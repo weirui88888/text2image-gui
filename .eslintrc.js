@@ -22,7 +22,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 2,
     '@typescript-eslint/triple-slash-reference': 0
   },
-  ignorePatterns: ['.eslintrc.cjs'],
+  ignorePatterns: ['.eslintrc.cjs', 'server/*'],
   settings: {
     react: {
       version: 'detect'

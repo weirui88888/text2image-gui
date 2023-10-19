@@ -2,7 +2,7 @@ const c = require('ansi-colors')
 
 const colorTip = (msg, ...args) => {
   if (args.length === 0) {
-    return console.log(msg)
+    console.log(msg)
   }
   const nextStyle = args[0]
   return colorTip(c[nextStyle](msg), ...args.slice(1))

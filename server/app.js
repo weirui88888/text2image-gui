@@ -12,13 +12,13 @@ const axios = require('axios')
 // TODO:导出默认
 const generate = require('anyphoto/src/cmd/generate')
 const { Photo } = require('./db')
-const { getCaptchaUrl, color } = require('./utils')
-
-const { httpDebugger } = require('./debug')
+const { getCaptchaUrl } = require('./utils')
 
 const app = express()
 
-app.set('port', process.env.PORT || 3001)
+const a = 234
+
+app.set('port', process.env.PORT ?? 3001)
 app.use(cors())
 app.use(morgan('dev'))
 app.use(cookieParser())
