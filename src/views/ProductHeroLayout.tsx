@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { type Theme, styled } from '@mui/material/styles'
 import { type SxProps } from '@mui/system'
 import Container from '@mui/material/Container'

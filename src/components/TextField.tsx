@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import clsx from 'clsx'
 import { styled, type Theme } from '@mui/material/styles'
 import MuiTextField, { type FilledTextFieldProps, type StandardTextFieldProps } from '@mui/material/TextField'
