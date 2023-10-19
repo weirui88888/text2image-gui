@@ -12,7 +12,7 @@
     "@testing-library/jest-dom": "6.1.4",
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.5.1",
-    "axios": "^1.5.1",
+    "axios": "1.5.1",
     "clsx": "2.0.0",
     "final-form": "4.20.10",
     "i18next": "23.5.1",
@@ -28,25 +28,33 @@
     "validator": "13.11.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "17.8.0",
+    "@commitlint/config-conventional": "17.8.0",
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.0",
     "@types/react-router-dom": "5.3.3",
     "@types/validator": "13.11.3",
     "@typescript-eslint/eslint-plugin": "6.4.0",
+    "commitizen": "4.3.0",
+    "cz-conventional-changelog": "3.3.0",
     "eslint": "8.0.1",
-    "eslint-config-standard-with-typescript": "^39.1.1",
+    "eslint-config-standard-with-typescript": "39.1.1",
     "eslint-plugin-import": "2.25.2",
     "eslint-plugin-n": "15.0.0 || 16.0.0 ",
     "eslint-plugin-promise": "6.0.0",
     "eslint-plugin-react": "7.33.2",
+    "husky": "8.0.3",
+    "lint-staged": "15.0.1",
     "typescript": "5.2.2"
   },
   "scripts": {
+    "prepare": "husky install",
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "lint": "eslint . --ext .tsx,.ts --fix",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "commit": "cz"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -62,6 +70,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "lint-staged": {
+    "*.ts,*.tsx": [
+      "npx eslint . --ext .tsx,.ts --fix"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   },
   "volta": {
     "node": "18.0.0"
