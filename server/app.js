@@ -11,7 +11,7 @@ const cors = require('cors')
 const axios = require('axios')
 // TODO:导出默认
 const generate = require('anyphoto/src/cmd/generate')
-const { Photo } = require('./db')
+const { Photo, User } = require('./db')
 const { getCaptchaUrl } = require('./utils')
 
 const app = express()
@@ -26,7 +26,10 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.post('/auth', async (req, res) => {
-  const { captchaVerifyParam } = req.body
+  const { captchaVerifyParam, signUpMsg } = req.body
+  console.log(signUpMsg)
+  const user = new User(signUpMsg)
+  await user.save()
   const url = getCaptchaUrl(
     process.env.AccessKeyId,
     process.env.AccessKeySecret,
@@ -37,7 +40,8 @@ app.post('/auth', async (req, res) => {
   const result = await axios.get(url)
   res.send({
     verifyResult: result.data.Result.VerifyResult,
-    bizResult: true
+    bizResult: true,
+    token: 'abcdeff'
   })
 })
 

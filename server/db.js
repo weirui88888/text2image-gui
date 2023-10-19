@@ -27,6 +27,16 @@ const PhotoSchema = new Schema({
   content: String,
   date: { type: Date, default: Date.now }
 })
+
+const UserSchema = new Schema({
+  user_pwd: String,
+  user_name: String,
+  user_email: String,
+  date: { type: Date, default: Date.now }
+})
+
 const Photo = mongoose.model('AnyPhoto', PhotoSchema, process.env.PhotoCollectionName)
+const User = mongoose.model('AnyPhotoUser', UserSchema, 'users')
 
 exports.Photo = Photo
+exports.User = User

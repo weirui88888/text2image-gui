@@ -38,6 +38,7 @@ function SignUp() {
       captchaVerifyParam, // 验证码参数
       signUpMsg: signUpMsg.current
     })
+    console.log(result)
     // 1.向后端发起业务请求，获取验证码验证结果和业务结果
     return {
       captchaResult: result.data.verifyResult,
