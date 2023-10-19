@@ -72,8 +72,8 @@
     ]
   },
   "lint-staged": {
-    "*.ts,*.tsx": [
-      "npx eslint . --ext .tsx,.ts --fix"
+    "*.{ts,tsx}": [
+      "npx eslint --ext .tsx,.ts --fix"
     ]
   },
   "config": {
