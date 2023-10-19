@@ -14,7 +14,7 @@ const inputStyleMappingClasses = {
 
 const classes = {
   root: 'AnyPhotoTextField-root',
-  input: 'AnyPhotoTextField-inputtttttttttttttttttttttttt',
+  input: 'AnyPhotoTextField-input',
   inputBorder: 'AnyPhotoTextField-inputBorder'
 }
 
