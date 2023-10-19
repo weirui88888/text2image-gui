@@ -2,6 +2,8 @@
   "name": "anyphoto-web",
   "version": "1.0.0",
   "private": true,
+  "description": "anyphoto web code",
+  "author": "Xdz ruiwei88888@163.com (https://www.newarray.vip/)",
   "dependencies": {
     "@emotion/react": "11.11.1",
     "@emotion/styled": "11.11.0",
