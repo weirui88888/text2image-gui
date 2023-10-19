@@ -22,7 +22,7 @@ i18n
           slogan: 'photo by any inspiration',
           'sign-up': 'sign up',
           'sign-in': 'sign in123',
-          author: `Author is：<1>code1 and beast</1>`
+          author: 'Author is：<1>code1 and beast</1>'
         }
       },
       zh: {
@@ -30,10 +30,13 @@ i18n
           slogan: '借由灵感创作图片',
           'sign-up': '注册',
           'sign-in': '登录',
-          author: `作者是：<1>代码与野兽</1>`
+          author: '作者是：<1>代码与野兽</1>'
         }
       }
     }
+  })
+  .catch(err => {
+    console.log(err)
   })
 
 export default i18n

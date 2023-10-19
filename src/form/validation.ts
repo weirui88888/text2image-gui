@@ -6,16 +6,16 @@
  */
 function isEmail(string: string) {
   const re =
-    /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-  return re.test(string);
+    /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
+  return re.test(string)
 }
 
 export function email(value: string) {
-  return value && !isEmail(value.trim()) ? "Invalid email" : null;
+  return value && !isEmail(value.trim()) ? 'Invalid email' : null
 }
 
 function isDirty(value: string | number) {
-  return value || value === 0;
+  return value || value === 0
 }
 
 export function required(
@@ -25,8 +25,8 @@ export function required(
   return requiredFields.reduce(
     (fields, field) => ({
       ...fields,
-      ...(isDirty(values[field]) ? undefined : { [field]: "Required" }),
+      ...(isDirty(values[field]) ? undefined : { [field]: 'Required' })
     }),
     {}
-  );
+  )
 }

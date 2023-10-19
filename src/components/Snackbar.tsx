@@ -1,12 +1,12 @@
 import React from 'react'
-import { Theme } from '@mui/material/styles'
-import { withStyles, WithStyles } from '@mui/styles'
-import MuiSnackbar, { SnackbarProps } from '@mui/material/Snackbar'
+import { type Theme } from '@mui/material/styles'
+import { withStyles, type WithStyles } from '@mui/styles'
+import MuiSnackbar, { type SnackbarProps } from '@mui/material/Snackbar'
 import Slide from '@mui/material/Slide'
 import CloseIcon from '@mui/icons-material/Close'
 import InfoIcon from '@mui/icons-material/Info'
 import IconButton from '@mui/material/IconButton'
-import { TransitionProps } from '@mui/material/transitions/transition'
+import { type TransitionProps } from '@mui/material/transitions/transition'
 
 const styles = (theme: Theme) =>
   ({
@@ -73,7 +73,7 @@ function Snackbar(props: WithStyles<typeof styles> & SnackbarProps & ExtraSnackb
           aria-label="close"
           color="inherit"
           className={classes.close}
-          onClick={() => closeFunc && closeFunc()}
+          onClick={() => { closeFunc && closeFunc() }}
         >
           <CloseIcon />
         </IconButton>

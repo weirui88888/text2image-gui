@@ -16,7 +16,7 @@ import { Link as RouterLink } from 'react-router-dom'
 function SignIn() {
   const [sent, setSent] = useState(false)
 
-  const validate = (values: { [index: string]: string }) => {
+  const validate = (values: Record<string, string>) => {
     const errors = required(['email', 'password'], values)
 
     if (!errors.email) {
@@ -77,11 +77,13 @@ function SignIn() {
               />
               <FormSpy subscription={{ submitError: true }}>
                 {({ submitError }) =>
-                  submitError ? (
+                  submitError
+                    ? (
                     <FormFeedback error sx={{ mt: 2 }}>
                       {submitError}
                     </FormFeedback>
-                  ) : null
+                      )
+                    : null
                 }
               </FormSpy>
               <FormButton sx={{ mt: 3, mb: 2 }} disabled={submitting || sent} size="large" color="secondary" fullWidth>

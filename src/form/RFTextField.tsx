@@ -1,6 +1,6 @@
 import React from 'react'
-import { FieldRenderProps } from 'react-final-form'
-import TextField, { AnyPhotoTextFieldProps } from '../components/TextField'
+import { type FieldRenderProps } from 'react-final-form'
+import TextField, { type AnyPhotoTextFieldProps } from '../components/TextField'
 
 function RFTextField(props: AnyPhotoTextFieldProps & FieldRenderProps<string, HTMLElement>) {
   const {

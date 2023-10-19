@@ -13,9 +13,11 @@ function Privacy() {
   // https://github.com/webpack/webpack/issues/6680
   useEffect(() => {
     import('../views/privacy.md')
-      .then(content => fetch(content.default))
-      .then(response => response.text())
-      .then(responseText => setMarkdown(responseText))
+      .then(async content => await fetch(content.default))
+      .then(async response => await response.text())
+      .then(responseText => {
+        setMarkdown(responseText)
+      })
   })
 
   if (!markdown) {

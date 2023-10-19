@@ -35,7 +35,7 @@ function SignUp() {
    */
   async function captchaVerifyCallback(captchaVerifyParam: any) {
     const result = await axios.post('http://localhost:3001/auth', {
-      captchaVerifyParam: captchaVerifyParam, // 验证码参数
+      captchaVerifyParam, // 验证码参数
       signUpMsg: signUpMsg.current
     })
     // 1.向后端发起业务请求，获取验证码验证结果和业务结果
@@ -58,10 +58,10 @@ function SignUp() {
     SceneId: 'pcflzxg9', // 场景ID。根据步骤二新建验证场景后，您可以在验证码场景列表，获取该场景的场景ID
     prefix: 'wr8jiu', // 身份标。开通阿里云验证码2.0后，您可以在控制台概览页面的实例基本信息卡片区域，获取身份标
     mode: 'popup', // 验证码模式。popup表示要集成的验证码模式为弹出式。无需修改
-    element: '#sign-up-captcha-element', //页面上预留的渲染验证码的元素，与原代码中预留的页面元素保持一致。
+    element: '#sign-up-captcha-element', // 页面上预留的渲染验证码的元素，与原代码中预留的页面元素保持一致。
     button: '#sign-up-submit-button', // 触发验证码弹窗的元素。button表示单击登录按钮后，触发captchaVerifyCallback函数。您可以根据实际使用的元素修改element的值
-    captchaVerifyCallback: captchaVerifyCallback, // 业务请求(带验证码校验)回调函数，无需修改
-    onBizResultCallback: onBizResultCallback, // 业务请求结果回调函数，无需修改
+    captchaVerifyCallback, // 业务请求(带验证码校验)回调函数，无需修改
+    onBizResultCallback, // 业务请求结果回调函数，无需修改
     getInstance() {}, // 绑定验证码实例函数，无需修改
     slideStyle: {
       width: 860,
@@ -70,7 +70,7 @@ function SignUp() {
     language: 'cn' // 验证码语言类型，支持简体中文（cn）、繁体中文（tw）、英文（en）
   })
 
-  const validate = (values: { [index: string]: string }) => {
+  const validate = (values: Record<string, string>) => {
     const errors = required(['user_name', 'user_pwd', 'user_email'], values)
     if (!errors.user_email) {
       const emailError = email(values.user_email)
@@ -134,11 +134,13 @@ function SignUp() {
               />
               <FormSpy subscription={{ submitError: true }}>
                 {({ submitError }) =>
-                  submitError ? (
+                  submitError
+                    ? (
                     <FormFeedback error sx={{ mt: 2 }}>
                       {submitError}
                     </FormFeedback>
-                  ) : null
+                      )
+                    : null
                 }
               </FormSpy>
               <div id="sign-up-captcha-element"></div>
