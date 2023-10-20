@@ -5,15 +5,11 @@ const { getCaptchaUrl } = require('../utils')
 const signUp = async (req, res) => {
   const { captchaVerifyParam, signUpMsg } = req.body
   const user = new UserModel(signUpMsg)
-  await user.save()
-  const url = getCaptchaUrl(
-    process.env.AccessKeyId,
-    process.env.AccessKeySecret,
-    '2023-03-05',
-    'VerifyCaptcha',
-    captchaVerifyParam
-  )
+  const url = getCaptchaUrl(captchaVerifyParam)
   const result = await axios.get(url)
+  if (result.data.Result.VerifyResult) {
+    await user.save()
+  }
   res.send({
     verifyResult: result.data.Result.VerifyResult,
     bizResult: true,

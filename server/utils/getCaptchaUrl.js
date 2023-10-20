@@ -19,12 +19,12 @@ const sortParameterKeys = parameters => {
 const fixedEncodeURIComponent = input =>
   encodeURIComponent(input).replace(/[!'()*]/g, c => `%${c.charCodeAt(0).toString(16).toUpperCase()}`)
 
-const getCaptchaUrl = (accessKeyId, appSecret, version, action, captchaVerifyParam) => {
+const getCaptchaUrl = captchaVerifyParam => {
   const params = sortParameterKeys({
     ...commonConfig,
-    Version: version,
-    AccessKeyId: accessKeyId,
-    Action: action,
+    Version: '2023-03-05',
+    AccessKeyId: process.env.AccessKeyId,
+    Action: 'VerifyCaptcha',
     CaptchaVerifyParam: captchaVerifyParam,
     Timestamp: new Date().toISOString().replace(/\.\d{3}/, ''),
     SignatureNonce: Math.round(Math.random() * 10000)
@@ -35,7 +35,7 @@ const getCaptchaUrl = (accessKeyId, appSecret, version, action, captchaVerifyPar
     .join('&')
 
   const stringToSign = `GET&%2F&${encodeURIComponent(headerString)}`
-  const hmac = CryptoJS.HmacSHA1(stringToSign, `${appSecret}&`)
+  const hmac = CryptoJS.HmacSHA1(stringToSign, `${process.env.AccessKeySecret}&`)
   const sign = CryptoJS.enc.Base64.stringify(hmac)
 
   return `https://captcha.cn-shanghai.aliyuncs.com?Signature=${encodeURIComponent(sign)}&${headerString}`
