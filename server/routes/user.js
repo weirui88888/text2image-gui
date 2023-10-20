@@ -1,32 +1,19 @@
 const express = require('express')
 const router = express.Router()
-const UserModel = require('../database/model/user')
+const { signUp, loginIn, loginOut } = require('../controller/user')
 
 router.use((req, res, next) => {
   console.log(`------user api------`)
   next()
 })
 
-router.get('/sign-up', (req, res) => {
-  res.send('user sign-up route')
-})
+// anyphoto.space/api/user/sign-up
+router.post('/sign-up', signUp)
 
-router.get('/login-in', async (req, res) => {
-  const user = new UserModel({
-    user_name: 'xdz1',
-    user_email: 'xdz@520.com',
-    user_pwd: 'xdz520'
-  })
-  const newUser = await user.save()
-  res.send(newUser)
-})
+// anyphoto.space/api/user/login-in
+router.get('/login-in', loginIn)
 
-router.get('/login-out', (req, res) => {
-  res.send('user login-out route')
-})
+// anyphoto.space/api/user/login-out
+router.get('/login-out', loginOut)
 
 module.exports = router
-
-// anyphoto.space/api/user/sign-up
-// anyphoto.space/api/user/login-in
-// anyphoto.space/api/user/login-out

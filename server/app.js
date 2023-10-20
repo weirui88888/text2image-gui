@@ -12,7 +12,6 @@ const cors = require('cors')
 const axios = require('axios')
 // TODO:导出默认
 const generate = require('anyphoto/src/cmd/generate')
-// const { Photo, User } = require('./db')
 const { getCaptchaUrl } = require('./utils')
 const userRouterApi = require('./routes/user')
 const photRouterApi = require('./routes/photo')
@@ -28,25 +27,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/api/user', userRouterApi)
 app.use('/api/photo', photRouterApi)
-
-// app.post('/auth', async (req, res) => {
-//   const { captchaVerifyParam, signUpMsg } = req.body
-//   const user = new User(signUpMsg)
-//   await user.save()
-//   const url = getCaptchaUrl(
-//     process.env.AccessKeyId,
-//     process.env.AccessKeySecret,
-//     '2023-03-05',
-//     'VerifyCaptcha',
-//     captchaVerifyParam
-//   )
-//   const result = await axios.get(url)
-//   res.send({
-//     verifyResult: result.data.Result.VerifyResult,
-//     bizResult: true,
-//     token: 'abcdeff'
-//   })
-// })
 
 // app.get('/api', async (req, res) => {
 //   const client = new OSS({

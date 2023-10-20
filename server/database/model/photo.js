@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const UserSchema = new Schema({
+const PhotoSchema = new Schema({
   url: String,
   avatar: String,
   author: String,
@@ -9,6 +9,6 @@ const UserSchema = new Schema({
   date: { type: Date, default: Date.now }
 })
 
-const UserModel = mongoose.model('AnyPhotoUser', UserSchema, process.env.PhotoCollectionName)
+const UserModel = mongoose.model('AnyPhotoPhoto', PhotoSchema, process.env.PhotoCollectionName)
 
 module.exports = UserModel

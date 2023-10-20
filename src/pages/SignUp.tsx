@@ -19,11 +19,6 @@ function SignUp() {
   const [sent, setSent] = useState(false)
   const navigate = useNavigate()
   const signUpMsg = useRef()
-  // let captcha
-
-  // function getInstance(instance: any) {
-  //   captcha = instance
-  // }
 
   // 业务请求(带验证码校验)回调函数
   /**
@@ -35,6 +30,7 @@ function SignUp() {
    * @returns {{captchaResult: boolean, bizResult?: boolean|undefined}}
    */
   async function captchaVerifyCallback(captchaVerifyParam: any) {
+    // TODO axios封装
     const result = await axios.post('http://localhost:3001/api/user/sign-up', {
       captchaVerifyParam, // 验证码参数
       signUpMsg: signUpMsg.current
@@ -107,6 +103,7 @@ function SignUp() {
                 component={RFTextField}
                 disabled={submitting || sent}
                 fullWidth
+                defaultValue="小布偶毛的一天"
                 label="NickName"
                 margin="normal"
                 name="user_name"
@@ -117,6 +114,7 @@ function SignUp() {
                 component={RFTextField}
                 disabled={submitting || sent}
                 fullWidth
+                defaultValue="xdz@520.com"
                 label="Email"
                 margin="normal"
                 name="user_email"
@@ -127,6 +125,7 @@ function SignUp() {
                 component={RFTextField}
                 disabled={submitting || sent}
                 required
+                defaultValue="xdz"
                 name="user_pwd"
                 label="Password"
                 type="password"
