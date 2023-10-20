@@ -1,4 +1,4 @@
-const crypto = require('crypto')
+const CryptoJS = require('crypto-js')
 
 const commonConfig = {
   Format: 'JSON',
@@ -7,36 +7,37 @@ const commonConfig = {
 }
 
 const sortParameterKeys = parameters => {
-  const response = {}
+  const sortedParams = {}
   Object.keys(parameters)
     .sort((a, b) => (a < b ? -1 : 1))
     .forEach(key => {
-      response[key] = parameters[key]
+      sortedParams[key] = parameters[key]
     })
-  return response
+  return sortedParams
 }
 
 const fixedEncodeURIComponent = input =>
   encodeURIComponent(input).replace(/[!'()*]/g, c => `%${c.charCodeAt(0).toString(16).toUpperCase()}`)
 
 const getCaptchaUrl = (accessKeyId, appSecret, version, action, captchaVerifyParam) => {
-  const params = sortParameterKeys(
-    Object.assign({}, commonConfig, {
-      Version: version,
-      AccessKeyId: accessKeyId,
-      Action: action,
-      CaptchaVerifyParam: captchaVerifyParam,
-      Timestamp: new Date().toISOString().replace(/\.\d{3}/, ''),
-      SignatureNonce: Math.round(Math.random() * 10000)
-    })
-  )
+  const params = sortParameterKeys({
+    ...commonConfig,
+    Version: version,
+    AccessKeyId: accessKeyId,
+    Action: action,
+    CaptchaVerifyParam: captchaVerifyParam,
+    Timestamp: new Date().toISOString().replace(/\.\d{3}/, ''),
+    SignatureNonce: Math.round(Math.random() * 10000)
+  })
 
-  let headerString = ''
-  Object.keys(params).forEach(key => (headerString += `${key}=${fixedEncodeURIComponent(params[key])}&`))
-  headerString = headerString.slice(0, -1)
+  const headerString = Object.entries(params)
+    .map(([key, value]) => `${key}=${fixedEncodeURIComponent(value)}`)
+    .join('&')
 
   const stringToSign = `GET&%2F&${encodeURIComponent(headerString)}`
-  const sign = crypto.createHmac('sha1', `${appSecret}&`).update(stringToSign).digest('base64')
+  const hmac = CryptoJS.HmacSHA1(stringToSign, `${appSecret}&`)
+  const sign = CryptoJS.enc.Base64.stringify(hmac)
+
   return `https://captcha.cn-shanghai.aliyuncs.com?Signature=${encodeURIComponent(sign)}&${headerString}`
 }
 
