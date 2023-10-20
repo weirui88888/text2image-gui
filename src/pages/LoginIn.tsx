@@ -39,7 +39,7 @@ function SignIn() {
       <AppForm>
         <React.Fragment>
           <Typography variant="h3" gutterBottom marked="center" align="center">
-            Sign In
+            Login In
           </Typography>
           <Typography variant="body2" align="center">
             {'Not a member yet? '}
@@ -77,17 +77,15 @@ function SignIn() {
               />
               <FormSpy subscription={{ submitError: true }}>
                 {({ submitError }) =>
-                  submitError
-                    ? (
+                  submitError ? (
                     <FormFeedback error sx={{ mt: 2 }}>
                       {submitError}
                     </FormFeedback>
-                      )
-                    : null
+                  ) : null
                 }
               </FormSpy>
               <FormButton sx={{ mt: 3, mb: 2 }} disabled={submitting || sent} size="large" color="secondary" fullWidth>
-                {submitting || sent ? 'In progress…' : 'Sign In'}
+                {submitting || sent ? 'In progress…' : 'Login In'}
               </FormButton>
             </Box>
           )}

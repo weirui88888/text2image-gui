@@ -21,7 +21,7 @@ i18n
         translation: {
           slogan: 'photo by any inspiration',
           'sign-up': 'sign up',
-          'sign-in': 'sign in123',
+          'login-in': 'login in',
           author: 'Author is：<1>code1 and beast</1>'
         }
       },
@@ -29,7 +29,7 @@ i18n
         translation: {
           slogan: '借由灵感创作图片',
           'sign-up': '注册',
-          'sign-in': '登录',
+          'login-in': '登录',
           author: '作者是：<1>代码与野兽</1>'
         }
       }

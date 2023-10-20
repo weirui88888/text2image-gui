@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
 import { Field, Form, FormSpy } from 'react-final-form'
@@ -15,6 +15,7 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 function SignUp() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [sent, setSent] = useState(false)
   const navigate = useNavigate()
   const signUpMsg = useRef()
@@ -34,11 +35,10 @@ function SignUp() {
    * @returns {{captchaResult: boolean, bizResult?: boolean|undefined}}
    */
   async function captchaVerifyCallback(captchaVerifyParam: any) {
-    const result = await axios.post('http://localhost:3001/auth', {
+    const result = await axios.post('http://localhost:3001/api/user/sign-up', {
       captchaVerifyParam, // 验证码参数
       signUpMsg: signUpMsg.current
     })
-    console.log(result)
     // 1.向后端发起业务请求，获取验证码验证结果和业务结果
     return {
       captchaResult: result.data.verifyResult,
@@ -95,7 +95,7 @@ function SignUp() {
             Sign Up
           </Typography>
           <Typography variant="body2" align="center">
-            <Link component={RouterLink} to="/sign-in/" underline="always">
+            <Link component={RouterLink} to="/login-in/" underline="always">
               Already have an account?
             </Link>
           </Typography>
@@ -135,13 +135,11 @@ function SignUp() {
               />
               <FormSpy subscription={{ submitError: true }}>
                 {({ submitError }) =>
-                  submitError
-                    ? (
+                  submitError ? (
                     <FormFeedback error sx={{ mt: 2 }}>
                       {submitError}
                     </FormFeedback>
-                      )
-                    : null
+                  ) : null
                 }
               </FormSpy>
               <div id="sign-up-captcha-element"></div>

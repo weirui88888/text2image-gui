@@ -23,8 +23,8 @@ function AppAppBar() {
             {'anyphoto'}
           </Link>
           <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
-            <Link color="inherit" variant="h6" underline="none" component={RouterLink} to="/sign-in/" sx={rightLink}>
-              {t('sign-in')}
+            <Link color="inherit" variant="h6" underline="none" component={RouterLink} to="/login-in/" sx={rightLink}>
+              {t('login-in')}
             </Link>
             <Link
               variant="h6"
