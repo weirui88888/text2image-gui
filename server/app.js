@@ -15,6 +15,7 @@ const generate = require('anyphoto/src/cmd/generate')
 const { getCaptchaUrl } = require('./utils')
 const userRouterApi = require('./routes/user')
 const photRouterApi = require('./routes/photo')
+const penRouterApi = require('./routes/pen')
 
 const app = express()
 
@@ -27,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/api/user', userRouterApi)
 app.use('/api/photo', photRouterApi)
+app.use('/api/pen', penRouterApi)
 
 // app.get('/api', async (req, res) => {
 //   const client = new OSS({
