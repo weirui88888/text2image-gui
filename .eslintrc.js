@@ -19,10 +19,10 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 0,
     '@typescript-eslint/no-misused-promises': 0,
     '@typescript-eslint/no-floating-promises': 0,
-    '@typescript-eslint/no-unused-vars': 2,
+    '@typescript-eslint/no-unused-vars': 1,
     '@typescript-eslint/triple-slash-reference': 0
   },
-  ignorePatterns: ['.eslintrc.cjs', 'server/*'],
+  ignorePatterns: ['.eslintrc.js', 'commitlint.config.js'],
   settings: {
     react: {
       version: 'detect'

@@ -3,7 +3,7 @@ const router = express.Router()
 const { createPhoto, deletePhoto } = require('../controller/photo')
 
 router.use((req, res, next) => {
-  console.log(`------photo api------`)
+  console.log('------photo api------')
   next()
 })
 

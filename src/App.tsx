@@ -7,7 +7,6 @@ import LoginIn from './pages/LoginIn'
 import SignUp from './pages/SignUp'
 import ForgotPassword from './pages/ForgotPassword'
 import Terms from './pages/Terms'
-
 function App() {
   return (
     <Router>

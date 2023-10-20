@@ -3,7 +3,7 @@ const router = express.Router()
 const { signUp, loginIn, loginOut } = require('../controller/user')
 
 router.use((req, res, next) => {
-  console.log(`------user api------`)
+  console.log('------user api------')
   next()
 })
 
