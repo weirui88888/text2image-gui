@@ -1,7 +1,6 @@
 require('dotenv').config({ path: './.env.local' }) // set process.env
 require('./database/db')
 
-const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 const OSS = require('ali-oss')
@@ -9,10 +8,8 @@ const cookieParser = require('cookie-parser')
 const errorHandler = require('errorhandler')
 const morgan = require('morgan')
 const cors = require('cors')
-const axios = require('axios')
 // TODO:导出默认
 const generate = require('anyphoto/src/cmd/generate')
-const { getCaptchaUrl } = require('./utils')
 const userRouterApi = require('./routes/user')
 const photRouterApi = require('./routes/photo')
 const penRouterApi = require('./routes/pen')
@@ -70,8 +67,4 @@ app.use('/api/pen', penRouterApi)
 if (app.get('env') === 'development') {
   app.use(errorHandler())
 }
-// app.post('/create', routes.create)
-// app.get('/destroy/:id', routes.destroy)
-// app.get('/edit/:id', routes.edit)
-// app.post('/update/:id', routes.update)
 module.exports = app

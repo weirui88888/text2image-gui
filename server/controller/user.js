@@ -1,11 +1,11 @@
 const axios = require('axios')
 const UserModel = require('../database/model/user')
-const { getCaptchaUrl } = require('../utils')
+const { getAliCaptchaUrl } = require('../utils')
 
 const signUp = async (req, res) => {
   const { captchaVerifyParam, signUpMsg } = req.body
   const user = new UserModel(signUpMsg)
-  const url = getCaptchaUrl(captchaVerifyParam)
+  const url = getAliCaptchaUrl(captchaVerifyParam)
   const result = await axios.get(url)
   if (result.data.Result.VerifyResult) {
     await user.save()

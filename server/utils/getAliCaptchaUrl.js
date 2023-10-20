@@ -19,7 +19,7 @@ const sortParameterKeys = parameters => {
 const fixedEncodeURIComponent = input =>
   encodeURIComponent(input).replace(/[!'()*]/g, c => `%${c.charCodeAt(0).toString(16).toUpperCase()}`)
 
-const getCaptchaUrl = captchaVerifyParam => {
+const getAliCaptchaUrl = captchaVerifyParam => {
   const params = sortParameterKeys({
     ...commonConfig,
     Version: '2023-03-05',
@@ -41,4 +41,4 @@ const getCaptchaUrl = captchaVerifyParam => {
   return `https://captcha.cn-shanghai.aliyuncs.com?Signature=${encodeURIComponent(sign)}&${headerString}`
 }
 
-exports.getCaptchaUrl = getCaptchaUrl
+exports.getAliCaptchaUrl = getAliCaptchaUrl

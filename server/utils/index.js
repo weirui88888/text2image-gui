@@ -1,7 +1,7 @@
 const { color, colorTip } = require('./color')
-const { getCaptchaUrl } = require('./getCaptchaUrl')
+const { getAliCaptchaUrl } = require('./getAliCaptchaUrl')
 module.exports = {
-  getCaptchaUrl,
+  getAliCaptchaUrl,
   color,
   colorTip
 }
