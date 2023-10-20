@@ -54,12 +54,7 @@ app.get('/api', async (req, res) => {
     accessKeySecret: process.env.AccessKeySecret,
     bucket: 'anyphoto'
   })
-  const {
-    content,
-    author = 'xdz',
-    avatar = 'https://anyphoto.newarray.vip/logos/logo1/logo.png',
-    outputName = 'anyphoto'
-  } = req.query
+  const { content, author, avatar, outputName } = req.query
   const photoSrc = await generate({
     content,
     options: {
@@ -68,6 +63,7 @@ app.get('/api', async (req, res) => {
       outputName
     }
   })
+
   const dirnamePath = path.dirname(photoSrc)
   const imageName = photoSrc.replace(`${dirnamePath}/`, '')
   const photoRes = await client.put(`myphotos/${imageName}`, photoSrc)
@@ -80,7 +76,7 @@ app.get('/api', async (req, res) => {
     url: usedSrc
   })
   await newPhoto.save()
-  res.setHeader('Content-Type', 'text/html')
+  res.setHeader('Content-Type', 'text/html;charset=utf8')
   res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate')
   res.end(
     `<h1 align="center" style="margin-top:200px;color:red;">generate photo <a href="${usedSrc}">${usedSrc}</a> successful!</h1><img src="${usedSrc}" style="display:block;margin:30px auto;"/>`
