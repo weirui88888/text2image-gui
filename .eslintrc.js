@@ -21,7 +21,8 @@ module.exports = {
     '@typescript-eslint/no-misused-promises': 0,
     '@typescript-eslint/no-floating-promises': 0,
     '@typescript-eslint/no-unused-vars': 2,
-    '@typescript-eslint/triple-slash-reference': 0
+    '@typescript-eslint/triple-slash-reference': 0,
+    '@typescript-eslint/member-delimiter-style': 0
   },
   ignorePatterns: ['.eslintrc.js', 'commitlint.config.js'],
   settings: {

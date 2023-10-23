@@ -23,6 +23,10 @@ function App() {
           vertical: 'top'
         }}
         maxSnack={3}
+        autoHideDuration={3000}
+        classes={{
+          containerAnchorOriginTopRight: 'z-alert'
+        }}
       >
         <SnackbarUtilsConfigurator />
         <Router>

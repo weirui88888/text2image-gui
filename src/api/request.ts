@@ -48,7 +48,7 @@ export class Request {
             SnackbarUtils.error('服务器发生了一些小问题')
             break
         }
-        return res.data as any // TODO why errors?
+        return res.data as any
       },
       responseErrorInterceptor: async (err: AxiosError) => {
         return await Promise.reject(err.response?.data)

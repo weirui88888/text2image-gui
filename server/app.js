@@ -82,6 +82,12 @@ app.use((err, req, res, next) => {
       message: 'Server error'
     })
   }
+  if (err.message === 'resource conflict') {
+    res.send({
+      code: 409,
+      message: 'Resource Conflict'
+    })
+  }
   next()
 })
 
