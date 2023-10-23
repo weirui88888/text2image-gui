@@ -13,35 +13,38 @@ import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import { SnackbarUtilsConfigurator } from './components/SnackbarUtilsConfigurator'
 import theme from './theme'
+import AppProvider from './AppProvider'
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <SnackbarProvider
-        anchorOrigin={{
-          horizontal: 'right',
-          vertical: 'top'
-        }}
-        maxSnack={3}
-        autoHideDuration={3000}
-        classes={{
-          containerAnchorOriginTopRight: 'z-alert'
-        }}
-      >
-        <SnackbarUtilsConfigurator />
-        <Router>
-          <Routes>
-            <Route path="/forgot-password" element={<ForgotPassword />}></Route>
-            <Route path="/sign-up" element={<SignUp />}></Route>
-            <Route path="/login-in" element={<LoginIn />}></Route>
-            <Route path="/privacy" element={<Privacy />}></Route>
-            <Route path="/terms" element={<Terms />}></Route>
-            <Route path="/" element={<Home />}></Route>
-          </Routes>
-          <SpeedDial />
-        </Router>
-      </SnackbarProvider>
-    </ThemeProvider>
+    <AppProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <SnackbarProvider
+          anchorOrigin={{
+            horizontal: 'right',
+            vertical: 'top'
+          }}
+          maxSnack={3}
+          autoHideDuration={3000}
+          classes={{
+            containerAnchorOriginTopRight: 'z-alert'
+          }}
+        >
+          <SnackbarUtilsConfigurator />
+          <Router>
+            <Routes>
+              <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+              <Route path="/sign-up" element={<SignUp />}></Route>
+              <Route path="/login-in" element={<LoginIn />}></Route>
+              <Route path="/privacy" element={<Privacy />}></Route>
+              <Route path="/terms" element={<Terms />}></Route>
+              <Route path="/" element={<Home />}></Route>
+            </Routes>
+            <SpeedDial />
+          </Router>
+        </SnackbarProvider>
+      </ThemeProvider>
+    </AppProvider>
   )
 }
 

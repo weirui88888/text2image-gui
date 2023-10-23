@@ -5,6 +5,7 @@ import AppBar from '../components/AppBar'
 import Toolbar from '../components/Toolbar'
 import { Link as RouterLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useUser } from '../store/user'
 
 const rightLink = {
   fontSize: 16,
@@ -14,6 +15,7 @@ const rightLink = {
 
 function AppAppBar() {
   const { t } = useTranslation()
+  const user = useUser()
   return (
     <div>
       <AppBar position="fixed">
@@ -22,7 +24,9 @@ function AppAppBar() {
           <Link variant="h6" underline="hover" color="inherit" component={RouterLink} to="/" sx={{ fontSize: 24 }}>
             {'anyphoto'}
           </Link>
+
           <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
+            {user.state.logining ? '已登录' : '未登录'}
             <Link color="inherit" variant="h6" underline="none" component={RouterLink} to="/login-in/" sx={rightLink}>
               {t('login-in')}
             </Link>
