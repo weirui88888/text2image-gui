@@ -11,6 +11,8 @@ interface SignUpResponseData {
   verifyResult: boolean
   bizResult: boolean
   token: string
+  userId: string
+  userName: string
 }
 
 const signUp = async (

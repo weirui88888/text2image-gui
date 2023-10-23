@@ -23,8 +23,16 @@ const signUp = async (req, res) => {
       const { user_id, user_pwd, user_name } = signUpParams
       const salt = bcrypt.genSaltSync(10)
       const hashUserPwd = bcrypt.hashSync(user_pwd, salt)
-      const token = createToken(user_id)
-      const user = new UserModel({ ...signUpParams, user_pwd: hashUserPwd, token, user_name: xss(user_name) })
+      const xss_user_id = xss(user_id)
+      const xss_user_name = xss(user_name)
+      const token = createToken(xss_user_id)
+      const user = new UserModel({
+        ...signUpParams,
+        user_pwd: hashUserPwd,
+        user_id: xss_user_id,
+        user_name: xss_user_name,
+        token
+      })
       await user.save()
       res.send({
         code: 200,
@@ -32,6 +40,8 @@ const signUp = async (req, res) => {
         data: {
           verifyResult: true,
           bizResult: true,
+          userId: xss_user_id,
+          userName: xss_user_name,
           token
         }
       })
