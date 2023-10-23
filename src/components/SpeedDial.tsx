@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import axios from 'axios'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
@@ -22,11 +21,11 @@ import DialogTitle from '@mui/material/DialogTitle'
 import { useSnackbar } from 'notistack'
 
 import { sleep } from '../util'
+import { pen } from '../api'
 
 export default function BasicSpeedDial() {
   const { enqueueSnackbar } = useSnackbar()
   const theme = useTheme()
-  console.log(theme)
   const [penVisible, setPenVisible] = useState(false)
   const [penContent, setPenContent] = useState('')
   const [isPen, setIsPen] = useState(false)
@@ -101,7 +100,7 @@ export default function BasicSpeedDial() {
           <LoadingButton
             size="small"
             onClick={async () => {
-              await axios.post('http://localhost:3001/api/pen', { user_pen_content: penContent })
+              await pen(penContent)
               setIsPen(true)
               await sleep()
               enqueueSnackbar('Don’t always be a troll!', {
