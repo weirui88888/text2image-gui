@@ -1,6 +1,8 @@
 import axios from 'axios'
 import type { AxiosError, AxiosInstance, AxiosRequestConfig, InternalAxiosRequestConfig, AxiosResponse } from 'axios'
 import SnackbarUtils from '../components/SnackbarUtilsConfigurator'
+import { ResponseCode } from './api.d'
+import type { AnyPhotoResponse } from './api.d'
 const baseURL = 'http://localhost:3001/api'
 const AuthorizationHeader = {
   Authorization: 'anyphoto'
@@ -43,9 +45,6 @@ export class Request {
             SnackbarUtils.error('权限不对')
             break
           case ResponseCode.InternalServerError:
-            SnackbarUtils.error('服务器发生了一些小问题')
-            break
-          default:
             SnackbarUtils.error('服务器发生了一些小问题')
             break
         }

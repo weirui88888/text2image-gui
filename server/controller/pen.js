@@ -7,7 +7,6 @@ const pen = async (req, res, next) => {
     user_email,
     user_pen_content
   })
-  // throw Error('access denied')
   await pen.save()
   res.send({
     code: 200,

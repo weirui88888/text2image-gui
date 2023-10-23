@@ -1,5 +1,5 @@
 import request from './request'
-
+import type { AnyPhotoResponse } from './api.d'
 interface SignUpParams {
   user_name: string
   user_email: string
