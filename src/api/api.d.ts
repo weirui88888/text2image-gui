@@ -7,5 +7,5 @@ export enum ResponseCode {
 export interface AnyPhotoResponse<T = Record<string, any>> {
   code: ResponseCode.OK | ResponseCode.Unauthorized | ResponseCode.InternalServerError
   message: string
-  data?: T
+  data: T
 }

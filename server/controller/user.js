@@ -1,6 +1,8 @@
 const axios = require('axios')
+const bcrypt = require('bcryptjs')
+const xss = require('xss')
 const UserModel = require('../database/model/user')
-const { getAliCaptchaUrl } = require('../utils')
+const { getAliCaptchaUrl, createToken } = require('../utils')
 
 const signUp = async (req, res) => {
   const { captchaVerifyParam, signUpParams } = req.body
@@ -18,7 +20,11 @@ const signUp = async (req, res) => {
         }
       })
     } else {
-      const user = new UserModel(signUpParams)
+      const { user_id, user_pwd, user_name } = signUpParams
+      const salt = bcrypt.genSaltSync(10)
+      const hashUserPwd = bcrypt.hashSync(user_pwd, salt)
+      const token = createToken(user_id)
+      const user = new UserModel({ ...signUpParams, user_pwd: hashUserPwd, token, user_name: xss(user_name) })
       await user.save()
       res.send({
         code: 200,
@@ -26,7 +32,7 @@ const signUp = async (req, res) => {
         data: {
           verifyResult: true,
           bizResult: true,
-          token: 'this is token 123'
+          token
         }
       })
     }

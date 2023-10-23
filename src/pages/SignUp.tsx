@@ -35,10 +35,11 @@ function SignUp() {
     if (signUpResult.code !== ResponseCode.OK) {
       SnackbarUtils.error(signUpResult.message)
     }
+    console.log(signUpResult.data.token)
     // 1.向后端发起业务请求，获取验证码验证结果和业务结果
     return {
-      captchaResult: signUpResult.data?.verifyResult,
-      bizResult: signUpResult.data?.bizResult
+      captchaResult: signUpResult.data.verifyResult,
+      bizResult: signUpResult.data.bizResult
     }
   }
 
@@ -46,7 +47,7 @@ function SignUp() {
   const onBizResultCallback = (bizResult: boolean) => {
     if (bizResult) {
       navigate('/')
-      SnackbarUtils.success('欢迎登录')
+      SnackbarUtils.success('注册成功')
     }
   }
 

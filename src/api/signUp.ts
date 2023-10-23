@@ -7,10 +7,16 @@ interface SignUpParams {
   user_pwd: string
 }
 
+interface SignUpResponseData {
+  verifyResult: boolean
+  bizResult: boolean
+  token: string
+}
+
 const signUp = async (
   captchaVerifyParam: string,
   signUpParams: SignUpParams
-): Promise<AnyPhotoResponse<{ verifyResult: boolean; bizResult: boolean }>> =>
+): Promise<AnyPhotoResponse<SignUpResponseData>> =>
   await request.post('user/sign-up', { captchaVerifyParam, signUpParams })
 
 export { type SignUpParams, signUp }
