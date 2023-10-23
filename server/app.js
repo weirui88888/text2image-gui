@@ -1,5 +1,6 @@
 require('dotenv').config({ path: './.env.local' }) // set process.env
 require('./database/db')
+require('express-async-errors')
 
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -64,7 +65,24 @@ app.use('/api/pen', penRouterApi)
 // })
 
 // Development only
-if (app.get('env') === 'development') {
-  app.use(errorHandler())
-}
+// if (app.get('env') === 'development') {
+//   app.use(errorHandler())
+// }
+
+app.use((err, req, res, next) => {
+  if (err.message === 'access denied') {
+    res.send({
+      code: 401,
+      message: 'Unauthorized'
+    })
+  }
+  if (err.message === 'server error') {
+    res.send({
+      code: 500,
+      message: 'Server error'
+    })
+  }
+  next()
+})
+
 module.exports = app

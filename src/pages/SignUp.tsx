@@ -11,13 +11,13 @@ import RFTextField from '../form/RFTextField'
 import FormButton from '../form/FormButton'
 import FormFeedback from '../form/FormFeedback'
 import { Link as RouterLink, useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { type SignUpParams, signUp } from '../api/signUp'
 
 function SignUp() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [sent, setSent] = useState(false)
   const navigate = useNavigate()
-  const signUpMsg = useRef()
+  const signUpParams = useRef<SignUpParams>()
 
   // 业务请求(带验证码校验)回调函数
   /**
@@ -29,15 +29,12 @@ function SignUp() {
    * @returns {{captchaResult: boolean, bizResult?: boolean|undefined}}
    */
   const captchaVerifyCallback = async (captchaVerifyParam: string) => {
-    const result = await axios.post('http://localhost:3001/api/user/sign-up', {
-      captchaVerifyParam, // 验证码参数
-      signUpMsg: signUpMsg.current
-    })
+    const result = await signUp(captchaVerifyParam, signUpParams.current!)
     console.log(result)
     // 1.向后端发起业务请求，获取验证码验证结果和业务结果
     return {
-      captchaResult: result.data.verifyResult,
-      bizResult: result.data.bizResult
+      captchaResult: result.data?.verifyResult,
+      bizResult: result.data?.bizResult
     }
   }
 
@@ -78,7 +75,7 @@ function SignUp() {
   }
 
   const handleSubmit = (val: any) => {
-    signUpMsg.current = val
+    signUpParams.current = val
   }
 
   return (

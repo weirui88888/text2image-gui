@@ -1,6 +1,6 @@
 import axios from 'axios'
 import type { AxiosError, AxiosInstance, AxiosRequestConfig, InternalAxiosRequestConfig, AxiosResponse } from 'axios'
-
+import SnackbarUtils from '../components/SnackbarUtilsConfigurator'
 const baseURL = 'http://localhost:3001/api'
 const AuthorizationHeader = {
   Authorization: 'anyphoto'
@@ -37,8 +37,19 @@ export class Request {
       requestErrorInterceptor: async (err: AxiosError) => {
         return await Promise.reject(err)
       },
-      responseInterceptors: (res: AxiosResponse) => {
-        return res.data
+      responseInterceptors: (res: AxiosResponse<AnyPhotoResponse>) => {
+        switch (res.data.code) {
+          case ResponseCode.Unauthorized:
+            SnackbarUtils.error('权限不对')
+            break
+          case ResponseCode.InternalServerError:
+            SnackbarUtils.error('服务器发生了一些小问题')
+            break
+          default:
+            SnackbarUtils.error('服务器发生了一些小问题')
+            break
+        }
+        return res.data as any // TODO why errors?
       },
       responseErrorInterceptor: async (err: AxiosError) => {
         return await Promise.reject(err.response?.data)

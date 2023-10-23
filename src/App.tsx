@@ -11,6 +11,7 @@ import SpeedDial from './components/SpeedDial'
 import { SnackbarProvider } from 'notistack'
 import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
+import { SnackbarUtilsConfigurator } from './components/SnackbarUtilsConfigurator'
 import theme from './theme'
 function App() {
   return (
@@ -21,8 +22,9 @@ function App() {
           horizontal: 'right',
           vertical: 'top'
         }}
-        autoHideDuration={5000}
+        maxSnack={3}
       >
+        <SnackbarUtilsConfigurator />
         <Router>
           <Routes>
             <Route path="/forgot-password" element={<ForgotPassword />}></Route>
