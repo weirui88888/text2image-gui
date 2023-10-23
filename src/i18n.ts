@@ -28,8 +28,8 @@ i18n
       zh: {
         translation: {
           slogan: '借由灵感创作图片',
-          'sign-up': '注册',
-          'login-in': '登录',
+          'sign-up': 'sign up', // 注册，
+          'login-in': 'login in', // 登录
           author: '作者是：<1>代码与野兽</1>'
         }
       }

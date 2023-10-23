@@ -28,8 +28,7 @@ function SignUp() {
    * 返回参数：字段名固定，captchaResult为必选；如无业务验证场景时，bizResult为可选
    * @returns {{captchaResult: boolean, bizResult?: boolean|undefined}}
    */
-  async function captchaVerifyCallback(captchaVerifyParam: any) {
-    // TODO axios封装
+  const captchaVerifyCallback = async (captchaVerifyParam: string) => {
     const result = await axios.post('http://localhost:3001/api/user/sign-up', {
       captchaVerifyParam, // 验证码参数
       signUpMsg: signUpMsg.current
@@ -43,8 +42,8 @@ function SignUp() {
   }
 
   // 业务请求验证结果回调函数
-  function onBizResultCallback(bizResult: any) {
-    if (bizResult === true) {
+  const onBizResultCallback = (bizResult: boolean) => {
+    if (bizResult) {
       navigate('/')
     } else {
       alert('业务验证不通过！')
@@ -107,6 +106,14 @@ function SignUp() {
                 label="NickName"
                 margin="normal"
                 name="user_name"
+                validate={value => {
+                  if (!value) {
+                    return '用户名不能为空'
+                  }
+                  if (value.length < 3) {
+                    return '用户名长度过短'
+                  }
+                }}
                 required
               />
               <Field
@@ -125,12 +132,23 @@ function SignUp() {
                 component={RFTextField}
                 disabled={submitting || sent}
                 required
-                defaultValue="xdz"
+                defaultValue="xdzde88"
                 name="user_pwd"
                 label="Password"
                 type="password"
                 margin="normal"
                 autoComplete="new-password"
+                validate={value => {
+                  if (!value) {
+                    return '密码不能为空'
+                  }
+                  if (value.length < 6 || value.length > 12) {
+                    return '密码长度为6至12位'
+                  }
+                  if (/[\u4E00-\u9FA5]/.test(value)) {
+                    return '密码不能包含中文字符'
+                  }
+                }}
               />
               <FormSpy subscription={{ submitError: true }}>
                 {({ submitError }) =>
