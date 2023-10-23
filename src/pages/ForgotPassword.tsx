@@ -9,7 +9,6 @@ import { email, required } from '../form/validation'
 import RFTextField from '../form/RFTextField'
 import FormButton from '../form/FormButton'
 import FormFeedback from '../form/FormFeedback'
-import withRoot from '../withRoot'
 
 function ForgotPassword() {
   const [sent, setSent] = React.useState(false)
@@ -79,4 +78,4 @@ function ForgotPassword() {
   )
 }
 
-export default withRoot(ForgotPassword)
+export default ForgotPassword

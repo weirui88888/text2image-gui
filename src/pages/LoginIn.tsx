@@ -10,7 +10,6 @@ import { email, required } from '../form/validation'
 import RFTextField from '../form/RFTextField'
 import FormButton from '../form/FormButton'
 import FormFeedback from '../form/FormFeedback'
-import withRoot from '../withRoot'
 import { Link as RouterLink } from 'react-router-dom'
 
 function SignIn() {
@@ -101,4 +100,4 @@ function SignIn() {
   )
 }
 
-export default withRoot(SignIn)
+export default SignIn

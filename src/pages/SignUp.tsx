@@ -10,7 +10,6 @@ import { email, required } from '../form/validation'
 import RFTextField from '../form/RFTextField'
 import FormButton from '../form/FormButton'
 import FormFeedback from '../form/FormFeedback'
-import withRoot from '../withRoot'
 import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
@@ -161,4 +160,4 @@ function SignUp() {
   )
 }
 
-export default withRoot(SignUp)
+export default SignUp

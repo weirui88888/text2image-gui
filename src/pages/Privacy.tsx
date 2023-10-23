@@ -5,7 +5,6 @@ import Markdown from '../components/Markdown'
 import Typography from '../components/Typography'
 import AppAppBar from '../views/AppAppBar'
 import AppFooter from '../views/AppFooter'
-import withRoot from '../withRoot'
 
 function Privacy() {
   const [markdown, setMarkdown] = useState('')
@@ -40,4 +39,4 @@ function Privacy() {
   )
 }
 
-export default withRoot(Privacy)
+export default Privacy

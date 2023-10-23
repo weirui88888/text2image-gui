@@ -9,6 +9,8 @@ import ChatIcon from '@mui/icons-material/Chat'
 import ElderlyWomanIcon from '@mui/icons-material/ElderlyWoman'
 import SendIcon from '@mui/icons-material/Send'
 import LoadingButton from '@mui/lab/LoadingButton'
+// import makeStyles from '@mui/styles/makeStyles'
+import { useTheme } from '@mui/material/styles'
 
 // Dialog
 import Dialog from '@mui/material/Dialog'
@@ -23,6 +25,8 @@ import { sleep } from '../util'
 
 export default function BasicSpeedDial() {
   const { enqueueSnackbar } = useSnackbar()
+  const theme = useTheme()
+  console.log(theme)
   const [penVisible, setPenVisible] = useState(false)
   const [penContent, setPenContent] = useState('')
   const [isPen, setIsPen] = useState(false)
@@ -39,7 +43,24 @@ export default function BasicSpeedDial() {
   return (
     <>
       <Box sx={{ position: 'fixed', bottom: 32, right: 16 }}>
-        <SpeedDial ariaLabel="SpeedDial basic example" sx={{}} icon={<SendIcon />}>
+        <SpeedDial
+          ariaLabel="SpeedDial"
+          icon={<SendIcon />}
+          sx={{
+            '& .MuiButtonBase-root': {
+              backgroundColor: theme.palette.secondary.main,
+              '&:hover': {
+                backgroundColor: theme.palette.secondary.dark
+              }
+            },
+            '& #SpeedDial-actions .MuiButtonBase-root': {
+              backgroundColor: theme.palette.common.white,
+              '&:hover': {
+                backgroundColor: theme.palette.grey[200]
+              }
+            }
+          }}
+        >
           {actions.map(action => (
             <SpeedDialAction key={action.name} icon={action.icon} tooltipTitle={action.name} onClick={action.click} />
           ))}

@@ -5,7 +5,6 @@ import Markdown from '../components/Markdown'
 import Typography from '../components/Typography'
 import AppAppBar from '../views/AppAppBar'
 import AppFooter from '../views/AppFooter'
-import withRoot from '../withRoot'
 
 function Terms() {
   const [markdown, setMarkdown] = useState('')
@@ -15,7 +14,9 @@ function Terms() {
     import('../views/terms.md')
       .then(async content => await fetch(content.default))
       .then(async response => await response.text())
-      .then(responseText => { setMarkdown(responseText) })
+      .then(responseText => {
+        setMarkdown(responseText)
+      })
   })
 
   if (!markdown) {
@@ -38,4 +39,4 @@ function Terms() {
   )
 }
 
-export default withRoot(Terms)
+export default Terms

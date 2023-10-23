@@ -7,7 +7,6 @@ import ProductValues from '../views/ProductValues'
 import ProductHowItWorks from '../views/ProductHowItWorks'
 import ProductCTA from '../views/ProductCTA'
 import AppAppBar from '../views/AppAppBar'
-import withRoot from '../withRoot'
 
 function Index() {
   return (
@@ -24,4 +23,4 @@ function Index() {
   )
 }
 
-export default withRoot(Index)
+export default Index
