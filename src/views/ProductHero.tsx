@@ -3,10 +3,13 @@ import Button from '../components/Button'
 import Typography from '../components/Typography'
 import ProductHeroLayout from './ProductHeroLayout'
 import { Link as RouterLink } from 'react-router-dom'
+import { useApp } from '../store/app'
 
 const backgroundImage = 'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400&q=80'
 
 export default function ProductHero() {
+  const { state } = useApp()
+  const { isLoggedIn } = state
   return (
     <ProductHeroLayout
       sxBackground={{
@@ -28,12 +31,11 @@ export default function ProductHero() {
         variant="contained"
         size="large"
         component={RouterLink}
-        to="/sign-up/"
+        to={isLoggedIn ? 'playground' : '/sign-up/'}
         sx={{ minWidth: 200 }}
       >
-        Register
+        {isLoggedIn ? 'Go PlayGround' : 'Register'}
       </Button>
-      {/* TODO:看下这里怎么和body2集成 */}
       <Typography variant="body2" color="inherit" sx={{ mt: 2 }}>
         Discover the experience
       </Typography>

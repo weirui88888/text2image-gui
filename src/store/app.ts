@@ -2,11 +2,14 @@ import { createContext, type Dispatch, useContext } from 'react'
 
 export interface AppState {
   isLoggedIn: boolean
+  token?: string
+  userId?: string
+  userName?: string
 }
 
 export interface AppAction {
   type: string
-  payload?: any
+  payload?: Record<string, any>
 }
 
 interface IAppContext {

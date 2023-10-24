@@ -21,13 +21,13 @@ function App() {
         <CssBaseline />
         <SnackbarProvider
           anchorOrigin={{
-            horizontal: 'right',
+            horizontal: 'center',
             vertical: 'top'
           }}
           maxSnack={3}
           autoHideDuration={3000}
           classes={{
-            containerAnchorOriginTopRight: 'z-alert'
+            containerAnchorOriginTopCenter: 'z-alert'
           }}
         >
           <SnackbarUtilsConfigurator />

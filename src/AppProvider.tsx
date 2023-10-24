@@ -7,9 +7,9 @@ const AppProvider = (props: React.HTMLAttributes<HTMLElement>) => {
     const { type } = action
     switch (type) {
       case 'loginIn':
-        return { ...state, isLoggedIn: true }
+        return { ...state, ...action.payload, isLoggedIn: true }
       case 'loginOut':
-        return { ...state, isLoggedIn: false }
+        return { isLoggedIn: false }
       default:
         throw Error('Unknown action: ' + action.type)
     }

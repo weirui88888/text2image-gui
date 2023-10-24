@@ -26,6 +26,7 @@ import { pen } from '../api'
 export default function BasicSpeedDial() {
   const { enqueueSnackbar } = useSnackbar()
   const theme = useTheme()
+  console.log(theme)
   const [penVisible, setPenVisible] = useState(false)
   const [penContent, setPenContent] = useState('')
   const [isPen, setIsPen] = useState(false)
