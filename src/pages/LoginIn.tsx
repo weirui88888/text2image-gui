@@ -1,35 +1,71 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Field, Form, FormSpy } from 'react-final-form'
+import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
 import Typography from '../components/Typography'
 import AppFooter from '../views/AppFooter'
 import AppAppBar from '../views/AppAppBar'
 import AppForm from '../views/AppForm'
-import { email, required } from '../form/validation'
+import { isEmail, required } from '../form/validation'
 import RFTextField from '../form/RFTextField'
 import FormButton from '../form/FormButton'
 import FormFeedback from '../form/FormFeedback'
-import { Link as RouterLink } from 'react-router-dom'
+import { ResponseCode } from '../api/api.d'
+import { type LoginInParams, loginIn } from '../api/loginIn'
+import SnackbarUtils from '../components/SnackbarUtilsConfigurator'
+import { useApp } from '../store/app'
+import useCaptcha from '../hooks/useCaptcha'
 
 function SignIn() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [sent, setSent] = useState(false)
+  const loginInParams = useRef<Omit<LoginInParams, 'user_identifier_type'>>()
+  const { dispatch } = useApp()
+  const navigate = useNavigate()
 
-  const validate = (values: Record<string, string>) => {
-    const errors = required(['email', 'password'], values)
-
-    if (!errors.email) {
-      const emailError = email(values.email)
-      if (emailError) {
-        errors.email = emailError
+  useCaptcha({
+    SceneId: process.env.REACT_APP_ALI_CAPTCHA_LOGININ_SCENE_ID as string,
+    prefix: process.env.REACT_APP_ALI_CAPTCHA_PREFIX as string,
+    element: '#login-in-captcha-element',
+    button: '#login-in-submit-button',
+    captchaVerifyCallback: async (captchaVerifyParam: string) => {
+      const userLoginInIdentifierType = isEmail(loginInParams.current?.user_identifier!) ? 'user_email' : 'user_id'
+      const loginInResult = await loginIn(captchaVerifyParam, {
+        ...loginInParams.current!,
+        user_identifier_type: userLoginInIdentifierType
+      })
+      if (loginInResult.code !== ResponseCode.OK) {
+        SnackbarUtils.error(loginInResult.message)
+      }
+      const { bizResult, verifyResult, ...userMsg } = loginInResult.data
+      if (bizResult && verifyResult) {
+        dispatch({
+          type: 'loginIn',
+          payload: userMsg
+        })
+      }
+      console.log(loginInResult.data)
+      return {
+        captchaResult: loginInResult.data.verifyResult,
+        bizResult: loginInResult.data.bizResult
+      }
+    },
+    onBizResultCallback: (bizResult: boolean) => {
+      if (bizResult) {
+        navigate('/')
+        SnackbarUtils.success('登录成功')
       }
     }
+  })
 
+  const validate = (values: Record<string, string>) => {
+    const errors = required(['user_identifier', 'user_pwd'], values)
     return errors
   }
 
-  const handleSubmit = () => {
-    setSent(true)
+  const handleSubmit = (val: Record<'user_identifier' | 'user_pwd', any>) => {
+    loginInParams.current = val
   }
 
   return (
@@ -47,8 +83,8 @@ function SignIn() {
             </Link>
           </Typography>
         </React.Fragment>
-        <Form onSubmit={handleSubmit} subscription={{ submitting: true }} validate={validate}>
-          {({ handleSubmit: handleSubmit2, submitting }) => (
+        <Form onSubmit={handleSubmit} subscription={{ submitting: true, invalid: true }} validate={validate}>
+          {({ handleSubmit: handleSubmit2, submitting, invalid }) => (
             <Box component="form" onSubmit={handleSubmit2} noValidate sx={{ mt: 6 }}>
               <Field
                 autoComplete="email"
@@ -56,11 +92,19 @@ function SignIn() {
                 component={RFTextField}
                 disabled={submitting || sent}
                 fullWidth
-                label="Email"
+                label="Email Or UserId"
                 margin="normal"
-                name="email"
+                name="user_identifier"
                 required
                 size="large"
+                validate={value => {
+                  if (!value) {
+                    return '用户标识符不能为空，使用用户邮箱或ID'
+                  }
+                  if (/[\u4E00-\u9FA5]/.test(value)) {
+                    return '用户标识符不能包含中文字符'
+                  }
+                }}
               />
               <Field
                 fullWidth
@@ -68,11 +112,22 @@ function SignIn() {
                 component={RFTextField}
                 disabled={submitting || sent}
                 required
-                name="password"
+                name="user_pwd"
                 autoComplete="current-password"
                 label="Password"
                 type="password"
                 margin="normal"
+                validate={value => {
+                  if (!value) {
+                    return '密码不能为空'
+                  }
+                  if (value.length < 6 || value.length > 12) {
+                    return '密码长度为6至12位'
+                  }
+                  if (/[\u4E00-\u9FA5]/.test(value)) {
+                    return '密码不能包含中文字符'
+                  }
+                }}
               />
               <FormSpy subscription={{ submitError: true }}>
                 {({ submitError }) =>
@@ -83,7 +138,15 @@ function SignIn() {
                   ) : null
                 }
               </FormSpy>
-              <FormButton sx={{ mt: 3, mb: 2 }} disabled={submitting || sent} size="large" color="secondary" fullWidth>
+              <div id="login-in-captcha-element"></div>
+              <FormButton
+                sx={{ mt: 3, mb: 2 }}
+                disabled={invalid || submitting || sent}
+                size="large"
+                color="secondary"
+                fullWidth
+                id="login-in-submit-button"
+              >
                 {submitting || sent ? 'In progress…' : 'Login In'}
               </FormButton>
             </Box>

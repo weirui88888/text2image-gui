@@ -11,7 +11,7 @@ router.use((req, res, next) => {
 router.post('/sign-up', signUp)
 
 // anyphoto.space/api/user/login-in
-router.get('/login-in', loginIn)
+router.post('/login-in', loginIn)
 
 // anyphoto.space/api/user/login-out
 router.get('/login-out', loginOut)

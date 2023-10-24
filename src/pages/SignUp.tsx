@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
 import { Field, Form, FormSpy } from 'react-final-form'
+import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import Typography from '../components/Typography'
 import AppFooter from '../views/AppFooter'
 import AppAppBar from '../views/AppAppBar'
@@ -10,7 +11,6 @@ import { email, required } from '../form/validation'
 import RFTextField from '../form/RFTextField'
 import FormButton from '../form/FormButton'
 import FormFeedback from '../form/FormFeedback'
-import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import { ResponseCode } from '../api/api.d'
 import { type SignUpParams, signUp } from '../api/signUp'
 import SnackbarUtils from '../components/SnackbarUtilsConfigurator'
@@ -24,7 +24,7 @@ function SignUp() {
   const signUpParams = useRef<SignUpParams>()
   const { dispatch } = useApp()
   useCaptcha({
-    SceneId: process.env.REACT_APP_ALI_CAPTCHA_SCENE_ID as string,
+    SceneId: process.env.REACT_APP_ALI_CAPTCHA_SIGNUP_SCENE_ID as string,
     prefix: process.env.REACT_APP_ALI_CAPTCHA_PREFIX as string,
     element: '#sign-up-captcha-element',
     button: '#sign-up-submit-button',
@@ -41,7 +41,6 @@ function SignUp() {
         })
       }
       console.log(signUpResult.data)
-      // 1.向后端发起业务请求，获取验证码验证结果和业务结果
       return {
         captchaResult: signUpResult.data.verifyResult,
         bizResult: signUpResult.data.bizResult
@@ -66,7 +65,7 @@ function SignUp() {
     return errors
   }
 
-  const handleSubmit = (val: any) => {
+  const handleSubmit = (val: Record<'user_id' | 'user_name' | 'user_email' | 'user_pwd', any>) => {
     signUpParams.current = val
   }
 
