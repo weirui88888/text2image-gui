@@ -2,7 +2,7 @@ const axios = require('axios')
 const bcrypt = require('bcryptjs')
 const xss = require('xss')
 const UserModel = require('../database/model/user')
-const { getAliCaptchaUrl, createToken } = require('../utils')
+const { getAliCaptchaUrl, createToken, verifyToken } = require('../utils')
 const { logDebugger } = require('../debug')
 
 const signUp = async (req, res) => {
@@ -178,6 +178,13 @@ const loginIn = async (req, res) => {
     })
   }
 }
+
+const authCheck = async (req, res) => {
+  const token = req.headers.authorization
+  const { str = '' } = await verifyToken(token.replace(/"/g, ''))
+  console.log(str)
+  res.send('user authCheck route')
+}
 const loginOut = async (req, res) => {
   res.send('user login-out route')
 }
@@ -185,5 +192,6 @@ const loginOut = async (req, res) => {
 module.exports = {
   signUp,
   loginIn,
+  authCheck,
   loginOut
 }

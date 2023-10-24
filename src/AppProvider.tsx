@@ -1,5 +1,8 @@
-import React, { useReducer } from 'react'
+import React, { useEffect, useReducer } from 'react'
+import { useLocalStorageState } from 'ahooks'
+import { AppTokenKey } from './config'
 import { AppContext, initState, type AppState, type AppAction } from './store/app'
+import { authCheck } from './api/authCheck'
 
 const AppProvider = (props: React.HTMLAttributes<HTMLElement>) => {
   const { children } = props
@@ -16,6 +19,16 @@ const AppProvider = (props: React.HTMLAttributes<HTMLElement>) => {
   }
 
   const [state, dispatch] = useReducer(reducer, initState)
+  const [appToken] = useLocalStorageState<string | undefined>(AppTokenKey)
+  useEffect(() => {
+    if (appToken) {
+      const checkUserAuth = async () => {
+        const user = await authCheck()
+        console.log(user)
+      }
+      checkUserAuth()
+    }
+  }, [])
 
   return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>
 }

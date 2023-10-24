@@ -21,7 +21,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 import { useSnackbar } from 'notistack'
 
 import { sleep } from '../util'
-import { pen } from '../api'
+import { pen } from '../api/pen'
 
 export default function BasicSpeedDial() {
   const { enqueueSnackbar } = useSnackbar()

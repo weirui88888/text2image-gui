@@ -3,6 +3,7 @@ import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
 import { Field, Form, FormSpy } from 'react-final-form'
 import { Link as RouterLink, useNavigate } from 'react-router-dom'
+import { useLocalStorageState } from 'ahooks'
 import Typography from '../components/Typography'
 import AppFooter from '../views/AppFooter'
 import AppAppBar from '../views/AppAppBar'
@@ -16,10 +17,13 @@ import { type SignUpParams, signUp } from '../api/signUp'
 import SnackbarUtils from '../components/SnackbarUtilsConfigurator'
 import { useApp } from '../store/app'
 import useCaptcha from '../hooks/useCaptcha'
+import { AppTokenKey } from '../config'
 
 function SignUp() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [sent, setSent] = useState(false)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [appToken, setAppToken] = useLocalStorageState<string | undefined>(AppTokenKey)
   const navigate = useNavigate()
   const signUpParams = useRef<SignUpParams>()
   const { dispatch } = useApp()
@@ -39,8 +43,8 @@ function SignUp() {
           type: 'loginIn',
           payload: userMsg
         })
+        setAppToken(signUpResult.data.token)
       }
-      console.log(signUpResult.data)
       return {
         captchaResult: signUpResult.data.verifyResult,
         bizResult: signUpResult.data.bizResult

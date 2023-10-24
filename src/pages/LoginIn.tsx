@@ -3,6 +3,7 @@ import { Field, Form, FormSpy } from 'react-final-form'
 import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
+import { useLocalStorageState } from 'ahooks'
 import Typography from '../components/Typography'
 import AppFooter from '../views/AppFooter'
 import AppAppBar from '../views/AppAppBar'
@@ -16,10 +17,13 @@ import { type LoginInParams, loginIn } from '../api/loginIn'
 import SnackbarUtils from '../components/SnackbarUtilsConfigurator'
 import { useApp } from '../store/app'
 import useCaptcha from '../hooks/useCaptcha'
+import { AppTokenKey } from '../config'
 
 function SignIn() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [sent, setSent] = useState(false)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [appToken, setAppToken] = useLocalStorageState<string | undefined>(AppTokenKey)
   const loginInParams = useRef<Omit<LoginInParams, 'user_identifier_type'>>()
   const { dispatch } = useApp()
   const navigate = useNavigate()
@@ -44,6 +48,8 @@ function SignIn() {
           type: 'loginIn',
           payload: userMsg
         })
+        console.log(loginInResult.data.token)
+        setAppToken(loginInResult.data.token)
       }
       console.log(loginInResult.data)
       return {
