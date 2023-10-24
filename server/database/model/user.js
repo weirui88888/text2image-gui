@@ -7,7 +7,7 @@ const UserSchema = new Schema({
   user_email: String,
   user_pwd: String,
   token: String,
-  date: { type: Date, default: Date.now }
+  create_date: { type: Date, default: Date.now }
 })
 
 const UserModel = mongoose.model('AnyPhotoUser', UserSchema, process.env.UserCollectionName)
