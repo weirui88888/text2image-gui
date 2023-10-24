@@ -1,26 +1,23 @@
-import React, { useReducer, type ReactNode } from 'react'
-import { Context, initState, type IState, type Action } from './store/user'
+import React, { useReducer } from 'react'
+import { AppContext, initState, type AppState, type AppAction } from './store/app'
 
-const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const reducer = (preState: IState, action: Action) => {
+const AppProvider = (props: React.HTMLAttributes<HTMLElement>) => {
+  const { children } = props
+  const reducer = (state: AppState, action: AppAction) => {
     const { type } = action
     switch (type) {
-      case 'login':
-        return { ...preState, logining: true }
-      case 'loginout':
-        return { ...preState, logining: false }
+      case 'loginIn':
+        return { ...state, isLoggedIn: true }
+      case 'loginOut':
+        return { ...state, isLoggedIn: false }
       default:
-        throw new Error()
+        throw Error('Unknown action: ' + action.type)
     }
   }
 
-  const [state, dispatch] = useReducer(reducer, initState) // TODO:这里使用接口判断用户token是否过期,用三个参数初始化
+  const [state, dispatch] = useReducer(reducer, initState)
 
-  return (
-    <Context.Provider value={{ state, dispatch }}>
-      {children}
-    </Context.Provider>
-  )
+  return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>
 }
 
-export default UserProvider
+export default AppProvider

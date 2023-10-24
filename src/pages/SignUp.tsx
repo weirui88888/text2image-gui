@@ -14,14 +14,14 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import { ResponseCode } from '../api/api.d'
 import { type SignUpParams, signUp } from '../api/signUp'
 import SnackbarUtils from '../components/SnackbarUtilsConfigurator'
-import { useUser } from '../store/user'
+import { useApp } from '../store/app'
 
 function SignUp() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [sent, setSent] = useState(false)
   const navigate = useNavigate()
   const signUpParams = useRef<SignUpParams>()
-  const { dispatch } = useUser()
+  const { dispatch } = useApp()
 
   // 业务请求(带验证码校验)回调函数
   /**
@@ -49,7 +49,7 @@ function SignUp() {
   const onBizResultCallback = (bizResult: boolean) => {
     if (bizResult) {
       dispatch({
-        type: 'login'
+        type: 'loginIn'
       })
       navigate('/')
       SnackbarUtils.success('注册成功')
