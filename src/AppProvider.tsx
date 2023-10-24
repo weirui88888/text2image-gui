@@ -19,12 +19,27 @@ const AppProvider = (props: React.HTMLAttributes<HTMLElement>) => {
   }
 
   const [state, dispatch] = useReducer(reducer, initState)
-  const [appToken] = useLocalStorageState<string | undefined>(AppTokenKey)
+  const [appToken] = useLocalStorageState<string | undefined>(AppTokenKey, { serializer: (val) => val as string, deserializer: (val) => val })
   useEffect(() => {
     if (appToken) {
       const checkUserAuth = async () => {
-        const user = await authCheck()
-        console.log(user)
+        const authCheckResult = await authCheck()
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { code, data } = authCheckResult
+        const { tokenExpired, userName, userId, userEmail } = data
+        if (!tokenExpired) {
+          dispatch({
+            type: 'loginIn',
+            payload: {
+              userName,
+              userId,
+              userEmail
+            }
+          })
+        } else {
+          dispatch({ type: 'loginOut' })
+          localStorage.removeItem(AppTokenKey)
+        }
       }
       checkUserAuth()
     }

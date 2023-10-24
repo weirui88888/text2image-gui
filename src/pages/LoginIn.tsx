@@ -23,7 +23,7 @@ function SignIn() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [sent, setSent] = useState(false)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [appToken, setAppToken] = useLocalStorageState<string | undefined>(AppTokenKey)
+  const [appToken, setAppToken] = useLocalStorageState<string | undefined>(AppTokenKey, { serializer: (val) => val as string, deserializer: (val) => val })
   const loginInParams = useRef<Omit<LoginInParams, 'user_identifier_type'>>()
   const { dispatch } = useApp()
   const navigate = useNavigate()
@@ -48,7 +48,7 @@ function SignIn() {
           type: 'loginIn',
           payload: userMsg
         })
-        console.log(loginInResult.data.token)
+        console.log(loginInResult.data)
         setAppToken(loginInResult.data.token)
       }
       console.log(loginInResult.data)
@@ -100,6 +100,7 @@ function SignIn() {
                 fullWidth
                 label="Email Or UserId"
                 margin="normal"
+                defaultValue="xdz@520.com"
                 name="user_identifier"
                 required
                 size="large"
@@ -118,6 +119,7 @@ function SignIn() {
                 component={RFTextField}
                 disabled={submitting || sent}
                 required
+                defaultValue="190713"
                 name="user_pwd"
                 autoComplete="current-password"
                 label="Password"

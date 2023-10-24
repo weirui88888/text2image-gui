@@ -23,7 +23,7 @@ function SignUp() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [sent, setSent] = useState(false)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [appToken, setAppToken] = useLocalStorageState<string | undefined>(AppTokenKey)
+  const [appToken, setAppToken] = useLocalStorageState<string | undefined>(AppTokenKey, { serializer: (val) => val as string, deserializer: (val) => val })
   const navigate = useNavigate()
   const signUpParams = useRef<SignUpParams>()
   const { dispatch } = useApp()
@@ -145,7 +145,7 @@ function SignUp() {
                 component={RFTextField}
                 disabled={submitting || sent}
                 required
-                defaultValue="xdzde88"
+                defaultValue="190713"
                 name="user_pwd"
                 label="Password"
                 type="password"

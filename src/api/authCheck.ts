@@ -2,8 +2,10 @@ import request from './request'
 import type { AnyPhotoResponse } from './api.d'
 
 interface AuthCheckResponseData {
-  userId: string
-  userName: string
+  tokenExpired: boolean
+  userId?: string
+  userName?: string
+  userEmail?: string
 }
 
 const authCheck = async (): Promise<AnyPhotoResponse<AuthCheckResponseData>> => await request.get('user/auth-check')

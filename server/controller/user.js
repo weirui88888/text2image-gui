@@ -2,7 +2,7 @@ const axios = require('axios')
 const bcrypt = require('bcryptjs')
 const xss = require('xss')
 const UserModel = require('../database/model/user')
-const { getAliCaptchaUrl, createToken, verifyToken } = require('../utils')
+const { getAliCaptchaUrl, createToken, verifyToken, isEmail } = require('../utils')
 const { logDebugger } = require('../debug')
 
 const signUp = async (req, res) => {
@@ -180,11 +180,42 @@ const loginIn = async (req, res) => {
 }
 
 const authCheck = async (req, res) => {
-  const token = req.headers.authorization
-  const { str = '' } = await verifyToken(token.replace(/"/g, ''))
-  console.log(str)
-  res.send('user authCheck route')
+  try {
+    const token = req.headers.authorization
+    const { str = '' } = await verifyToken(token)
+
+    const findUserQuerys = {
+      token
+    }
+    if (isEmail(str)) {
+      findUserQuerys.user_email = str
+    } else {
+      findUserQuerys.user_id = str
+    }
+    logDebugger(`authCheck:findUser by ${isEmail(str) ? 'user_email' : 'user_id'} = '${str}'`)
+    const user = await UserModel.find(findUserQuerys)
+    const { user_email, user_id, user_name } = user[0]
+    res.send({
+      code: 200,
+      message: 'success',
+      data: {
+        tokenExpired: false,
+        userEmail: user_email,
+        userId: user_id,
+        userName: user_name
+      }
+    })
+  } catch (err) {
+    res.send({
+      code: 200,
+      message: 'success',
+      data: {
+        tokenExpired: true
+      }
+    })
+  }
 }
+
 const loginOut = async (req, res) => {
   res.send('user login-out route')
 }
