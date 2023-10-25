@@ -1,8 +1,9 @@
 import { createTheme } from '@mui/material/styles'
 import { green, grey, red } from '@mui/material/colors'
-import { type PaletteMode } from '@mui/material'
+import { type PaletteMode, type PaletteOptions } from '@mui/material'
 
-const lightPalette = {
+const lightPalette: PaletteOptions = {
+  mode: 'light',
   primary: {
     light: '#69696a',
     main: '#28282a',
@@ -29,7 +30,8 @@ const lightPalette = {
   }
 }
 
-const darkPalette = {
+const darkPalette: PaletteOptions = {
+  mode: 'dark',
   primary: {
     light: '#69696a',
     main: '#28282a',
@@ -37,7 +39,7 @@ const darkPalette = {
   },
   secondary: {
     light: '#fff5f8',
-    main: 'purple',
+    main: '#ff0',
     dark: '#e62958'
   },
   warning: {

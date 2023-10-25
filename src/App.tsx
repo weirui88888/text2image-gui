@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState } from 'react'
 import './App.css'
 import Home from './pages/Home'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -14,12 +14,13 @@ import CssBaseline from '@mui/material/CssBaseline'
 import { SnackbarUtilsConfigurator } from './components/SnackbarUtilsConfigurator'
 import getThemeByAppThemeMode from './theme'
 import AppProvider from './AppProvider'
-import AppThemeProvider, { AppThemeProviderContext } from './AppThemeProvider'
+import { AppThemeProviderContext } from './store/theme'
+
 function App() {
-  const { themeMode } = useContext(AppThemeProviderContext)
-  console.log(themeMode)
+  const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light')
+  const toggleThemeMode = () => { setThemeMode(prevThemeModeMode => (prevThemeModeMode === 'light' ? 'dark' : 'light')) }
   return (
-    <AppThemeProvider>
+    <AppThemeProviderContext.Provider value={{ themeMode, toggleThemeMode }}>
       <AppProvider>
         <ThemeProvider theme={getThemeByAppThemeMode(themeMode)}>
           <CssBaseline />
@@ -49,7 +50,7 @@ function App() {
           </SnackbarProvider>
         </ThemeProvider>
       </AppProvider>
-    </AppThemeProvider>
+    </AppThemeProviderContext.Provider>
   )
 }
 

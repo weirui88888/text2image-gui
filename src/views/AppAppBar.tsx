@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { styled, alpha, useTheme } from '@mui/material/styles'
 import Link from '@mui/material/Link'
 import Box from '@mui/material/Box'
@@ -24,7 +24,7 @@ import { useApp } from '../store/app'
 import AppBar from '../components/AppBar'
 import Toolbar from '../components/Toolbar'
 import { AppTokenKey } from '../config'
-import { AppThemeProviderContext } from '../AppThemeProvider'
+import { useAppTheme } from '../store/theme'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -69,9 +69,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function AppAppBar() {
   const theme = useTheme()
   const { state, dispatch } = useApp()
+  const { themeMode, toggleThemeMode } = useAppTheme()
   const { isLoggedIn, userId, userName, isFetchingAuth } = state
   const { t } = useTranslation()
-  const { themeMode, toggleThemeMode } = useContext(AppThemeProviderContext)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null)
   const pages = ['Playground', 'Example', 'Api', 'Core', 'Blog', 'Release']
