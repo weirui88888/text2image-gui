@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useContext } from 'react'
 import { styled, alpha, useTheme } from '@mui/material/styles'
 import Link from '@mui/material/Link'
 import Box from '@mui/material/Box'
@@ -14,6 +14,8 @@ import AccountCircle from '@mui/icons-material/AccountCircle'
 import MailIcon from '@mui/icons-material/Mail'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import MoreIcon from '@mui/icons-material/MoreVert'
+import Brightness4Icon from '@mui/icons-material/Brightness4'
+import Brightness7Icon from '@mui/icons-material/Brightness7'
 import CircularProgress from '@mui/material/CircularProgress'
 import { Link as RouterLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -22,6 +24,7 @@ import { useApp } from '../store/app'
 import AppBar from '../components/AppBar'
 import Toolbar from '../components/Toolbar'
 import { AppTokenKey } from '../config'
+import { AppThemeProviderContext } from '../AppThemeProvider'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -68,6 +71,7 @@ export default function AppAppBar() {
   const { state, dispatch } = useApp()
   const { isLoggedIn, userId, userName, isFetchingAuth } = state
   const { t } = useTranslation()
+  const { themeMode, toggleThemeMode } = useContext(AppThemeProviderContext)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null)
   const pages = ['Playground', 'Example', 'Api', 'Core', 'Blog', 'Release']
@@ -251,6 +255,15 @@ export default function AppAppBar() {
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
               </Badge>
+            </IconButton>
+            <IconButton
+              sx={{ ml: 1 }}
+              onClick={() => {
+                toggleThemeMode()
+              }}
+              color="inherit"
+            >
+              {themeMode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>
             {isFetchingAuth ? (
               <CircularProgress color="secondary" size={24} sx={{ ml: '12px' }} />
