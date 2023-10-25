@@ -2,6 +2,7 @@ import { createContext, type Dispatch, useContext } from 'react'
 
 export interface AppState {
   isLoggedIn: boolean
+  isFetchingAuth: boolean
   token?: string
   userId?: string
   userName?: string
@@ -18,7 +19,8 @@ interface IAppContext {
 }
 
 export const initState: AppState = {
-  isLoggedIn: false
+  isLoggedIn: false,
+  isFetchingAuth: true
 }
 
 export const AppContext = createContext<IAppContext>({

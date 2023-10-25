@@ -2,7 +2,7 @@ const axios = require('axios')
 const bcrypt = require('bcryptjs')
 const xss = require('xss')
 const UserModel = require('../database/model/user')
-const { getAliCaptchaUrl, createToken, verifyToken, isEmail } = require('../utils')
+const { getAliCaptchaUrl, createToken, verifyToken, isEmail, sleep } = require('../utils')
 const { logDebugger } = require('../debug')
 
 const signUp = async (req, res) => {
@@ -193,6 +193,7 @@ const authCheck = async (req, res) => {
       findUserQuerys.user_id = str
     }
     logDebugger(`authCheck:findUser by ${isEmail(str) ? 'user_email' : 'user_id'} = '${str}'`)
+    await sleep(1)
     const user = await UserModel.find(findUserQuerys)
     const { user_email, user_id, user_name } = user[0]
     res.send({

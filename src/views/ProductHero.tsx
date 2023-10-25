@@ -1,4 +1,6 @@
 import React from 'react'
+import { useTheme } from '@mui/material/styles'
+import CircularProgress from '@mui/material/CircularProgress'
 import Button from '../components/Button'
 import Typography from '../components/Typography'
 import ProductHeroLayout from './ProductHeroLayout'
@@ -9,7 +11,8 @@ const backgroundImage = 'https://images.unsplash.com/photo-1534854638093-bada181
 
 export default function ProductHero() {
   const { state } = useApp()
-  const { isLoggedIn } = state
+  const theme = useTheme()
+  const { isLoggedIn, isFetchingAuth } = state
   return (
     <ProductHeroLayout
       sxBackground={{
@@ -31,10 +34,17 @@ export default function ProductHero() {
         variant="contained"
         size="large"
         component={RouterLink}
-        to={isLoggedIn ? 'playground' : '/sign-up/'}
-        sx={{ minWidth: 200 }}
+        to={isLoggedIn ? 'playground' : '/login-in/'}
+        sx={{ minWidth: 200, '&.Mui-disabled': { background: theme.palette.secondary.dark } }}
+        disabled={isFetchingAuth}
       >
-        {isLoggedIn ? 'Go PlayGround' : 'Register'}
+        {isFetchingAuth ? (
+          <CircularProgress color="secondary" size={24} sx={{ color: '#ffffff' }} />
+        ) : isLoggedIn ? (
+          'Go PlayGround'
+        ) : (
+          'Login In'
+        )}
       </Button>
       <Typography variant="body2" color="inherit" sx={{ mt: 2 }}>
         Discover the experience

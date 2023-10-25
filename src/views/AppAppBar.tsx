@@ -14,6 +14,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle'
 import MailIcon from '@mui/icons-material/Mail'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import MoreIcon from '@mui/icons-material/MoreVert'
+import CircularProgress from '@mui/material/CircularProgress'
 import { Link as RouterLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
@@ -65,7 +66,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function AppAppBar() {
   const theme = useTheme()
   const { state, dispatch } = useApp()
-  const { isLoggedIn, userId, userName } = state
+  const { isLoggedIn, userId, userName, isFetchingAuth } = state
   const { t } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -237,39 +238,45 @@ export default function AppAppBar() {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            {isLoggedIn ? (
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
+            {isFetchingAuth ? (
+              <CircularProgress color="secondary" size={24} sx={{ ml: '12px' }} />
             ) : (
               <>
-                <Link
-                  sx={{ px: 1.5, color: 'secondary.main' }}
-                  variant="h6"
-                  underline="none"
-                  component={RouterLink}
-                  to="/sign-up/"
-                >
-                  {t('sign-up')}
-                </Link>
-                <Link
-                  color="inherit"
-                  variant="h6"
-                  underline="none"
-                  component={RouterLink}
-                  to="/login-in/"
-                  // sx={rightLink}
-                >
-                  {t('login-in')}
-                </Link>
+                {isLoggedIn ? (
+                  <IconButton
+                    size="large"
+                    edge="end"
+                    aria-label="account of current user"
+                    aria-controls={menuId}
+                    aria-haspopup="true"
+                    onClick={handleProfileMenuOpen}
+                    color="inherit"
+                  >
+                    <AccountCircle />
+                  </IconButton>
+                ) : (
+                  <>
+                    <Link
+                      sx={{ px: 1.5, color: 'secondary.main' }}
+                      variant="h6"
+                      underline="none"
+                      component={RouterLink}
+                      to="/sign-up/"
+                    >
+                      {t('sign-up')}
+                    </Link>
+                    <Link
+                      color="inherit"
+                      variant="h6"
+                      underline="none"
+                      component={RouterLink}
+                      to="/login-in/"
+                      // sx={rightLink}
+                    >
+                      {t('login-in')}
+                    </Link>
+                  </>
+                )}
               </>
             )}
           </Box>

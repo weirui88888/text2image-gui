@@ -23,7 +23,10 @@ function SignUp() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [sent, setSent] = useState(false)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [appToken, setAppToken] = useLocalStorageState<string | undefined>(AppTokenKey, { serializer: (val) => val as string, deserializer: (val) => val })
+  const [appToken, setAppToken] = useLocalStorageState<string | undefined>(AppTokenKey, {
+    serializer: val => val as string,
+    deserializer: val => val
+  })
   const navigate = useNavigate()
   const signUpParams = useRef<SignUpParams>()
   const { dispatch } = useApp()
@@ -94,7 +97,7 @@ function SignUp() {
                 component={RFTextField}
                 disabled={submitting || sent}
                 fullWidth
-                defaultValue="小布偶毛的一天"
+                defaultValue="布偶猫的一天"
                 label="NickName"
                 margin="normal"
                 name="user_name"
