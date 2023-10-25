@@ -3,7 +3,6 @@ import { styled, alpha, useTheme } from '@mui/material/styles'
 import Link from '@mui/material/Link'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
 import InputBase from '@mui/material/InputBase'
 import Badge from '@mui/material/Badge'
 import MenuItem from '@mui/material/MenuItem'
@@ -212,14 +211,9 @@ export default function AppAppBar() {
           <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}>
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' }, color: '#ffffff' }}
-          >
+          <Link sx={{ color: '#ffffff' }} variant="h6" underline="none" component={RouterLink} to="/">
             AnyPhoto
-          </Typography>
+          </Link>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />

@@ -59,6 +59,13 @@ const AppProvider = (props: React.HTMLAttributes<HTMLElement>) => {
         }
       }
       checkUserAuth()
+    } else {
+      dispatch({
+        type: 'isFetchingAuth',
+        payload: {
+          isFetchingAuth: false
+        }
+      })
     }
   }, [])
 
