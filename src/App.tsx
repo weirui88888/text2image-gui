@@ -15,10 +15,17 @@ import { SnackbarUtilsConfigurator } from './components/SnackbarUtilsConfigurato
 import getThemeByAppThemeMode from './theme'
 import AppProvider from './AppProvider'
 import { AppThemeProviderContext } from './store/theme'
+import { AppThemeMode } from './config'
 
 function App() {
-  const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light')
-  const toggleThemeMode = () => { setThemeMode(prevThemeModeMode => (prevThemeModeMode === 'light' ? 'dark' : 'light')) }
+  const [themeMode, setThemeMode] = useState<'light' | 'dark'>(localStorage.getItem(AppThemeMode) as any || 'light')
+  const toggleThemeMode = () => {
+    setThemeMode(prevThemeModeMode => {
+      const currentThemeMode = prevThemeModeMode === 'light' ? 'dark' : 'light'
+      localStorage.setItem(AppThemeMode, currentThemeMode)
+      return currentThemeMode
+    })
+  }
   return (
     <AppThemeProviderContext.Provider value={{ themeMode, toggleThemeMode }}>
       <AppProvider>
