@@ -179,7 +179,7 @@ function SignUp() {
               <FormButton
                 sx={{ mt: 3, mb: 2 }}
                 disabled={invalid || submitting || sent}
-                color="secondary"
+                color="button"
                 fullWidth
                 id="sign-up-submit-button"
               >

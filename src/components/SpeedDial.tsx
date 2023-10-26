@@ -47,15 +47,15 @@ export default function BasicSpeedDial() {
           icon={<SendIcon />}
           sx={{
             '& .MuiButtonBase-root': {
-              backgroundColor: theme.palette.secondary.main,
+              backgroundColor: theme.palette.button.main,
               '&:hover': {
-                backgroundColor: theme.palette.secondary.dark
+                backgroundColor: theme.palette.button.dark
               }
             },
             '& #SpeedDial-actions .MuiButtonBase-root': {
               backgroundColor: theme.palette.common.white,
               '&:hover': {
-                backgroundColor: theme.palette.grey[200]
+                backgroundColor: theme.palette.grey[300]
               }
             }
           }}

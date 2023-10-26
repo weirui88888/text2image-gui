@@ -30,7 +30,7 @@ export default function ProductHero() {
         You can generate any photo that satisfies you anywhere.
       </Typography>
       <Button
-        color="secondary"
+        color="button"
         variant="contained"
         size="large"
         component={RouterLink}

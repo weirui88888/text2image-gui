@@ -23,7 +23,10 @@ function SignIn() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [sent, setSent] = useState(false)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [appToken, setAppToken] = useLocalStorageState<string | undefined>(AppTokenKey, { serializer: (val) => val as string, deserializer: (val) => val })
+  const [appToken, setAppToken] = useLocalStorageState<string | undefined>(AppTokenKey, {
+    serializer: val => val as string,
+    deserializer: val => val
+  })
   const loginInParams = useRef<Omit<LoginInParams, 'user_identifier_type'>>()
   const { dispatch } = useApp()
   const navigate = useNavigate()
@@ -151,7 +154,7 @@ function SignIn() {
                 sx={{ mt: 3, mb: 2 }}
                 disabled={invalid || submitting || sent}
                 size="large"
-                color="secondary"
+                color="button"
                 fullWidth
                 id="login-in-submit-button"
               >

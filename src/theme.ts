@@ -1,32 +1,49 @@
 import { createTheme } from '@mui/material/styles'
-import { green, grey, red } from '@mui/material/colors'
-import { type PaletteMode, type PaletteOptions } from '@mui/material'
+import { grey } from '@mui/material/colors'
+
+import { type PaletteMode, type SimplePaletteColorOptions, type PaletteOptions } from '@mui/material'
+
+declare module '@mui/material/styles' {
+  interface Palette {
+    button: SimplePaletteColorOptions
+  }
+
+  interface PaletteOptions {
+    button?: SimplePaletteColorOptions
+  }
+}
+declare module '@mui/material/Button' {
+  interface ButtonPropsColorOverrides {
+    button: true
+  }
+}
+
+// enum themeModes {
+//   'light' = 'light',
+//   'dark' = 'dark'
+// }
+
+// enum themeLightColors {
+//   '#FDE5E5' = '#FDE5E5',
+//   '#F0F6F6' = '#F0F6F6',
+//   '#EFF4E6' = '#EFF4E6',
+//   '#FDF8E2' = '#FDF8E2'
+// }
+
+// enum themeDarkColors {
+//   '#4C4D4F' = '#4C4D4F'
+// }
 
 const lightPalette: PaletteOptions = {
   mode: 'light',
+  text: {
+    primary: '#78909c' // TODO:3.选择字体
+  },
   primary: {
-    light: '#69696a',
-    main: '#28282a',
-    dark: '#1e1e1f'
+    main: '#4c4d4f' // TODO:1.先挑主色调
   },
   secondary: {
-    light: '#fff5f8',
-    main: '#ff3366',
-    dark: '#e62958'
-  },
-  warning: {
-    main: '#ffc071',
-    dark: '#ffb25e'
-  },
-  error: {
-    light: red[50],
-    main: red[500],
-    dark: red[700]
-  },
-  success: {
-    light: green[50],
-    main: green[500],
-    dark: green[700]
+    main: '#eaebed' // TODO:2.再挑对应次色调
   }
 }
 
@@ -41,20 +58,6 @@ const darkPalette: PaletteOptions = {
     light: '#fff5f8',
     main: '#ff0',
     dark: '#e62958'
-  },
-  warning: {
-    main: '#ffc071',
-    dark: '#ffb25e'
-  },
-  error: {
-    light: red[50],
-    main: red[500],
-    dark: red[700]
-  },
-  success: {
-    light: green[50],
-    main: green[500],
-    dark: green[700]
   }
 }
 
@@ -71,7 +74,7 @@ const getThemeByAppThemeMode = (mode: PaletteMode) => {
     }
   })
 
-  const fontHeader = {
+  const fontHeader: Record<string, any> = {
     color: rawTheme.palette.text.primary,
     fontWeight: rawTheme.typography.fontWeightMedium,
     fontFamily: "'Roboto Condensed', sans-serif",
@@ -126,19 +129,26 @@ const getThemeByAppThemeMode = (mode: PaletteMode) => {
         ...rawTheme.typography.subtitle1,
         fontSize: 18
       },
-      body1: {
-        ...rawTheme.typography.body2,
-        fontWeight: rawTheme.typography.fontWeightRegular,
-        fontSize: 16
-      },
       body2: {
         ...rawTheme.typography.body1,
         fontSize: 14
       }
     }
   }
-  console.log(theme)
-  return theme
+  const themeWithPaletteButton = createTheme(theme, {
+    palette: {
+      button: theme.palette.augmentColor({
+        color: {
+          main: '#e62958' // TODO:4.按钮色调
+        },
+        name: 'button'
+      })
+    }
+  })
+  console.log('themeWithPaletteButton')
+  console.log(themeWithPaletteButton)
+  console.log('themeWithPaletteButton')
+  return themeWithPaletteButton
 }
 
 export default getThemeByAppThemeMode

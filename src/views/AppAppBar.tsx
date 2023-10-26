@@ -8,7 +8,7 @@ import InputBase from '@mui/material/InputBase'
 import Badge from '@mui/material/Badge'
 import MenuItem from '@mui/material/MenuItem'
 import Menu from '@mui/material/Menu'
-import MenuIcon from '@mui/icons-material/Menu'
+// import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import MailIcon from '@mui/icons-material/Mail'
@@ -214,15 +214,16 @@ export default function AppAppBar() {
     <div>
       <AppBar color="primary">
         <Toolbar>
-          <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}>
+          {/* <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}>
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Typography
+            color="inherit"
             variant="h6"
             noWrap
             component="a"
             href="/"
-            sx={{ display: { xs: 'none', sm: 'block' }, color: '#ffffff', textDecoration: 'none' }}
+            sx={{ display: { xs: 'none', sm: 'block' }, textDecoration: 'none' }}
           >
             AnyPhoto
           </Typography>
@@ -238,8 +239,10 @@ export default function AppAppBar() {
                 key={page}
                 noWrap
                 component="a"
+                variant="h6"
+                color="inherit"
                 href={`/${page}`}
-                sx={{ color: '#ffffff', textDecoration: 'none', mr: 2 }}
+                sx={{ textDecoration: 'none', mr: 2 }}
               >
                 {page}
               </Typography>
@@ -284,11 +287,12 @@ export default function AppAppBar() {
                 ) : (
                   <>
                     <Link
-                      sx={{ px: 1.5, color: 'secondary.main' }}
+                      sx={{ px: 1.5 }}
                       variant="h6"
                       underline="none"
                       component={RouterLink}
                       to="/sign-up/"
+                      color="inherit"
                     >
                       {t('sign-up')}
                     </Link>

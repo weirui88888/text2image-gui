@@ -23,11 +23,11 @@ function ProductValues() {
           alt="curvy lines"
           sx={{ pointerEvents: 'none', position: 'absolute', top: -180 }}
         />
-        <Grid container spacing={5}>
+        <Grid container spacing={5} sx={{ color: 'secondary.contrastText' }}>
           <Grid item xs={12} md={4}>
             <Box sx={item}>
               <Box component="img" src="/productValues1.svg" alt="suitcase" sx={{ height: 55 }} />
-              <Typography variant="h6" sx={{ my: 5 }}>
+              <Typography variant="h6" sx={{ my: 5 }} color="inherit">
                 The best luxury hotels
               </Typography>
               <Typography variant="h5">
@@ -39,7 +39,7 @@ function ProductValues() {
           <Grid item xs={12} md={4}>
             <Box sx={item}>
               <Box component="img" src="/productValues2.svg" alt="graph" sx={{ height: 55 }} />
-              <Typography variant="h6" sx={{ my: 5 }}>
+              <Typography variant="h6" sx={{ my: 5 }} color="inherit">
                 New experiences
               </Typography>
               <Typography variant="h5">
@@ -51,7 +51,7 @@ function ProductValues() {
           <Grid item xs={12} md={4}>
             <Box sx={item}>
               <Box component="img" src="/productValues3.svg" alt="clock" sx={{ height: 55 }} />
-              <Typography variant="h6" sx={{ my: 5 }}>
+              <Typography variant="h6" sx={{ my: 5 }} color="inherit">
                 Exclusive rates
               </Typography>
               <Typography variant="h5">

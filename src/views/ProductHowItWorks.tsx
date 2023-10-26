@@ -18,7 +18,7 @@ const item: SxProps<Theme> = {
 const number = {
   fontSize: 24,
   fontFamily: 'default',
-  color: 'secondary.main',
+  color: 'inherit',
   fontWeight: 'medium'
 }
 
@@ -55,7 +55,7 @@ function ProductHowItWorks() {
           How it works
         </Typography>
         <div>
-          <Grid container spacing={5}>
+          <Grid container spacing={5} sx={{ color: 'secondary.contrastText' }}>
             <Grid item xs={12} md={4}>
               <Box sx={item}>
                 <Box sx={number}>1.</Box>
