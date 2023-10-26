@@ -27,18 +27,19 @@ function ProductCTA() {
             sx={{
               display: 'flex',
               justifyContent: 'center',
-              bgcolor: 'warning.main',
+              bgcolor: 'secondary.main',
+              color: 'secondary.contrastText',
               py: 8,
               px: 3
             }}
           >
             <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 400 }}>
-              <Typography variant="h2" component="h2" gutterBottom>
+              <Typography variant="h2" component="h2" gutterBottom color="inherit">
                 Receive offers
               </Typography>
               <Typography variant="h5">Taste the holidays of the everyday close to home.</Typography>
               <TextField noBorder placeholder="Your email" variant="standard" sx={{ width: '100%', mt: 3, mb: 2 }} />
-              <Button type="submit" color="primary" variant="contained" sx={{ width: '100%' }}>
+              <Button type="submit" color="button" variant="contained" sx={{ width: '100%' }}>
                 Keep me updated
               </Button>
             </Box>

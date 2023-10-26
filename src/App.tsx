@@ -18,7 +18,7 @@ import { AppThemeProviderContext } from './store/theme'
 import { AppThemeMode } from './config'
 
 function App() {
-  const [themeMode, setThemeMode] = useState<'light' | 'dark'>(localStorage.getItem(AppThemeMode) as any || 'light')
+  const [themeMode, setThemeMode] = useState<'light' | 'dark'>((localStorage.getItem(AppThemeMode) as any) || 'light')
   const toggleThemeMode = () => {
     setThemeMode(prevThemeModeMode => {
       const currentThemeMode = prevThemeModeMode === 'light' ? 'dark' : 'light'
@@ -43,17 +43,19 @@ function App() {
             }}
           >
             <SnackbarUtilsConfigurator />
-            <Router>
-              <Routes>
-                <Route path="/forgot-password" element={<ForgotPassword />}></Route>
-                <Route path="/sign-up" element={<SignUp />}></Route>
-                <Route path="/login-in" element={<LoginIn />}></Route>
-                <Route path="/privacy" element={<Privacy />}></Route>
-                <Route path="/terms" element={<Terms />}></Route>
-                <Route path="/" element={<Home />}></Route>
-              </Routes>
-              <SpeedDial />
-            </Router>
+            <div className={`${themeMode}-theme`}>
+              <Router>
+                <Routes>
+                  <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+                  <Route path="/sign-up" element={<SignUp />}></Route>
+                  <Route path="/login-in" element={<LoginIn />}></Route>
+                  <Route path="/privacy" element={<Privacy />}></Route>
+                  <Route path="/terms" element={<Terms />}></Route>
+                  <Route path="/" element={<Home />}></Route>
+                </Routes>
+                <SpeedDial />
+              </Router>
+            </div>
           </SnackbarProvider>
         </ThemeProvider>
       </AppProvider>

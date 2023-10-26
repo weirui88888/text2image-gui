@@ -37,27 +37,27 @@ declare module '@mui/material/Button' {
 const lightPalette: PaletteOptions = {
   mode: 'light',
   text: {
-    primary: '#78909c' // TODO:3.选择字体
+    primary: '#00FF00'
   },
   primary: {
-    main: '#4c4d4f' // TODO:1.先挑主色调
+    main: '#4c4d4f'
   },
   secondary: {
-    main: '#eaebed' // TODO:2.再挑对应次色调
+    main: '#f0f'
   }
 }
 
 const darkPalette: PaletteOptions = {
   mode: 'dark',
+
   primary: {
-    light: '#69696a',
-    main: '#28282a',
-    dark: '#1e1e1f'
+    main: '#000000'
   },
   secondary: {
-    light: '#fff5f8',
-    main: '#ff0',
-    dark: '#e62958'
+    main: '#7b7b7b'
+  },
+  text: {
+    primary: '#ffffff'
   }
 }
 

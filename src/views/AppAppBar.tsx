@@ -212,7 +212,7 @@ export default function AppAppBar() {
 
   return (
     <div>
-      <AppBar color="primary">
+      <AppBar sx={{ color: 'primary.contrastText' }}>
         <Toolbar>
           {/* <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}>
             <MenuIcon />
@@ -239,7 +239,7 @@ export default function AppAppBar() {
                 key={page}
                 noWrap
                 component="a"
-                variant="h6"
+                variant="h5"
                 color="inherit"
                 href={`/${page}`}
                 sx={{ textDecoration: 'none', mr: 2 }}
@@ -266,6 +266,7 @@ export default function AppAppBar() {
               }}
               color="inherit"
             >
+              {themeMode}
               {themeMode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>
             {isFetchingAuth ? (
