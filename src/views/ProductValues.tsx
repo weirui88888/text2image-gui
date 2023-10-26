@@ -1,5 +1,5 @@
 import React from 'react'
-import { type Theme } from '@mui/material/styles'
+import { type Theme, useTheme } from '@mui/material/styles'
 import { type SxProps } from '@mui/system'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
@@ -14,8 +14,9 @@ const item: SxProps<Theme> = {
 }
 
 function ProductValues() {
+  const theme = useTheme()
   return (
-    <Box component="section" sx={{ display: 'flex', overflow: 'hidden', bgcolor: 'secondary.light' }}>
+    <Box component="section" sx={{ display: 'flex', overflow: 'hidden', bgcolor: 'secondary.main', transition: theme.transitions.create('background-color') }}>
       <Container sx={{ mt: 15, mb: 30, display: 'flex', position: 'relative' }}>
         <Box
           component="img"

@@ -24,11 +24,11 @@ function ProductSmokingHero() {
           px: 5
         }}
       >
-        <Typography variant="h4" component="span">
+        <Typography variant="h4" component="span" sx={{ color: 'common.black' }}>
           Got any questions? Need help?
         </Typography>
       </Button>
-      <Typography variant="subtitle1" sx={{ my: 3 }}>
+      <Typography variant="subtitle1" sx={{ my: 3 }} color="common.black">
         We are here to help. Get in touch!
       </Typography>
       <Box component="img" src="/producBuoy.svg" alt="buoy" sx={{ width: 60 }} />

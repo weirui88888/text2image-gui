@@ -104,7 +104,7 @@ const images = [
 export default function ProductCategories() {
   return (
     <Container component="section" sx={{ mt: 8, mb: 4 }}>
-      <Typography variant="h4" marked="center" align="center" component="h2">
+      <Typography variant="h4" marked="center" align="center" component="h2" color="common.black">
         For all tastes and all desires
       </Typography>
       <Box sx={{ mt: 8, display: 'flex', flexWrap: 'wrap' }}>

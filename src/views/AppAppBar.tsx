@@ -74,7 +74,7 @@ export default function AppAppBar() {
   const { t } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null)
-  const pages = ['Playground', 'Example', 'Api', 'Core', 'Blog', 'Release']
+  const pages = ['Playground', 'Example', 'Api', 'Core', 'Blog', 'Release', 'terms']
 
   const isMenuOpen = Boolean(anchorEl)
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
@@ -212,7 +212,7 @@ export default function AppAppBar() {
 
   return (
     <div>
-      <AppBar sx={{ color: 'primary.contrastText' }}>
+      <AppBar sx={{ bgcolor: 'primary.main', color: 'primary.contrastText', transition: theme.transitions.create('background-color') }}>
         <Toolbar>
           {/* <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}>
             <MenuIcon />
@@ -266,11 +266,10 @@ export default function AppAppBar() {
               }}
               color="inherit"
             >
-              {themeMode}
               {themeMode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>
             {isFetchingAuth ? (
-              <CircularProgress color="secondary" size={24} sx={{ ml: '12px' }} />
+              <CircularProgress size={24} sx={{ ml: '12px', color: 'common.white' }} />
             ) : (
               <>
                 {isLoggedIn ? (

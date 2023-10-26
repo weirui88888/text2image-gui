@@ -1,5 +1,5 @@
 import React from 'react'
-import { type Theme } from '@mui/material/styles'
+import { type Theme, useTheme } from '@mui/material/styles'
 import { type SxProps } from '@mui/system'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
@@ -28,8 +28,9 @@ const image = {
 }
 
 function ProductHowItWorks() {
+  const theme = useTheme()
   return (
-    <Box component="section" sx={{ display: 'flex', bgcolor: 'secondary.light', overflow: 'hidden' }}>
+    <Box component="section" sx={{ display: 'flex', bgcolor: 'secondary.main', overflow: 'hidden', transition: theme.transitions.create('background-color') }}>
       <Container
         sx={{
           mt: 10,
@@ -51,7 +52,7 @@ function ProductHowItWorks() {
             opacity: 0.7
           }}
         />
-        <Typography variant="h4" marked="center" component="h2" sx={{ mb: 14 }}>
+        <Typography variant="h4" marked="center" component="h2" sx={{ mb: 14, color: 'secondary.contrastText' }}>
           How it works
         </Typography>
         <div>

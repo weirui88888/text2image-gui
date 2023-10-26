@@ -18,7 +18,6 @@ export default function ProductHero() {
     <ProductHeroLayout
       sxBackground={{
         backgroundImage: `url(${backgroundImage})`,
-        backgroundColor: '#7fc7d9', // Average color of the background image.
         backgroundPosition: 'center'
       }}
     >
@@ -36,11 +35,11 @@ export default function ProductHero() {
         size="large"
         component={RouterLink}
         to={isLoggedIn ? 'playground' : '/login-in/'}
-        sx={{ minWidth: 200, '&.Mui-disabled': { background: theme.palette.secondary.dark } }}
+        sx={{ minWidth: 200, '&.Mui-disabled': { background: theme.palette.button.dark } }}
         disabled={isFetchingAuth}
       >
         {isFetchingAuth ? (
-          <CircularProgress color="secondary" size={24} sx={{ color: '#ffffff' }} />
+          <CircularProgress size={24} sx={{ color: theme.palette.button.contrastText }} />
         ) : isLoggedIn ? (
           'Go PlayGround'
         ) : (

@@ -53,9 +53,9 @@ export default function BasicSpeedDial() {
               }
             },
             '& #SpeedDial-actions .MuiButtonBase-root': {
-              backgroundColor: theme.palette.common.white,
+              backgroundColor: theme.palette.button.main,
               '&:hover': {
-                backgroundColor: theme.palette.grey[300]
+                backgroundColor: theme.palette.button.dark
               }
             }
           }}

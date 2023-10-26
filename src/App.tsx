@@ -18,7 +18,7 @@ import { AppThemeProviderContext } from './store/theme'
 import { AppThemeMode } from './config'
 
 function App() {
-  const [themeMode, setThemeMode] = useState<'light' | 'dark'>((localStorage.getItem(AppThemeMode) as any) || 'light')
+  const [themeMode, setThemeMode] = useState<'light' | 'dark'>((localStorage.getItem(AppThemeMode) as any) || 'dark')
   const toggleThemeMode = () => {
     setThemeMode(prevThemeModeMode => {
       const currentThemeMode = prevThemeModeMode === 'light' ? 'dark' : 'light'
@@ -43,7 +43,6 @@ function App() {
             }}
           >
             <SnackbarUtilsConfigurator />
-            <div className={`${themeMode}-theme`}>
               <Router>
                 <Routes>
                   <Route path="/forgot-password" element={<ForgotPassword />}></Route>
@@ -55,7 +54,6 @@ function App() {
                 </Routes>
                 <SpeedDial />
               </Router>
-            </div>
           </SnackbarProvider>
         </ThemeProvider>
       </AppProvider>

@@ -11,7 +11,7 @@ import { type TransitionProps } from '@mui/material/transitions/transition'
 const styles = (theme: Theme) =>
   ({
     content: {
-      backgroundColor: theme.palette.secondary.light,
+      backgroundColor: theme.palette.secondary.main,
       color: theme.palette.text.primary,
       flexWrap: 'inherit',
       [theme.breakpoints.up('md')]: {

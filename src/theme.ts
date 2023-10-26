@@ -37,13 +37,13 @@ declare module '@mui/material/Button' {
 const lightPalette: PaletteOptions = {
   mode: 'light',
   text: {
-    primary: '#00FF00'
+    primary: '#000000'
   },
   primary: {
-    main: '#4c4d4f'
+    main: '#82b484' // 控制顶部背景颜色和PHOTO BY ANY INSPIRATION的边框颜色
   },
   secondary: {
-    main: '#f0f'
+    main: '#cfe3d0' // 控制2，4，6模块的背景颜色以及设置对应比度字体颜色
   }
 }
 
@@ -54,10 +54,10 @@ const darkPalette: PaletteOptions = {
     main: '#000000'
   },
   secondary: {
-    main: '#7b7b7b'
+    main: '#434343'
   },
   text: {
-    primary: '#ffffff'
+    primary: '#000000' // 控制底部链接颜色和主文案颜色
   }
 }
 
@@ -139,7 +139,8 @@ const getThemeByAppThemeMode = (mode: PaletteMode) => {
     palette: {
       button: theme.palette.augmentColor({
         color: {
-          main: '#e62958' // TODO:4.按钮色调
+          main: '#82b484',
+          contrastText: '#ffffff'
         },
         name: 'button'
       })

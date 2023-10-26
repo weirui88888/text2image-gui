@@ -82,12 +82,12 @@ function SignIn() {
       <AppAppBar />
       <AppForm>
         <React.Fragment>
-          <Typography variant="h3" gutterBottom marked="center" align="center">
+          <Typography variant="h3" gutterBottom marked="center" align="center" color="secondary.contrastText">
             Login In
           </Typography>
-          <Typography variant="body2" align="center">
+          <Typography variant="body2" align="center" color="secondary.contrastText">
             {'Not a member yet? '}
-            <Link component={RouterLink} to="/sign-up/" align="center" underline="always">
+            <Link component={RouterLink} to="/sign-up/" align="center" underline="always" color="button.main" fontWeight="bolder">
               Sign Up here
             </Link>
           </Typography>
@@ -164,7 +164,7 @@ function SignIn() {
           )}
         </Form>
         <Typography align="center">
-          <Link underline="always" component={RouterLink} to="/forgot-password/">
+          <Link underline="always" component={RouterLink} to="/forgot-password/" color="button.main" fontWeight="bolder">
             Forgot password?
           </Link>
         </Typography>

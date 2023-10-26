@@ -81,11 +81,11 @@ function SignUp() {
       <AppAppBar />
       <AppForm>
         <React.Fragment>
-          <Typography variant="h3" gutterBottom marked="center" align="center">
+          <Typography variant="h3" gutterBottom marked="center" align="center" color="secondary.contrastText">
             Sign Up
           </Typography>
           <Typography variant="body2" align="center">
-            <Link component={RouterLink} to="/login-in/" underline="always">
+            <Link component={RouterLink} to="/login-in/" underline="always" color="secondary.contrastText">
               Already have an account?
             </Link>
           </Typography>
