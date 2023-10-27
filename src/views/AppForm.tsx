@@ -10,7 +10,6 @@ export default function AppForm(props: React.HTMLAttributes<HTMLDivElement>) {
     <Box>
       <Container maxWidth="sm">
         <Box sx={{ mt: 7, mb: 12 }}>
-          {/* TODO:这里可以看到在不同尺寸下的设置 */}
           <Paper background="light" sx={{ py: { xs: 4, md: 8 }, px: { xs: 3, md: 6 } }} elevation={2}>
             {children}
           </Paper>

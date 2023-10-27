@@ -15,6 +15,7 @@ const AppProvider = (props: React.HTMLAttributes<HTMLElement>) => {
       case 'loginIn':
         return { ...state, ...action.payload, isLoggedIn: true }
       case 'loginOut':
+        useRemoveAppToken()
         return { ...state, isLoggedIn: false }
       default:
         throw Error('Unknown action: ' + action.type)
@@ -42,8 +43,7 @@ const AppProvider = (props: React.HTMLAttributes<HTMLElement>) => {
             isFetchingAuth: false
           }
         })
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { code, data } = authCheckResult
+        const { data } = authCheckResult
         const { tokenExpired, userName, userId, userEmail } = data
         if (!tokenExpired) {
           dispatch({
@@ -56,7 +56,6 @@ const AppProvider = (props: React.HTMLAttributes<HTMLElement>) => {
           })
         } else {
           dispatch({ type: 'loginOut' })
-          useRemoveAppToken()
         }
       }
       checkUserAuth()
