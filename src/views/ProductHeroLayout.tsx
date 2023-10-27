@@ -3,8 +3,9 @@ import { type Theme, styled } from '@mui/material/styles'
 import { type SxProps } from '@mui/system'
 import Container from '@mui/material/Container'
 import IconButton from '@mui/material/IconButton'
-import DeleteIcon from '@mui/icons-material/ArrowDownwardOutlined'
+import ArrowDownIcon from '@mui/icons-material/ArrowDownwardOutlined'
 import Box from '@mui/material/Box'
+import Typography from '../components/Typography'
 
 const ProductHeroLayoutRoot = styled('section')(({ theme }) => ({
   color: theme.palette.common.white,
@@ -47,7 +48,6 @@ export default function ProductHeroLayout(props: React.HTMLAttributes<HTMLDivEle
           alignItems: 'center'
         }}
       >
-        <img src="/productHeroWonder.png" alt="wonder" width="147" height="80" />
         {children}
         <Box
           sx={{
@@ -62,12 +62,15 @@ export default function ProductHeroLayout(props: React.HTMLAttributes<HTMLDivEle
           }}
         />
         <Background sx={sxBackground} />
+        <Typography variant="body2" color="inherit" sx={{ position: 'absolute', bottom: 80 }}>
+          Discover the experience
+        </Typography>
         <IconButton
           aria-label="scroll-down"
           sx={{ position: 'absolute', bottom: 32 }}
           className="scroll-down-animation"
         >
-          <DeleteIcon />
+          <ArrowDownIcon sx={{ color: 'common.white' }} />
         </IconButton>
       </Container>
     </ProductHeroLayoutRoot>
