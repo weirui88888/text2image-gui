@@ -22,8 +22,8 @@ import { useTranslation } from 'react-i18next'
 import { useApp } from '../store/app'
 import AppBar from '../components/AppBar'
 import Toolbar from '../components/Toolbar'
-import { AppTokenKey } from '../config'
 import { useAppTheme } from '../store/theme'
+import { useRemoveAppToken } from '../hooks/useAppToken'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -98,7 +98,7 @@ export default function AppAppBar() {
   const logOut = () => {
     handleMenuClose()
     dispatch({ type: 'loginOut' })
-    localStorage.removeItem(AppTokenKey)
+    useRemoveAppToken()
   }
 
   const menuId = 'primary-search-account-menu'

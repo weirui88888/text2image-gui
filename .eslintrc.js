@@ -23,7 +23,8 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 2,
     '@typescript-eslint/triple-slash-reference': 0,
     '@typescript-eslint/member-delimiter-style': 0,
-    '@typescript-eslint/no-non-null-asserted-optional-chain': 0
+    '@typescript-eslint/no-non-null-asserted-optional-chain': 0,
+    '@typescript-eslint/no-confusing-void-expression': 0
   },
   ignorePatterns: ['.eslintrc.js', 'commitlint.config.js'],
   settings: {

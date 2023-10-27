@@ -3,10 +3,10 @@ import type { AxiosError, AxiosInstance, AxiosRequestConfig, InternalAxiosReques
 import SnackbarUtils from '../components/SnackbarUtilsConfigurator'
 import { ResponseCode } from './api.d'
 import type { AnyPhotoResponse } from './api.d'
-import { AppTokenKey } from '../config'
+import { useGetAppToken } from '../hooks/useAppToken'
 const baseURL = 'http://localhost:3001/api'
 const AuthorizationHeader = {
-  Authorization: localStorage.getItem(AppTokenKey)
+  Authorization: useGetAppToken()
 }
 
 export interface InterceptorsConfig {

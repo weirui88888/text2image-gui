@@ -3,6 +3,7 @@ import { useLocalStorageState } from 'ahooks'
 import { AppTokenKey } from './config'
 import { AppContext, initState, type AppState, type AppAction } from './store/app'
 import { authCheck } from './api/authCheck'
+import { useRemoveAppToken } from './hooks/useAppToken'
 
 const AppProvider = (props: React.HTMLAttributes<HTMLElement>) => {
   const { children } = props
@@ -55,7 +56,7 @@ const AppProvider = (props: React.HTMLAttributes<HTMLElement>) => {
           })
         } else {
           dispatch({ type: 'loginOut' })
-          localStorage.removeItem(AppTokenKey)
+          useRemoveAppToken()
         }
       }
       checkUserAuth()
