@@ -2,6 +2,8 @@ import React from 'react'
 import { type Theme, styled } from '@mui/material/styles'
 import { type SxProps } from '@mui/system'
 import Container from '@mui/material/Container'
+import IconButton from '@mui/material/IconButton'
+import DeleteIcon from '@mui/icons-material/ArrowDownwardOutlined'
 import Box from '@mui/material/Box'
 
 const ProductHeroLayoutRoot = styled('section')(({ theme }) => ({
@@ -60,14 +62,13 @@ export default function ProductHeroLayout(props: React.HTMLAttributes<HTMLDivEle
           }}
         />
         <Background sx={sxBackground} />
-        <Box
-          component="img"
-          src="/productHeroArrowDown.png"
-          height="16"
-          width="12"
-          alt="arrow down"
+        <IconButton
+          aria-label="scroll-down"
           sx={{ position: 'absolute', bottom: 32 }}
-        />
+          className="scroll-down-animation"
+        >
+          <DeleteIcon />
+        </IconButton>
       </Container>
     </ProductHeroLayoutRoot>
   )

@@ -121,9 +121,9 @@ export default function AppAppBar() {
           overflow: 'visible',
           mt: 0,
           '& .MuiList-root': {
-            background: theme.palette.secondary.main,
+            background: theme.palette.common.white,
             '& .MuiButtonBase-root:hover': {
-              background: theme.palette.secondary.dark
+              background: theme.palette.grey[100]
             }
           },
           '&:before': {
@@ -134,7 +134,7 @@ export default function AppAppBar() {
             right: 14,
             width: 10,
             height: 10,
-            bgcolor: theme.palette.secondary.main,
+            bgcolor: theme.palette.common.white,
             transform: 'translateY(-50%) rotate(45deg)',
             zIndex: 0
           }

@@ -7,6 +7,10 @@
   pointer-events: none;
 }
 
+.scroll-down-animation {
+  animation: Scroll-down infinite 2s linear both;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -34,5 +38,14 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes Scroll-down {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(20px);
   }
 }
