@@ -82,12 +82,26 @@ function SignIn() {
       <AppAppBar />
       <AppForm>
         <React.Fragment>
-          <Typography variant="h3" gutterBottom marked="center" align="center" color="secondary.contrastText">
+          <Typography
+            variant="h3"
+            gutterBottom
+            suffixBgColor="secondary.contrastText"
+            marked="center"
+            align="center"
+            color="secondary.contrastText"
+          >
             Login In
           </Typography>
           <Typography variant="body2" align="center" color="secondary.contrastText">
             {'Not a member yet? '}
-            <Link component={RouterLink} to="/sign-up/" align="center" underline="always" color="button.main" fontWeight="bolder">
+            <Link
+              component={RouterLink}
+              to="/sign-up/"
+              align="center"
+              underline="always"
+              color="secondary.contrastText"
+              fontWeight="bolder"
+            >
               Sign Up here
             </Link>
           </Typography>
@@ -144,6 +158,7 @@ function SignIn() {
                 {({ submitError }) =>
                   submitError ? (
                     <FormFeedback error sx={{ mt: 2 }}>
+                      123
                       {submitError}
                     </FormFeedback>
                   ) : null
@@ -164,7 +179,13 @@ function SignIn() {
           )}
         </Form>
         <Typography align="center">
-          <Link underline="always" component={RouterLink} to="/forgot-password/" color="button.main" fontWeight="bolder">
+          <Link
+            underline="always"
+            component={RouterLink}
+            to="/forgot-password/"
+            color="secondary.contrastText"
+            fontWeight="bolder"
+          >
             Forgot password?
           </Link>
         </Typography>

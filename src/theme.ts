@@ -40,7 +40,8 @@ const lightPalette: PaletteOptions = {
     primary: '#000000'
   },
   primary: {
-    main: '#82b484' // 控制顶部背景颜色和PHOTO BY ANY INSPIRATION的边框颜色
+    main: '#82b484', // 控制顶部背景颜色和PHOTO BY ANY INSPIRATION的边框颜色,
+    contrastText: '#ffffff'
   },
   secondary: {
     main: '#cfe3d0' // 控制2，4，6模块的背景颜色以及设置对应比度字体颜色
@@ -51,86 +52,88 @@ const darkPalette: PaletteOptions = {
   mode: 'dark',
 
   primary: {
-    main: '#000000'
+    main: grey[900]
   },
   secondary: {
-    main: '#434343'
+    main: grey[600]
   },
   text: {
     primary: '#000000' // 控制底部链接颜色和主文案颜色
+  },
+  background: {
+    default: grey[200]
   }
 }
 
 const getThemeByAppThemeMode = (mode: PaletteMode) => {
   const modePalette = mode === 'light' ? lightPalette : darkPalette
-  const rawTheme = createTheme({
+  const modeTheme = createTheme({
     palette: modePalette,
     typography: {
       fontFamily: "'Work Sans', sans-serif",
       fontSize: 14,
-      fontWeightLight: 300, // Work Sans
-      fontWeightRegular: 400, // Work Sans
+      fontWeightLight: 400, // Work Sans
+      fontWeightRegular: 500, // Work Sans
       fontWeightMedium: 700 // Roboto Condensed
     }
   })
 
   const fontHeader: Record<string, any> = {
-    color: rawTheme.palette.text.primary,
-    fontWeight: rawTheme.typography.fontWeightMedium,
+    color: modeTheme.palette.text.primary,
+    fontWeight: modeTheme.typography.fontWeightMedium,
     fontFamily: "'Roboto Condensed', sans-serif",
     textTransform: 'uppercase'
   }
 
   const theme = {
-    ...rawTheme,
+    ...modeTheme,
     palette: {
-      ...rawTheme.palette,
+      ...modeTheme.palette,
       background: {
-        ...rawTheme.palette.background,
-        default: rawTheme.palette.common.white,
+        ...modeTheme.palette.background,
         placeholder: grey[200]
       }
     },
     typography: {
-      ...rawTheme.typography,
+      ...modeTheme.typography,
       fontHeader,
       h1: {
-        ...rawTheme.typography.h1,
+        ...modeTheme.typography.h1,
         ...fontHeader,
         letterSpacing: 0,
         fontSize: 60
       },
       h2: {
-        ...rawTheme.typography.h2,
+        ...modeTheme.typography.h2,
         ...fontHeader,
         fontSize: 48
       },
       h3: {
-        ...rawTheme.typography.h3,
+        ...modeTheme.typography.h3,
         ...fontHeader,
         fontSize: 42
       },
       h4: {
-        ...rawTheme.typography.h4,
+        ...modeTheme.typography.h4,
         ...fontHeader,
         fontSize: 36
       },
       h5: {
-        ...rawTheme.typography.h5,
+        ...modeTheme.typography.h5,
         fontSize: 20,
-        fontWeight: rawTheme.typography.fontWeightLight
+        fontWeight: modeTheme.typography.fontWeightLight
       },
       h6: {
-        ...rawTheme.typography.h6,
+        ...modeTheme.typography.h6,
         ...fontHeader,
         fontSize: 18
       },
       subtitle1: {
-        ...rawTheme.typography.subtitle1,
+        ...modeTheme.typography.subtitle1,
         fontSize: 18
       },
       body2: {
-        ...rawTheme.typography.body1,
+        ...modeTheme.typography.body1,
         fontSize: 14
       }
     }

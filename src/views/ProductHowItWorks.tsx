@@ -30,7 +30,15 @@ const image = {
 function ProductHowItWorks() {
   const theme = useTheme()
   return (
-    <Box component="section" sx={{ display: 'flex', bgcolor: 'secondary.main', overflow: 'hidden', transition: theme.transitions.create('background-color') }}>
+    <Box
+      component="section"
+      sx={{
+        display: 'flex',
+        bgcolor: 'secondary.main',
+        overflow: 'hidden',
+        transition: theme.transitions.create('background-color')
+      }}
+    >
       <Container
         sx={{
           mt: 10,
@@ -52,7 +60,13 @@ function ProductHowItWorks() {
             opacity: 0.7
           }}
         />
-        <Typography variant="h4" marked="center" component="h2" sx={{ mb: 14, color: 'secondary.contrastText' }}>
+        <Typography
+          variant="h4"
+          marked="center"
+          component="h2"
+          suffixBgColor={theme.palette.secondary.contrastText}
+          sx={{ mb: 14, color: 'secondary.contrastText' }}
+        >
           How it works
         </Typography>
         <div>

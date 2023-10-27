@@ -2,6 +2,7 @@ import React from 'react'
 import { type Theme } from '@mui/material/styles'
 import { withStyles, type WithStyles } from '@mui/styles'
 import MuiTypography, { type TypographyProps } from '@mui/material/Typography'
+import Box from '@mui/material/Box'
 
 const markStyleMapping: Record<string, Record<string, string>> = {
   center: {
@@ -9,7 +10,7 @@ const markStyleMapping: Record<string, Record<string, string>> = {
     h2: 'markedH2Center',
     h3: 'markedH3Center',
     h4: 'markedH4Center',
-    h5: '',
+    h5: 'markedH5Center',
     h6: ''
   },
   left: {
@@ -32,6 +33,7 @@ const markStyleMapping: Record<string, Record<string, string>> = {
 
 const styles = (theme: Theme) => ({
   [markStyleMapping.center.h2]: {
+    // NOTE 这个的意思就是将这些key和value注入这个组件中，其中的子元素设置了对应的key，也就是classname就会被设置value的样式
     height: 4,
     width: 73,
     display: 'block',
@@ -52,6 +54,13 @@ const styles = (theme: Theme) => ({
     margin: `${theme.spacing(1)} auto 0`,
     backgroundColor: theme.palette.secondary.main
   },
+  [markStyleMapping.center.h5]: {
+    height: 4,
+    width: 55,
+    display: 'block',
+    margin: `${theme.spacing(1)} auto 0`,
+    backgroundColor: theme.palette.secondary.main
+  },
   [markStyleMapping.left.h6]: {
     height: 2,
     width: 28,
@@ -63,23 +72,23 @@ const styles = (theme: Theme) => ({
 
 interface ExtraTypographyProps {
   marked?: 'center' | 'left' | 'none'
+  suffixColor?: string
 }
 
 const variantMapping = {
   h1: 'h1',
   h2: 'h1',
   h3: 'h1',
-  h4: 'h1',
-  h5: 'h3',
-  h6: 'h2',
+  h4: 'h4',
+  h5: 'h5',
+  h6: 'h6',
   subtitle1: 'h3'
 }
 
 function Typography<C extends React.ElementType>(
   props: TypographyProps<C, { component?: C }> & WithStyles<typeof styles> & ExtraTypographyProps
 ) {
-  const { children, variant, classes, marked = 'none', ...other } = props
-
+  const { children, variant, classes, suffixBgColor, marked = 'none', ...other } = props
   let markedClassName = ''
   if (variant && variant in markStyleMapping[marked]) {
     markedClassName = classes[markStyleMapping[marked][variant]]
@@ -88,7 +97,7 @@ function Typography<C extends React.ElementType>(
   return (
     <MuiTypography variantMapping={variantMapping} variant={variant} {...other}>
       {children}
-      {markedClassName ? <span className={markedClassName} /> : null}
+      {markedClassName ? <Box component="span" className={markedClassName} sx={{ bgcolor: suffixBgColor }} /> : null}
     </MuiTypography>
   )
 }

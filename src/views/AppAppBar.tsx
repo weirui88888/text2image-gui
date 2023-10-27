@@ -3,7 +3,6 @@ import { styled, alpha, useTheme } from '@mui/material/styles'
 import Link from '@mui/material/Link'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
 import InputBase from '@mui/material/InputBase'
 import Badge from '@mui/material/Badge'
 import MenuItem from '@mui/material/MenuItem'
@@ -74,7 +73,7 @@ export default function AppAppBar() {
   const { t } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null)
-  const pages = ['Playground', 'Example', 'Api', 'Core', 'Blog', 'Release', 'terms']
+  const pages = ['Playground', 'Example', 'Api', 'Core', 'Blog', 'Release', 'Terms']
 
   const isMenuOpen = Boolean(anchorEl)
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
@@ -212,21 +211,20 @@ export default function AppAppBar() {
 
   return (
     <div>
-      <AppBar sx={{ bgcolor: 'primary.main', color: 'primary.contrastText', transition: theme.transitions.create('background-color') }}>
+      <AppBar
+        sx={{
+          bgcolor: 'primary.main',
+          color: 'primary.contrastText',
+          transition: theme.transitions.create('background-color')
+        }}
+      >
         <Toolbar>
           {/* <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}>
             <MenuIcon />
           </IconButton> */}
-          <Typography
-            color="inherit"
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{ display: { xs: 'none', sm: 'block' }, textDecoration: 'none' }}
-          >
+          <Link variant="h6" underline="none" color="inherit" component={RouterLink} to="/">
             AnyPhoto
-          </Typography>
+          </Link>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -235,17 +233,17 @@ export default function AppAppBar() {
           </Search>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map(page => (
-              <Typography
-                key={page}
-                noWrap
-                component="a"
+              <Link
                 variant="h5"
+                underline="hover"
+                key={page}
                 color="inherit"
-                href={`/${page}`}
-                sx={{ textDecoration: 'none', mr: 2 }}
+                component={RouterLink}
+                to={`/${page}`}
+                sx={{ mr: 2, fontSize: 16 }}
               >
                 {page}
-              </Typography>
+              </Link>
             ))}
           </Box>
           <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
@@ -288,22 +286,15 @@ export default function AppAppBar() {
                   <>
                     <Link
                       sx={{ px: 1.5 }}
-                      variant="h6"
-                      underline="none"
+                      variant="h5"
+                      underline="hover"
                       component={RouterLink}
                       to="/sign-up/"
                       color="inherit"
                     >
                       {t('sign-up')}
                     </Link>
-                    <Link
-                      color="inherit"
-                      variant="h6"
-                      underline="none"
-                      component={RouterLink}
-                      to="/login-in/"
-                      // sx={rightLink}
-                    >
+                    <Link color="inherit" variant="h5" underline="hover" component={RouterLink} to="/login-in/">
                       {t('login-in')}
                     </Link>
                   </>

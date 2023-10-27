@@ -31,13 +31,13 @@ export default function BasicSpeedDial() {
   const [isPen, setIsPen] = useState(false)
   const actions = [
     {
-      icon: <ElderlyWomanIcon />,
+      icon: <ElderlyWomanIcon sx={{ color: 'common.white' }} />,
       name: 'Pen',
       click() {
         setPenVisible(true)
       }
     },
-    { icon: <ChatIcon />, name: 'Chat', click() {} }
+    { icon: <ChatIcon sx={{ color: 'common.white' }} />, name: 'Chat', click() {} }
   ]
   return (
     <>
@@ -77,7 +77,6 @@ export default function BasicSpeedDial() {
           <TextField
             autoFocus
             margin="dense"
-            // inputProps={{ maxLength: 10 }}
             id="pen-content"
             label="Pen Content"
             fullWidth

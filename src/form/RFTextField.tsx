@@ -16,6 +16,11 @@ function RFTextField(props: AnyPhotoTextFieldProps & FieldRenderProps<string, HT
       error={Boolean(!!touched && (error || submitError))}
       {...input}
       {...other}
+      InputLabelProps={{
+        sx: {
+          color: 'secondary.contrastText'
+        }
+      }}
       InputProps={{
         inputProps: {
           autoComplete

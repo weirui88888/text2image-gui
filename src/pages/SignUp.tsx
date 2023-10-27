@@ -81,7 +81,14 @@ function SignUp() {
       <AppAppBar />
       <AppForm>
         <React.Fragment>
-          <Typography variant="h3" gutterBottom marked="center" align="center" color="secondary.contrastText">
+          <Typography
+            variant="h3"
+            gutterBottom
+            suffixBgColor="secondary.contrastText"
+            marked="center"
+            align="center"
+            color="secondary.contrastText"
+          >
             Sign Up
           </Typography>
           <Typography variant="body2" align="center">
