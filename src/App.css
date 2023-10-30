@@ -49,3 +49,33 @@
     transform: translateY(20px);
   }
 }
+
+@keyframes Clip-Button-Border {
+  0%,
+  100% {
+    clip: rect(0px, calc(var(--button-width) + 10px), 2px, 0px);
+    border-color: #d24625;
+  }
+  25% {
+    clip: rect(
+      0px,
+      calc(var(--button-width) + 10px),
+      calc(var(--button-height) + 10px),
+      calc(var(--button-width) - 2px)
+    );
+    border-color: #2a5699;
+  }
+  50% {
+    clip: rect(
+      calc(var(--button-height) - 2px),
+      calc(var(--button-width) + 10px),
+      calc(var(--button-height) + 10px),
+      0px
+    );
+    border-color: #207245;
+  }
+  75% {
+    clip: rect(0px, 2px, calc(var(--button-height) + 10px), 0px);
+    border-color: #f2801f;
+  }
+}

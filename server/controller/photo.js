@@ -2,6 +2,7 @@ const OSS = require('ali-oss')
 const path = require('path')
 const generate = require('anyphoto/src/cmd/generate')
 const PhotoModel = require('../database/model/photo')
+const { sleep } = require('../utils')
 
 const generatePhoto = async (req, res) => {
   const client = new OSS({
@@ -20,6 +21,7 @@ const generatePhoto = async (req, res) => {
     }
   })
   try {
+    await sleep(5)
     const dirnamePath = path.dirname(photoSrc)
     const imageName = photoSrc.replace(`${dirnamePath}/`, '')
     const photoRes = await client.put(`myphotos/${imageName}`, photoSrc)
