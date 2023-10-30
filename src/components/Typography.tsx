@@ -37,36 +37,31 @@ const styles = (theme: Theme) => ({
     height: 4,
     width: 73,
     display: 'block',
-    margin: `${theme.spacing(1)} auto 0`,
-    backgroundColor: theme.palette.secondary.main
+    margin: `${theme.spacing(1)} auto 0`
   },
   [markStyleMapping.center.h3]: {
     height: 4,
     width: 55,
     display: 'block',
-    margin: `${theme.spacing(1)} auto 0`,
-    backgroundColor: theme.palette.secondary.main
+    margin: `${theme.spacing(1)} auto 0`
   },
   [markStyleMapping.center.h4]: {
     height: 4,
     width: 55,
     display: 'block',
-    margin: `${theme.spacing(1)} auto 0`,
-    backgroundColor: theme.palette.secondary.main
+    margin: `${theme.spacing(1)} auto 0`
   },
   [markStyleMapping.center.h5]: {
     height: 4,
     width: 55,
     display: 'block',
-    margin: `${theme.spacing(1)} auto 0`,
-    backgroundColor: theme.palette.secondary.main
+    margin: `${theme.spacing(1)} auto 0`
   },
   [markStyleMapping.left.h6]: {
     height: 2,
     width: 28,
     display: 'block',
-    marginTop: theme.spacing(0.5),
-    background: 'currentColor'
+    marginTop: theme.spacing(0.5)
   }
 })
 

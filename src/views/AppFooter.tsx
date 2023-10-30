@@ -35,7 +35,15 @@ const iconStyle = {
 export default function AppFooter() {
   const theme = useTheme()
   return (
-    <Typography component="footer" sx={{ display: 'flex', bgcolor: 'secondary.main', color: 'secondary.contrastText', transition: theme.transitions.create('background-color') }}>
+    <Typography
+      component="footer"
+      sx={{
+        display: 'flex',
+        bgcolor: 'secondary.main',
+        color: 'secondary.contrastText',
+        transition: theme.transitions.create('background-color')
+      }}
+    >
       <Container sx={{ my: 8, display: 'flex' }}>
         <Grid container spacing={5}>
           <Grid item xs={6} sm={4} md={3}>
@@ -59,7 +67,7 @@ export default function AppFooter() {
             </Typography>
             <Box component="ul" sx={{ m: 0, listStyle: 'none', p: 0 }}>
               <Box component="li" sx={{ py: 0.5 }}>
-                <Link component={RouterLink} to="/terms/" color="inherit" >
+                <Link component={RouterLink} to="/terms/" color="inherit">
                   Terms
                 </Link>
               </Box>

@@ -9,6 +9,6 @@ const PhotoSchema = new Schema({
   date: { type: Date, default: Date.now }
 })
 
-const UserModel = mongoose.model('AnyPhotoPhoto', PhotoSchema, process.env.PhotoCollectionName)
+const PhotoModel = mongoose.model('AnyPhotoPhoto', PhotoSchema, process.env.PhotoCollectionName)
 
-module.exports = UserModel
+module.exports = PhotoModel

@@ -54,7 +54,6 @@ function SignIn() {
         console.log(loginInResult.data)
         setAppToken(loginInResult.data.token)
       }
-      console.log(loginInResult.data)
       return {
         captchaResult: loginInResult.data.verifyResult,
         bizResult: loginInResult.data.bizResult

@@ -73,7 +73,7 @@ export default function AppAppBar() {
   const { t } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null)
-  const pages = ['Playground', 'Example', 'Api', 'Core', 'Blog', 'Release', 'Terms']
+  const pages = ['playground', 'example', 'api', 'core', 'blog', 'release', 'terms']
 
   const isMenuOpen = Boolean(anchorEl)
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)

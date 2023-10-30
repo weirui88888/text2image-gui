@@ -26,7 +26,7 @@ function ProductValues() {
         transition: theme.transitions.create('background-color')
       }}
     >
-      <Container sx={{ mt: 15, mb: 30, display: 'flex', position: 'relative' }}>
+      <Container maxWidth="xl" sx={{ mt: 15, mb: 30, display: 'flex', position: 'relative' }}>
         <Box
           component="img"
           src="/productCurvyLines.png"

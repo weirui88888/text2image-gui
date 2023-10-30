@@ -33,6 +33,7 @@ const useCaptcha = (options: CaptchaOptions) => {
       language // 验证码语言类型，支持简体中文（cn）、繁体中文（tw）、英文（en）
     })
     return () => {
+      console.log(captcha)
       captcha?.destroyCaptcha() // this is very important
     }
   }, [])
