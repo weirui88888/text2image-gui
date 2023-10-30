@@ -1,4 +1,5 @@
 import React from 'react'
+import Box from '@mui/material/Box'
 
 interface AnyphotoResultProps {
   generatedPhotoUrl: string
@@ -6,6 +7,6 @@ interface AnyphotoResultProps {
 }
 
 const AnyphotoResult: React.FC<AnyphotoResultProps> = ({ generatedPhotoUrl, isGenerate }) => {
-  return <div>{generatedPhotoUrl ? <img src={generatedPhotoUrl} style={{ width: '100%' }} /> : null}</div>
+  return <Box>{generatedPhotoUrl ? <img src={generatedPhotoUrl} style={{ width: '100%' }} /> : null}</Box>
 }
 export default AnyphotoResult

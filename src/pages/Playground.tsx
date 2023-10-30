@@ -12,6 +12,7 @@ function Playground() {
   const generate = async (params: GenerateParams) => {
     setIsGenerate(true)
     const res = await generatePhoto(params)
+    setIsGenerate(false)
     setGeneratedPhotoUrl(res.data.url)
   }
   return (
@@ -20,7 +21,7 @@ function Playground() {
       <Box sx={{ p: 4 }}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
-            <AnyphotoEditor generate={generate} />
+            <AnyphotoEditor generate={generate} isGenerate={isGenerate} />
           </Grid>
           <Grid item xs={12} md={6}>
             <AnyphotoResult generatedPhotoUrl={generatedPhotoUrl} isGenerate={isGenerate} />

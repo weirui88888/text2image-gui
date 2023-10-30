@@ -16,9 +16,10 @@ const validationSchema = object({
 
 interface AnyphotoEditorProps {
   generate: (...args: any[]) => void
+  isGenerate: boolean
 }
 
-const AnyphotoEditor: React.FC<AnyphotoEditorProps> = ({ generate }) => {
+const AnyphotoEditor: React.FC<AnyphotoEditorProps> = ({ generate, isGenerate }) => {
   const formik = useFormik({
     initialValues: {
       author: 'anyphoto',
@@ -86,8 +87,15 @@ const AnyphotoEditor: React.FC<AnyphotoEditorProps> = ({ generate }) => {
           error={formik.touched.outputName && Boolean(formik.errors.outputName)}
           helperText={formik.touched.outputName && formik.errors.outputName}
         />
-        <Button color="primary" variant="contained" fullWidth type="submit" sx={{ mt: 4 }} disabled={!formik.isValid}>
-          Submit
+        <Button
+          color="primary"
+          variant="contained"
+          fullWidth
+          type="submit"
+          sx={{ mt: 4 }}
+          disabled={!formik.isValid || isGenerate}
+        >
+          {isGenerate ? 'in generate progress' : 'generate'}
         </Button>
       </form>
     </div>
