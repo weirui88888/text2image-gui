@@ -13,3 +13,7 @@ code {
 .z-alert {
   z-index: 10000000000 !important;
 }
+
+iframe#webpack-dev-server-client-overlay {
+  display: none !important;
+}

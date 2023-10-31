@@ -43,16 +43,19 @@ export class Request {
       responseInterceptors: (res: AxiosResponse<AnyPhotoResponse>) => {
         switch (res.data.code) {
           case ResponseCode.Unauthorized:
-            SnackbarUtils.error('权限不对')
+            SnackbarUtils.error('Wrong authority')
             break
           case ResponseCode.InternalServerError:
-            SnackbarUtils.error('服务器发生了一些小问题')
+            SnackbarUtils.error('The server has some problems')
             break
         }
         return res.data as any
       },
       responseErrorInterceptor: async (err: AxiosError) => {
-        return await Promise.reject(err.response?.data)
+        if (err.code === 'ECONNABORTED') {
+          SnackbarUtils.error('Request timed out, please try again later')
+        }
+        return await Promise.reject(err)
       }
     }
     if (!interceptorConfig) {

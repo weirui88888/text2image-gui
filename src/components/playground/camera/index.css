@@ -1,0 +1,388 @@
+@border-gray: #DCDCDC;
+@border-dark-gray: #A3A3A3;
+
+.Camera-container {
+  border-radius: 5px;
+  box-shadow: 0px 30px 50px -20px rgba(0, 0, 0, 0.7);
+  animation: 5s Angle-In-Desktop infinite;
+  width: 360px;
+}
+.Camera-top,
+.Camera-mid,
+.Camera-bottom {
+  width: 100%;
+  /* position: relative; */
+}
+.Camera-top {
+  height: 60px;
+  background: linear-gradient(to right, #e2e2e2 0%, #f5f5f5 10%, #f5f5f5 90%, #e2e2e2 100%);
+  border: 1px solid #dcdcdc;
+  border-top-left-radius: 5px;
+}
+.Camera-top:before {
+  display: block;
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: 0;
+  width: 210px;
+  height: 20px;
+  background: linear-gradient(to right, #f5f5f5 0%, #f5f5f5 174px, #e2e2e2 100%);
+  border: 1px solid #dcdcdc;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: none;
+  box-shadow: inset 0 15px 15px -15px #fdfdfd;
+}
+.Camera-top .zoom {
+  position: absolute;
+  top: -15px;
+  left: 30px;
+  width: 42px;
+  height: 9px;
+  background: linear-gradient(to right, #b0b0b0 0%, #e2e2e2 30%, #e2e2e2 50%, #e2e2e2 70%, #b0b0b0 100%);
+  border: 1px solid #a3a3a3;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  box-shadow: inset 0 15px 15px -15px #fdfdfd;
+}
+.Camera-top .zoom:before {
+  display: block;
+  content: '';
+  position: relative;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 4px;
+  background: linear-gradient(to right, #b0b0b0 0%, #e2e2e2 50%, #b0b0b0 100%);
+  border: 1px solid #a3a3a3;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.Camera-top .zoom:after {
+  display: block;
+  content: '';
+  position: relative;
+  top: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 46px;
+  height: 4px;
+  background: linear-gradient(to right, #b0b0b0 0%, #e2e2e2 30%, #e2e2e2 50%, #e2e2e2 70%, #b0b0b0 100%);
+  border: 1px solid #a3a3a3;
+  border-bottom: none;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.Camera-top .mode-changer {
+  position: absolute;
+  top: -20px;
+  left: 82px;
+  width: 60px;
+  height: 16px;
+  background: linear-gradient(to right, #b0b0b0 0%, #e2e2e2 30%, #e2e2e2 50%, #e2e2e2 70%, #b0b0b0 100%);
+  border: 1px solid #a3a3a3;
+  border-radius: 3px;
+  box-shadow: inset 0 15px 15px -15px #fdfdfd;
+}
+.Camera-top .mode-changer:after {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 2px;
+  background: linear-gradient(to right, #b0b0b0 0%, #e2e2e2 30%, #e2e2e2 50%, #e2e2e2 70%, #b0b0b0 100%);
+  border: 1px solid #a3a3a3;
+  border-bottom: none;
+}
+.Camera-top .sides {
+  width: 100%;
+}
+.Camera-top .sides:before,
+.Camera-top .sides:after {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 24px;
+  width: 8px;
+  height: 30px;
+  background: linear-gradient(to bottom, #828181 0%, #696767 10%, #4f4d4d 50%, #403e3f 100%);
+  border: 1px solid #3e3c3d;
+  border-radius: 2px;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.5);
+}
+.Camera-top .sides:before {
+  left: -4px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.Camera-top .sides:after {
+  right: -4px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.Camera-top .range-finder {
+  position: absolute;
+  top: 10px;
+  left: 105px;
+  width: 30px;
+  height: 20px;
+  background: #3e3c3d;
+  border-radius: 3px;
+  box-shadow: inset 0 0 5px 3px #333132;
+}
+.Camera-top .range-finder:before {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: #797878;
+  border-radius: 100%;
+}
+.Camera-top .focus {
+  position: absolute;
+  top: -14px;
+  left: 156px;
+  width: 15px;
+  height: 15px;
+  background: #3f3d3e;
+  border-radius: 100%;
+  box-shadow: inset 0 0 4px 3px #2d2b2b, inset 0 4px 5px 0 #f5f5f5, inset 0 -3px 4px -2px #a3a2a2;
+}
+.Camera-top .red {
+  position: absolute;
+  top: 5px;
+  left: 165px;
+  width: 30px;
+  height: 30px;
+  background: #dc2839;
+  border-radius: 100%;
+}
+.Camera-top .view-finder {
+  position: absolute;
+  left: 210px;
+  width: 48px;
+  height: 30px;
+  background: radial-gradient(ellipse at center, #828181 0%, #403e3f 85%, #403e3f 100%);
+  border: 3px solid #312f2f;
+  border-radius: 4px;
+  box-shadow: inset 0 8px 8px -8px #fdfdfd;
+}
+.Camera-top .flash {
+  position: absolute;
+  top: -6px;
+  right: 20px;
+  width: 58px;
+  height: 46px;
+  background: radial-gradient(ellipse at center, #828181 0%, #403e3f 70%, #403e3f 100%);
+  border: 2px solid #312f2f;
+  border-radius: 3px;
+  box-shadow: inset 0 8px 8px -8px #fdfdfd;
+}
+.Camera-top .flash:before,
+.Camera-top .flash:after {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.Camera-top .flash:before {
+  width: 90%;
+  height: 70%;
+  background: radial-gradient(ellipse at center, #696767 0%, #1e1e1e 50%, #1e1e1e 100%);
+}
+.Camera-top .flash:after {
+  width: 16px;
+  height: 14px;
+  background: #797979;
+  border-top-left-radius: 8px 2px;
+  border-top-right-radius: 8px 2px;
+  border-bottom-left-radius: 8px 2px;
+  border-bottom-right-radius: 8px 2px;
+}
+.Camera-top .flash .light {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(ellipse at center, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+  border-radius: 100%;
+  z-index: 2;
+}
+.Camera-top .flash .light.generating {
+  animation: 1s flash infinite;
+}
+.Camera-mid {
+  position: relative;
+  height: 130px;
+  background: linear-gradient(to right, #e4e4e4 0%, #fafafa 10%, #fafafa 90%, #e4e4e4 100%);
+  border: 1px solid #dcdcdc;
+  border-top: none;
+  border-bottom: none;
+  box-shadow: inset 0 15px 15px -15px #fdfdfd;
+}
+.Camera-mid .sensor {
+  position: absolute;
+  top: 40px;
+  left: 105px;
+  width: 30px;
+  height: 30px;
+  background: #545252;
+  border: 2px solid #545252;
+  border-radius: 100%;
+  box-shadow: inset 0 12px 12px -10px #fdfdfd, 0 2px 5px 1px rgba(0, 0, 0, 0.3);
+}
+.Camera-mid .sensor:before,
+.Camera-mid .sensor:after {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.Camera-mid .sensor:before {
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(to bottom, #e9e9e9 0%, #bdbdbd 100%);
+  border-radius: 100%;
+}
+.Camera-mid .sensor:after {
+  width: 12px;
+  height: 12px;
+  background: #fafafa;
+  border-radius: 100%;
+  box-shadow: 0 2px 3px 0 #747474;
+}
+.Camera-mid .lens {
+  position: absolute;
+  top: -20px;
+  left: 130px;
+  width: 155px;
+  height: 155px;
+  background: radial-gradient(
+    ellipse at center,
+    #000000 0%,
+    #000000 15%,
+    #272525 30%,
+    #403e3f 30%,
+    #403e3f 31%,
+    #403e3f 40%,
+    #e9ebec 41%,
+    #e9ebec 44%,
+    #b0b1b2 48%,
+    #e8e9ea 50%,
+    #e8e9ea 60%,
+    #f7f8f8 60%,
+    #787979 65%,
+    #ffffff 66%,
+    #ffffff 100%
+  );
+  border: 1px solid #b6b7b8;
+  border-radius: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 7px 15px -2px rgba(0, 0, 0, 0.4), inset 0 -2px 15px -2px rgba(0, 0, 0, 0.2), inset 0 7px 15px -2px #fff;
+}
+.Camera-mid .lens:before {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 25px;
+  height: 25px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 100%;
+  box-shadow: inset 0 5px 3px -2px rgba(255, 255, 255, 0.5), inset 0 -5px 20px -8px rgba(255, 255, 255, 0.5);
+}
+.Camera-bottom {
+  height: 16px;
+  background: linear-gradient(to right, #e2e2e2 0%, #f5f5f5 10%, #f5f5f5 90%, #e2e2e2 100%);
+  border: 1px solid #dcdcdc;
+  border-bottom: none;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-shadow: inset 0 15px 15px -15px #fdfdfd, inset 0 -12px 12px -10px #797979;
+}
+@keyframes flash {
+  0% {
+    width: 0;
+    height: 0;
+  }
+  20% {
+    width: 200px;
+    height: 200px;
+  }
+  25% {
+    width: 0;
+    height: 0;
+  }
+  45% {
+    width: 200px;
+    height: 200px;
+  }
+  50% {
+    width: 0;
+    height: 0;
+  }
+  100% {
+    width: 0;
+    height: 0;
+  }
+}
+@keyframes Angle-In-Desktop {
+  0% {
+    transform: rotate(0deg);
+    box-shadow: 0px 30px 50px -20px rgba(0, 0, 0, 0.7);
+  }
+  25% {
+    transform: rotate(4deg);
+    box-shadow: 10px 30px 50px -20px rgba(0, 0, 0, 0.7);
+  }
+  75% {
+    transform: rotate(-4deg);
+    box-shadow: -10px 30px 50px -20px rgba(0, 0, 0, 0.7);
+  }
+  100% {
+    transform: rotate(0deg);
+    box-shadow: 0px 30px 50px -20px rgba(0, 0, 0, 0.7);
+  }
+}
+
+@keyframes Angle-In-Mobile {
+  0% {
+    transform: rotate(0deg) scale(0.5);
+    box-shadow: 0px 30px 50px -20px rgba(0, 0, 0, 0.7);
+  }
+  25% {
+    transform: rotate(8deg) scale(0.5);
+    box-shadow: 10px 30px 50px -20px rgba(0, 0, 0, 0.7);
+  }
+  75% {
+    transform: rotate(-8deg) scale(0.5);
+    box-shadow: -10px 30px 50px -20px rgba(0, 0, 0, 0.7);
+  }
+  100% {
+    transform: rotate(0deg) scale(0.5);
+    box-shadow: 0px 30px 50px -20px rgba(0, 0, 0, 0.7);
+  }
+}
+
+@media (max-width: 600px) {
+  .Camera-container {
+    animation: 5s Angle-In-Mobile infinite;
+  }
+}

@@ -21,7 +21,7 @@ const generatePhoto = async (req, res) => {
     }
   })
   try {
-    await sleep(5)
+    await sleep(1)
     const dirnamePath = path.dirname(photoSrc)
     const imageName = photoSrc.replace(`${dirnamePath}/`, '')
     const photoRes = await client.put(`myphotos/${imageName}`, photoSrc)
@@ -42,7 +42,6 @@ const generatePhoto = async (req, res) => {
       }
     })
   } catch (error) {
-    console.log(error)
     res.send({
       code: 500,
       message: 'anyphoto server has some error'

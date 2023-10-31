@@ -11,9 +11,14 @@ function Playground() {
   const [generatedPhotoUrl, setGeneratedPhotoUrl] = useState('')
   const generate = async (params: GenerateParams) => {
     setIsGenerate(true)
-    const res = await generatePhoto(params)
-    setIsGenerate(false)
-    setGeneratedPhotoUrl(res.data.url)
+    try {
+      const res = await generatePhoto(params)
+      setIsGenerate(false)
+      setGeneratedPhotoUrl(res.data.url)
+    } catch (error) {
+      setIsGenerate(false)
+      setGeneratedPhotoUrl('')
+    }
   }
   return (
     <React.Fragment>
