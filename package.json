@@ -16,6 +16,7 @@
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.5.1",
     "ahooks": "^3.7.8",
+    "ali-oss": "^6.18.1",
     "axios": "1.5.1",
     "clsx": "2.0.0",
     "final-form": "4.20.10",
@@ -37,6 +38,7 @@
   "devDependencies": {
     "@commitlint/cli": "17.8.0",
     "@commitlint/config-conventional": "17.8.0",
+    "@types/ali-oss": "^6.16.10",
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.0",
     "@types/react-router-dom": "5.3.3",
