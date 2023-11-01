@@ -12,8 +12,8 @@ dependencies:
     specifier: 4.1.3
     version: 4.1.3
   anyphoto:
-    specifier: ^1.1.0
-    version: 1.1.0(debug@4.3.4)
+    specifier: ^1.0.0
+    version: 1.0.0(debug@4.3.4)
   axios:
     specifier: 1.5.1
     version: 1.5.1(debug@4.3.4)
@@ -212,8 +212,8 @@ packages:
       picomatch: 2.3.1
     dev: false
 
-  /anyphoto@1.1.0(debug@4.3.4):
-    resolution: {integrity: sha512-km+8AIkpC4eSaARSJOCogawNKmdQDwfctjL3mSqatZ8JZgWCvz8n4QGkF6br6Px5xJLxtK8pAhrDlWEY173Fng==}
+  /anyphoto@1.0.0(debug@4.3.4):
+    resolution: {integrity: sha512-0vwF2AgoIpni+8YrCWBpX8Za5MtI+QdmO+KRNlOCgeJp8jPkAH83lt/LywgNvDFI0J5WYlou4kgv0PCsce2akw==}
     hasBin: true
     dependencies:
       '@types/node': 20.8.7
