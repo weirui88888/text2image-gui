@@ -1,0 +1,63 @@
+name: Upload Web Static Files And Server Files
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: SFTP Web Static Files To Centos
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch Resources
+        uses: actions/checkout@v3
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8
+      
+      - name: Setup Node 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: https://registry.npmmirror.com/
+          cache: pnpm
+
+      - name: Set Up Environment Variables
+        run: |
+          echo "REACT_APP_ALI_ACCESSKEYID=${{ secrets.REACT_APP_ALI_ACCESSKEYID }}" >> .env.production
+          echo "REACT_APP_ALI_ACCESSKEYSECRET=${{ secrets.REACT_APP_ALI_ACCESSKEYSECRET }}" >> .env.production
+          echo "REACT_APP_ALI_CAPTCHA_LOGININ_SCENE_ID=${{ secrets.REACT_APP_ALI_CAPTCHA_LOGININ_SCENE_ID }}" >> .env.production
+          echo "REACT_APP_ALI_CAPTCHA_PREFIX=${{ secrets.REACT_APP_ALI_CAPTCHA_PREFIX }}" >> .env.production
+          echo "REACT_APP_ALI_CAPTCHA_SIGNUP_SCENE_ID=${{ secrets.REACT_APP_ALI_CAPTCHA_SIGNUP_SCENE_ID }}" >> .env.production
+
+      - name: Install Dependencies & Build
+        run: |
+          pnpm install
+          pnpm run build
+      
+      - name: View Anyphoto Web Static Files
+        run: ls build
+
+      - name: Deploy Files To Centos
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+            username: 'root'
+            server: ${{ secrets.CENTOS_HOST }}
+            password: ${{ secrets.CENTOS_PASSWORD }}
+            local_path: './build/*'
+            remote_path: '/home/www'
+          
+
+        
+      
+
+
+          
+          
