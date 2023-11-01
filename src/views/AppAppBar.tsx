@@ -289,12 +289,12 @@ export default function AppAppBar() {
                       variant="h5"
                       underline="hover"
                       component={RouterLink}
-                      to="/sign-up/"
+                      to="/sign-up"
                       color="inherit"
                     >
                       {t('sign-up')}
                     </Link>
-                    <Link color="inherit" variant="h5" underline="hover" component={RouterLink} to="/login-in/">
+                    <Link color="inherit" variant="h5" underline="hover" component={RouterLink} to="/login-in">
                       {t('login-in')}
                     </Link>
                   </>

@@ -92,7 +92,7 @@ function SignUp() {
             Sign Up
           </Typography>
           <Typography variant="body2" align="center">
-            <Link component={RouterLink} to="/login-in/" underline="always" color="secondary.contrastText">
+            <Link component={RouterLink} to="/login-in" underline="always" color="secondary.contrastText">
               Already have an account?
             </Link>
           </Typography>

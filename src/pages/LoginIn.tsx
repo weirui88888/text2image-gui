@@ -95,7 +95,7 @@ function SignIn() {
             {'Not a member yet? '}
             <Link
               component={RouterLink}
-              to="/sign-up/"
+              to="/sign-up"
               align="center"
               underline="always"
               color="secondary.contrastText"

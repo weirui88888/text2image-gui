@@ -34,7 +34,7 @@ export default function ProductHero() {
         variant="contained"
         size="large"
         component={RouterLink}
-        to={isLoggedIn ? 'playground' : '/login-in/'}
+        to={isLoggedIn ? 'playground' : '/login-in'}
         sx={{ minWidth: 200, '&.Mui-disabled': { background: theme.palette.button.dark } }}
         disabled={isFetchingAuth}
       >

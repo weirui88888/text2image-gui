@@ -192,7 +192,7 @@ function ProductHowItWorks() {
             </Grid>
           </Grid>
         </div>
-        <Button color="button" size="large" variant="contained" component={RouterLink} to="/sign-up/" sx={{ mt: 8 }}>
+        <Button color="button" size="large" variant="contained" component={RouterLink} to="/sign-up" sx={{ mt: 8 }}>
           Get started
         </Button>
       </Container>
