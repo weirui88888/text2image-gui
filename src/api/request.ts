@@ -4,7 +4,7 @@ import SnackbarUtils from '../components/SnackbarUtilsConfigurator'
 import { ResponseCode } from './api.d'
 import type { AnyPhotoResponse } from './api.d'
 import { useGetAppToken } from '../hooks/useAppToken'
-const baseURL = 'http://localhost:3001/api'
+const baseURL = 'https://api.anyphoto.space/api'
 const AuthorizationHeader = {
   Authorization: useGetAppToken()
 }
