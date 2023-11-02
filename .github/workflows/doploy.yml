@@ -10,9 +10,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  deploy-web:
     name: SFTP Web Static Files To Centos
     runs-on: ubuntu-latest
+    outputs:
+      WebPageUpdateTimeWithNumber: ${{ steps.observer.outputs.WebPageUpdateTimeWithNumber }}
     steps:
       - name: Fetch Resources
         uses: actions/checkout@v3
@@ -54,3 +56,27 @@ jobs:
           local_path: './build/*'
           remote_path: '/home/www/anyphoto-web-static'
           delete_remote_files: true
+
+      - name: Observer Web Page Update Time
+        id: observer
+        run: |
+          echo "-------------------- Observer Web Page Update Time Log Start --------------------"
+          echo "WebPageUpdateTimeWithNumber=$(date "+%y%m%d").$GITHUB_RUN_NUMBER"
+          echo "-------------------- Observer Web Page Update Time Log end --------------------"
+          echo "::set-output name=WebPageUpdateTimeWithNumber::$(date "+%y%m%d").$GITHUB_RUN_NUMBER"
+
+  deploy-server:
+    name: SFTP Node Server Files To Centos
+    runs-on: ubuntu-latest
+    needs: deploy-web
+    steps:
+      - name: Fetch Resources
+        uses: actions/checkout@v3
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8
+
+      - name: View Env Detail
+        run: echo ${{needs.deploy-web.outputs.WebPageUpdateTimeWithNumber}}
