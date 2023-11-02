@@ -73,7 +73,7 @@ jobs:
       - name: Fetch Resources
         uses: actions/checkout@v3
 
-      - name: Deploy to Server # 执行部署任务
+      - name: Deploy to Server
         uses: cross-the-world/ssh-scp-ssh-pipelines@latest
         with:
           host: ${{ secrets.CENTOS_HOST }}
@@ -81,10 +81,13 @@ jobs:
           pass: ${{ secrets.CENTOS_PASSWORD }}
           connect_timeout: 60s
 
-          # 将工作目录下的文件全部拷贝到部署服务器的工作目录
+          first_ssh: |
+            cd /home/www
+            rm -r anyphoto-server
+
           scp: |
             ./server/* => /home/www/anyphoto-server
-          # 完成拷贝后在部署服务器执行的命令：进入项目目录，安装生产依赖，并使用 pm2 管理
+
           last_ssh: |
             cd /home/www/anyphoto-server
             pnpm i
