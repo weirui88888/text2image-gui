@@ -50,7 +50,7 @@ jobs:
       - name: Deploy Files To Centos
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          username: 'root'
+          username: ${{ secrets.CENTOS_USER }}
           server: ${{ secrets.CENTOS_HOST }}
           password: ${{ secrets.CENTOS_PASSWORD }}
           local_path: './build/*'
@@ -73,10 +73,22 @@ jobs:
       - name: Fetch Resources
         uses: actions/checkout@v3
 
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
+      - name: Deploy to Server # 执行部署任务
+        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
         with:
-          version: 8
+          host: ${{ secrets.CENTOS_HOST }}
+          user: ${{ secrets.CENTOS_USER }}
+          pass: ${{ secrets.CENTOS_PASSWORD }}
+          connect_timeout: 60s
+
+          # 将工作目录下的文件全部拷贝到部署服务器的工作目录
+          scp: |
+            ./server/* => /home/www/anyphoto-server
+          # 完成拷贝后在部署服务器执行的命令：进入项目目录，安装生产依赖，并使用 pm2 管理
+          last_ssh: |
+            cd /home/www/anyphoto-server
+            pnpm i
+            pnpm run start:production
 
       - name: View Env Detail
         run: echo ${{needs.deploy-web.outputs.WebPageUpdateTimeWithNumber}}
