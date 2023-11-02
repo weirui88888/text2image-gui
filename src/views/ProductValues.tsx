@@ -124,7 +124,7 @@ function ProductValues() {
               </Typography>
               <Typography variant="h5">
                 There are some great themes built in, so even if you&apos;re not a developer, you can implement your
-                creations in no time. More often than not, I encourage you to explore in depth
+                creations in no time. More often than not, I encourage you to explore in depth.
               </Typography>
             </Box>
           </Grid>

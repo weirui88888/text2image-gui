@@ -21,7 +21,7 @@ jobs:
         name: Install pnpm
         with:
           version: 8
-      
+
       - name: Setup Node 18
         uses: actions/setup-node@v3
         with:
@@ -41,23 +41,16 @@ jobs:
         run: |
           pnpm install
           pnpm run build
-      
+
       - name: View Anyphoto Web Static Files
         run: ls build
 
       - name: Deploy Files To Centos
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-            username: 'root'
-            server: ${{ secrets.CENTOS_HOST }}
-            password: ${{ secrets.CENTOS_PASSWORD }}
-            local_path: './build/*'
-            remote_path: '/home/www'
-          
-
-        
-      
-
-
-          
-          
+          username: 'root'
+          server: ${{ secrets.CENTOS_HOST }}
+          password: ${{ secrets.CENTOS_PASSWORD }}
+          local_path: './build/*'
+          remote_path: '/home/www/anyphoto-web-static'
+          delete_remote_files: true
