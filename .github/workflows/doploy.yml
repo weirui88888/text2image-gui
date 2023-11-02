@@ -3,7 +3,7 @@ name: Upload Web Static Files And Server Files
 on:
   push:
     branches:
-      - main
+      - main-origin
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -47,7 +47,7 @@ jobs:
       - name: View Anyphoto Web Static Files
         run: ls build
 
-      - name: Deploy Files To Centos
+      - name: Deploy Web Static Files To Centos
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           username: ${{ secrets.CENTOS_USER }}
@@ -73,6 +73,16 @@ jobs:
       - name: Fetch Resources
         uses: actions/checkout@v3
 
+      # - uses: mdallasanta/ssh-scp-deploy@latest
+      #   with:
+      #     local: './server'
+      #     remote: '/home/www/anyphoto-server'
+      #     host: ${{ secrets.CENTOS_HOST }}
+      #     user: ${{ secrets.CENTOS_USER }}
+      #     password: ${{ secrets.CENTOS_PASSWORD }} 
+      #     pre_upload: echo $(which pnpm)
+      #     post_upload: echo "This will be executed after the upload!"
+
       - name: Deploy to Server
         uses: cross-the-world/ssh-scp-ssh-pipelines@latest
         with:
@@ -83,7 +93,7 @@ jobs:
 
           first_ssh: |
             cd /home/www
-            rm -r anyphoto-server
+            rm -rf anyphoto-server
 
           scp: |
             ./server/* => /home/www/anyphoto-server
@@ -91,7 +101,8 @@ jobs:
           last_ssh: |
             cd /home/www/anyphoto-server
             pnpm i
-            pnpm run start:production
+            ls node_modules
+            # pnpm run start:production
 
       - name: View Env Detail
         run: echo ${{needs.deploy-web.outputs.WebPageUpdateTimeWithNumber}}
