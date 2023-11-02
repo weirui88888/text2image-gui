@@ -1,4 +1,4 @@
-require('dotenv').config({ path: './.env.local' }) // set process.env
+require('dotenv').config() // set process.env
 require('./database/db')
 require('express-async-errors')
 
