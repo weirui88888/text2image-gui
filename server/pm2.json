@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "name": "myapp",
+      "name": "anyphoto-server",
       "script": "bin/www",
       "watch": true,
       "env": {
