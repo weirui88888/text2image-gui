@@ -4,7 +4,6 @@ import { styled } from '@mui/material/styles'
 import { object, string } from 'yup'
 import TextField from '@mui/material/TextField'
 import LoadingButton from '@mui/lab/LoadingButton'
-import PhotoCameraIcon from '@mui/icons-material/PhotoCamera'
 import InputAdornment from '@mui/material/InputAdornment'
 import UploadButton from './uploadButton'
 
@@ -146,13 +145,12 @@ const AnyphotoEditor: React.FC<AnyphotoEditorProps> = ({ generate, isGenerate })
           className={isGenerate ? 'in-generate-button' : ''}
           type="submit"
           sx={{ mt: 4 }}
-          endIcon={<PhotoCameraIcon />}
           loading={isGenerate}
-          loadingPosition="end"
+          loadingIndicator="just wait a moment"
           variant="contained"
           disabled={!formik.isValid || isGenerate}
         >
-          <span>{isGenerate ? 'in generate progress' : 'generate'}</span>
+          <span>generate</span>
         </StyledLoadingButton>
       </form>
     </div>
