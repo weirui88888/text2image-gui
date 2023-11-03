@@ -4,7 +4,12 @@ import SnackbarUtils from '../components/SnackbarUtilsConfigurator'
 import { ResponseCode } from './api.d'
 import type { AnyPhotoResponse } from './api.d'
 import { useGetAppToken } from '../hooks/useAppToken'
-const baseURL = 'https://api.anyphoto.space/api'
+
+const baseURL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://anyphoto.space/api'
+    : `http://localhost:${process.env.REACT_APP_ANYPHOTO_SERVER_PORT}/api`
+
 const AuthorizationHeader = {
   Authorization: useGetAppToken()
 }
