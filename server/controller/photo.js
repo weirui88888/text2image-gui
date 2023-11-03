@@ -49,7 +49,7 @@ const generatePhoto = async (req, res) => {
   }
 }
 const deletePhoto = async (req, res) => {
-  res.send(`photo delete route,port:${process.env.PORT}`)
+  res.send(`photo delete route,you start port at :${process.env.PORT}`)
 }
 
 module.exports = {

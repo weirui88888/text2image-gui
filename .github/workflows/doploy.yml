@@ -3,7 +3,7 @@ name: Upload Web Static Files And Server Files
 on:
   push:
     branches:
-      - main-origin
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   deploy-web:
-    name: SFTP Web Static Files To Centos
+    name: deploy-web
     runs-on: ubuntu-latest
     outputs:
       WebPageUpdateTimeWithNumber: ${{ steps.observer.outputs.WebPageUpdateTimeWithNumber }}
@@ -66,7 +66,7 @@ jobs:
           echo "::set-output name=WebPageUpdateTimeWithNumber::$(date "+%y%m%d").$GITHUB_RUN_NUMBER"
 
   deploy-server:
-    name: SFTP Node Server Files To Centos
+    name: deploy-server
     runs-on: ubuntu-latest
     needs: deploy-web
     steps:
@@ -84,8 +84,9 @@ jobs:
             cd /home/www
             rm -rf anyphoto-server
             mkdir anyphoto-server
-          scp: |
-            ./server/* => /home/www/anyphoto-server
+          scp: |-
+            ./server/* => /home/www/anyphoto-server/
+            ./server/.env.vault => /home/www/anyphoto-server/
           last_ssh: |
             source /etc/profile
             cd /home/www/anyphoto-server
