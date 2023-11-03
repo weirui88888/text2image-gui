@@ -6,8 +6,8 @@
   "author": "Xdz ruiwei88888@163.com (https://www.newarray.vip/)",
   "keywords": [],
   "scripts": {
-    "start:dev": "DOTENV_KEY=dotenv://:key_3f5ffe145bcffdd4d38a49aeb54e83af84b71161d8c0e58017a3732ef33192af@dotenv.org/vault/.env.vault?environment=development nodemon ./bin/www",
-    "start:production": "DOTENV_KEY=dotenv://:key_f3af2c9d5a2ecaeec8d633c56a30324ac076ef652983fabccbee48a052dfcd45@dotenv.org/vault/.env.vault?environment=production pm2 start ./bin/www --name=api --update-env --watch"
+    "start:dev": "DOTENV_KEY=dotenv://:key_05eff5a554c88a7b852ba9c22bf49c5d502a65618ae01ec1fc0fc9b3d835c5f8@dotenv.org/vault/.env.vault?environment=development nodemon ./bin/www",
+    "start:production": "pm2 startOrRestart pm2.json"
   },
   "dependencies": {
     "ali-oss": "6.18.1",

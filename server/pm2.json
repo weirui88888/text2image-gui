@@ -1,0 +1,12 @@
+{
+  "apps": [
+    {
+      "name": "myapp",
+      "script": "bin/www",
+      "watch": true,
+      "env": {
+        "DOTENV_KEY": "dotenv://:key_adb4faafbcc977a2a84ffdefbe51175dda26d63c0ca218c8c234e0abe5be1dd0@dotenv.org/vault/.env.vault?environment=production"
+      }
+    }
+  ]
+}

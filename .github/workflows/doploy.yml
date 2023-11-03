@@ -90,8 +90,6 @@ jobs:
             source /etc/profile
             cd /home/www/anyphoto-server
             pnpm i
-            ls node_modules
-            pm2 del api
             pnpm run start:production
 
       - name: View Env Detail
