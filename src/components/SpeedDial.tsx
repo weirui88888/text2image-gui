@@ -145,16 +145,14 @@ export default function BasicSpeedDial() {
               LATEST_COMMIT_ID:
             </Typography>
             <Typography component="p" sx={{ wordWrap: 'break-word' }}>
-              c2052cc0a03ee19b1e645fb911960a0d1d9c75a1
+              {process.env.REACT_APP_WEBSITE_LATEST_COMMIT_ID}
             </Typography>
           </DialogContentText>
           <DialogContentText component="div">
             <Typography variant="h6" sx={{ fontSize: '14px' }}>
               LATEST_COMMIT_MESSAGE:
             </Typography>
-            <Typography component="p">
-              feat(app log): support app log to view latest commit id and commit msg
-            </Typography>
+            <Typography component="p">{process.env.REACT_APP_WEBSITE_LATEST_COMMIT_MESSAGE}</Typography>
           </DialogContentText>
         </DialogContent>
       </Dialog>
