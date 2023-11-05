@@ -6,7 +6,8 @@ import Typography from './Typography'
 import SpeedDial from '@mui/material/SpeedDial'
 import SpeedDialAction from '@mui/material/SpeedDialAction'
 import ChatIcon from '@mui/icons-material/Chat'
-import ElderlyWomanIcon from '@mui/icons-material/ElderlyWoman'
+import MoodBadIcon from '@mui/icons-material/MoodBad'
+import GridViewIcon from '@mui/icons-material/GridView'
 import SendIcon from '@mui/icons-material/Send'
 import AdbIcon from '@mui/icons-material/Adb'
 import LoadingButton from '@mui/lab/LoadingButton'
@@ -35,7 +36,7 @@ export default function BasicSpeedDial() {
   const [appLog, setAppLogVisible] = useState(false)
   const actions = [
     {
-      icon: <ElderlyWomanIcon sx={{ color: 'common.white' }} />,
+      icon: <MoodBadIcon sx={{ color: 'common.white' }} />,
       name: 'Pen',
       click() {
         setPenVisible(true)
@@ -55,7 +56,7 @@ export default function BasicSpeedDial() {
       <Box sx={{ position: 'fixed', bottom: 32, right: 16, zIndex: 1000 }}>
         <SpeedDial
           ariaLabel="SpeedDial"
-          icon={<SendIcon />}
+          icon={<GridViewIcon />}
           sx={{
             '& .MuiButtonBase-root': {
               backgroundColor: theme.palette.button.main,
@@ -131,6 +132,7 @@ export default function BasicSpeedDial() {
       </Dialog>
       {/* Locator */}
       <Dialog
+        maxWidth="md"
         open={appLog}
         onClose={() => {
           setAppLogVisible(false)
@@ -138,13 +140,21 @@ export default function BasicSpeedDial() {
       >
         <DialogTitle align="center">App Log</DialogTitle>
         <DialogContent>
-          <DialogContentText sx={{ mb: 1 }}>
-            <Typography variant="label">LATEST_COMMIT_ID:</Typography>
-            <Typography component="span">{process.env.REACT_APP_WEBSITE_LATEST_COMMIT_ID}</Typography>
+          <DialogContentText sx={{ mb: 1 }} component="div">
+            <Typography variant="h6" sx={{ fontSize: '14px' }}>
+              LATEST_COMMIT_ID:
+            </Typography>
+            <Typography component="p" sx={{ wordWrap: 'break-word' }}>
+              c2052cc0a03ee19b1e645fb911960a0d1d9c75a1
+            </Typography>
           </DialogContentText>
-          <DialogContentText>
-            <Typography variant="label">LATEST_COMMIT_MESSAGE:</Typography>
-            <Typography component="span">{process.env.REACT_APP_WEBSITE_LATEST_COMMIT_MESSAGE}</Typography>
+          <DialogContentText component="div">
+            <Typography variant="h6" sx={{ fontSize: '14px' }}>
+              LATEST_COMMIT_MESSAGE:
+            </Typography>
+            <Typography component="p">
+              feat(app log): support app log to view latest commit id and commit msg
+            </Typography>
           </DialogContentText>
         </DialogContent>
       </Dialog>
