@@ -364,19 +364,19 @@
 
 @keyframes Angle-In-Mobile {
   0% {
-    transform: rotate(0deg) scale(0.5);
+    transform: rotate(0deg) scale(0.5) translateX(-8px);
     box-shadow: 0px 30px 50px -20px rgba(0, 0, 0, 0.7);
   }
   25% {
-    transform: rotate(8deg) scale(0.5);
+    transform: rotate(8deg) scale(0.5) translateX(-8px);
     box-shadow: 10px 30px 50px -20px rgba(0, 0, 0, 0.7);
   }
   75% {
-    transform: rotate(-8deg) scale(0.5);
+    transform: rotate(-8deg) scale(0.5) translateX(-8px);
     box-shadow: -10px 30px 50px -20px rgba(0, 0, 0, 0.7);
   }
   100% {
-    transform: rotate(0deg) scale(0.5);
+    transform: rotate(0deg) scale(0.5) translateX(-8px);
     box-shadow: 0px 30px 50px -20px rgba(0, 0, 0, 0.7);
   }
 }
