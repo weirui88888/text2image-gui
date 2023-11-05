@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
+import Typography from './Typography'
 import SpeedDial from '@mui/material/SpeedDial'
 import SpeedDialAction from '@mui/material/SpeedDialAction'
 import ChatIcon from '@mui/icons-material/Chat'
 import ElderlyWomanIcon from '@mui/icons-material/ElderlyWoman'
 import SendIcon from '@mui/icons-material/Send'
+import AdbIcon from '@mui/icons-material/Adb'
 import LoadingButton from '@mui/lab/LoadingButton'
 // import makeStyles from '@mui/styles/makeStyles'
 import { useTheme } from '@mui/material/styles'
@@ -29,6 +31,8 @@ export default function BasicSpeedDial() {
   const [penVisible, setPenVisible] = useState(false)
   const [penContent, setPenContent] = useState('')
   const [isPen, setIsPen] = useState(false)
+
+  const [appLog, setAppLogVisible] = useState(false)
   const actions = [
     {
       icon: <ElderlyWomanIcon sx={{ color: 'common.white' }} />,
@@ -37,7 +41,14 @@ export default function BasicSpeedDial() {
         setPenVisible(true)
       }
     },
-    { icon: <ChatIcon sx={{ color: 'common.white' }} />, name: 'Chat', click() {} }
+    { icon: <ChatIcon sx={{ color: 'common.white' }} />, name: 'Chat', click() {} },
+    {
+      icon: <AdbIcon sx={{ color: 'common.white' }} />,
+      name: 'App Log',
+      click() {
+        setAppLogVisible(true)
+      }
+    }
   ]
   return (
     <>
@@ -65,6 +76,7 @@ export default function BasicSpeedDial() {
           ))}
         </SpeedDial>
       </Box>
+      {/* pen */}
       <Dialog
         open={penVisible}
         onClose={() => {
@@ -116,6 +128,25 @@ export default function BasicSpeedDial() {
             <span>Pen it</span>
           </LoadingButton>
         </DialogActions>
+      </Dialog>
+      {/* Locator */}
+      <Dialog
+        open={appLog}
+        onClose={() => {
+          setAppLogVisible(false)
+        }}
+      >
+        <DialogTitle align="center">App Log</DialogTitle>
+        <DialogContent>
+          <DialogContentText sx={{ mb: 1 }}>
+            <Typography variant="label">LATEST_COMMIT_ID:</Typography>
+            <Typography component="span">{process.env.REACT_APP_WEBSITE_LATEST_COMMIT_ID}</Typography>
+          </DialogContentText>
+          <DialogContentText>
+            <Typography variant="label">LATEST_COMMIT_MESSAGE:</Typography>
+            <Typography component="span">{process.env.REACT_APP_WEBSITE_LATEST_COMMIT_MESSAGE}</Typography>
+          </DialogContentText>
+        </DialogContent>
       </Dialog>
     </>
   )

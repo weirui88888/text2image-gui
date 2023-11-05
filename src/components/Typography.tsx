@@ -77,7 +77,8 @@ const variantMapping = {
   h4: 'h4',
   h5: 'h5',
   h6: 'h6',
-  subtitle1: 'h3'
+  subtitle1: 'h3',
+  label: 'label'
 }
 
 function Typography<C extends React.ElementType>(

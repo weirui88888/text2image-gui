@@ -19,6 +19,11 @@ jobs:
       - name: Fetch Resources
         uses: actions/checkout@v3
 
+      - name: Get Latest Commit Message
+        id: getLatestCommitMessage
+        run: |
+          echo "LatestCommitMessage=$(git log --format=%B -n 1 ${{ github.sha }})" >> $GITHUB_OUTPUT
+
       - uses: pnpm/action-setup@v2
         name: Install pnpm
         with:
@@ -35,9 +40,11 @@ jobs:
         run: |
           echo "REACT_APP_ALI_ACCESSKEYID=${{ secrets.REACT_APP_ALI_ACCESSKEYID }}" >> .env.production
           echo "REACT_APP_ALI_ACCESSKEYSECRET=${{ secrets.REACT_APP_ALI_ACCESSKEYSECRET }}" >> .env.production
-          echo "REACT_APP_ALI_CAPTCHA_LOGININ_SCENE_ID=${{ secrets.REACT_APP_ALI_CAPTCHA_LOGININ_SCENE_ID }}" >> .env.production
           echo "REACT_APP_ALI_CAPTCHA_PREFIX=${{ secrets.REACT_APP_ALI_CAPTCHA_PREFIX }}" >> .env.production
+          echo "REACT_APP_ALI_CAPTCHA_LOGININ_SCENE_ID=${{ secrets.REACT_APP_ALI_CAPTCHA_LOGININ_SCENE_ID }}" >> .env.production
           echo "REACT_APP_ALI_CAPTCHA_SIGNUP_SCENE_ID=${{ secrets.REACT_APP_ALI_CAPTCHA_SIGNUP_SCENE_ID }}" >> .env.production
+          echo "REACT_APP_WEBSITE_LATEST_COMMIT_ID=$GITHUB_SHA" >> .env.production
+          echo "REACT_APP_WEBSITE_LATEST_COMMIT_MESSAGE=${{ steps.getLatestCommitMessage.outputs.LatestCommitMessage }}" >> .env.production
 
       - name: Install Dependencies & Build
         run: |
