@@ -107,8 +107,17 @@ jobs:
   send-email:
     name: send email
     runs-on: ubuntu-latest
-    needs: deploy-web
+    needs: [deploy-web, deploy-server]
     steps:
+      - name: Check Deploy Status
+        id: checkDeployStatus
+        run: |
+          if [[ "${{ needs.deploy-web.result }}" == 'success' && "${{ needs.deploy-server.result }}" == 'success' ]]; then
+            echo "DeployStatus=success" >> $GITHUB_OUTPUT
+          else
+            echo "DeployStatus=fail" >> $GITHUB_OUTPUT
+          fi
+
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
         with:
@@ -129,4 +138,4 @@ jobs:
           # Required sender full name (address can be skipped):
           from: Github Actioner
           # Optional plain body:
-          body: Build completed successfully,Commit Id:${{ github.sha }},Commit Message:${{needs.deploy-web.outputs.LatestCommitMessage}}!
+          body: Build completed ${{steps.checkDeployStatus.outputs.DeployStatus}},Commit Id:${{ github.sha }},Commit Message:${{needs.deploy-web.outputs.LatestCommitMessage}}!
