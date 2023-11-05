@@ -60,6 +60,9 @@ export class Request {
         if (err.code === 'ECONNABORTED') {
           SnackbarUtils.error('Request timed out, please try again later')
         }
+        if (err.code === 'ERR_NETWORK') {
+          SnackbarUtils.error('The server has some problems，please try again later')
+        }
         return await Promise.reject(err)
       }
     }

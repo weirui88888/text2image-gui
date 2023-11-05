@@ -36,7 +36,18 @@ const AppProvider = (props: React.HTMLAttributes<HTMLElement>) => {
             isFetchingAuth: true
           }
         })
-        const authCheckResult = await authCheck()
+        let authCheckResult
+        try {
+          authCheckResult = await authCheck()
+        } catch (error) {
+          dispatch({
+            type: 'isFetchingAuth',
+            payload: {
+              isFetchingAuth: false
+            }
+          })
+          return
+        }
         dispatch({
           type: 'isFetchingAuth',
           payload: {
