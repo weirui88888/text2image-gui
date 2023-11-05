@@ -55,13 +55,13 @@ const darkPalette: PaletteOptions = {
     main: grey[900]
   },
   secondary: {
-    main: grey[600]
+    main: grey[700]
   },
   text: {
-    primary: '#000000' // 控制底部链接颜色和主文案颜色
+    primary: '#ffffff' // 控制底部链接颜色和主文案颜色
   },
   background: {
-    default: grey[200]
+    default: grey[600]
   }
 }
 

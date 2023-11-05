@@ -107,10 +107,10 @@ export default function ProductCategories() {
       <Typography
         variant="h4"
         marked="center"
-        suffixBgColor="common.black"
         align="center"
         component="h2"
-        color="common.black"
+        color="secondary.contrastText"
+        suffixBgColor="secondary.contrastText"
       >
         For all tastes and all desires
       </Typography>
