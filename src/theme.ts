@@ -135,10 +135,6 @@ const getThemeByAppThemeMode = (mode: PaletteMode) => {
       body2: {
         ...modeTheme.typography.body1,
         fontSize: 14
-      },
-      label: {
-        fontWeight: 700,
-        marginRight: 8
       }
     }
   }

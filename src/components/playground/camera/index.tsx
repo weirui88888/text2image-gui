@@ -24,6 +24,9 @@ const Camera: React.FC<CameraProps> = ({ generating }) => {
       <Box className="Camera-mid">
         <Box className="sensor"></Box>
         <Box className="lens"></Box>
+        <Box className="app-name" sx={{ position: 'absolute', left: '16px', bottom: '8px' }} color="common.black">
+          AnyPhoto
+        </Box>
       </Box>
       <div className="Camera-bottom"></div>
     </Box>
