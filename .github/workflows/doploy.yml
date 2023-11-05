@@ -3,7 +3,7 @@ name: Upload Web Static Files And Server Files
 on:
   push:
     branches:
-      - main
+      - main-origin
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

@@ -1,0 +1,44 @@
+name: Upload Web Static Files And Server Files
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-server:
+    name: deploy-server
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch Resources
+        uses: actions/checkout@v3
+
+      - name: View steps
+        run: |
+          ls ./server
+
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          # Required mail server address if not connection_url:
+          server_address: smtp.gmail.com
+          # Server port, default 25:
+          server_port: 465
+          # Optional whether this connection use TLS (default is true if server_port is 465)
+          secure: true
+          # Optional (recommended) mail server username:
+          username: ${{secrets.GMAIL_USERNAME}}
+          # Optional (recommended) mail server password:
+          password: ${{secrets.GMAIL_PASSWORD}}
+          # Required mail subject:
+          subject: Github Actions Deploy Result
+          # Required recipients' addresses:
+          to: ${{secrets.GMAIL_USERNAME}}
+          # Required sender full name (address can be skipped):
+          from: Github Actioner
+          # Optional plain body:
+          body: Build job of ${{github.repository}} completed successfully!
