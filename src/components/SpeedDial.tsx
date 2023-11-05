@@ -41,7 +41,7 @@ export default function BasicSpeedDial() {
   ]
   return (
     <>
-      <Box sx={{ position: 'fixed', bottom: 32, right: 16 }}>
+      <Box sx={{ position: 'fixed', bottom: 32, right: 16, zIndex: 1000 }}>
         <SpeedDial
           ariaLabel="SpeedDial"
           icon={<SendIcon />}
