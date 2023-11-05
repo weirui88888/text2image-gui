@@ -28,7 +28,7 @@ function Playground() {
           <Grid item xs={12} md={6}>
             <AnyphotoEditor generate={generate} isGenerate={isGenerate} />
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={6} sx={{ pl: '0 !important' }}>
             <AnyphotoResult generatedPhotoUrl={generatedPhotoUrl} isGenerate={isGenerate} />
           </Grid>
         </Grid>
