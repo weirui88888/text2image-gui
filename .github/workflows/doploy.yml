@@ -3,7 +3,7 @@ name: Upload Web Static Files And Server Files
 on:
   push:
     branches:
-      - main-origin
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       WebPageUpdateTimeWithNumber: ${{ steps.observer.outputs.WebPageUpdateTimeWithNumber }}
+      LatestCommitMessage: ${{steps.getLatestCommitMessage.outputs.LatestCommitMessage }}
     steps:
       - name: Fetch Resources
         uses: actions/checkout@v3
@@ -102,3 +103,30 @@ jobs:
 
       - name: View Env Detail
         run: echo ${{needs.deploy-web.outputs.WebPageUpdateTimeWithNumber}}
+
+  send-email:
+    name: send email
+    runs-on: ubuntu-latest
+    needs: deploy-web
+    steps:
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          # Required mail server address if not connection_url:
+          server_address: smtp.gmail.com
+          # Server port, default 25:
+          server_port: 465
+          # Optional whether this connection use TLS (default is true if server_port is 465)
+          secure: true
+          # Optional (recommended) mail server username:
+          username: ${{secrets.GMAIL_USERNAME}}
+          # Optional (recommended) mail server password:
+          password: ${{secrets.GMAIL_PASSWORD}}
+          # Required mail subject:
+          subject: Github Actions Deploy Result
+          # Required recipients' addresses:
+          to: ${{secrets.GMAIL_USERNAME}}
+          # Required sender full name (address can be skipped):
+          from: Github Actioner
+          # Optional plain body:
+          body: Build completed successfully,Commit Id:${{ github.sha }},Commit Message:${{needs.deploy-web.outputs.LatestCommitMessage}}!
