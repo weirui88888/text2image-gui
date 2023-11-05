@@ -63,7 +63,7 @@ jobs:
           echo "-------------------- Observer Web Page Update Time Log Start --------------------"
           echo "WebPageUpdateTimeWithNumber=$(date "+%y%m%d").$GITHUB_RUN_NUMBER"
           echo "-------------------- Observer Web Page Update Time Log end --------------------"
-          echo "::set-output name=WebPageUpdateTimeWithNumber::$(date "+%y%m%d").$GITHUB_RUN_NUMBER"
+          echo "WebPageUpdateTimeWithNumber=$(date "+%y%m%d").$GITHUB_RUN_NUMBER" >> $GITHUB_OUTPUT
 
   deploy-server:
     name: deploy-server
