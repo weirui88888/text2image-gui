@@ -178,6 +178,16 @@ export default function AppAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
+      <MenuItem
+        onClick={() => {
+          toggleThemeMode()
+        }}
+      >
+        <IconButton size="large" color="inherit">
+          {themeMode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+        </IconButton>
+        <p>Turn {themeMode === 'dark' ? 'light' : 'dark'} theme </p>
+      </MenuItem>
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="error">
