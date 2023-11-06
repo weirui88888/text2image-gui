@@ -45,7 +45,7 @@ const UploadButton: React.FC<UploadButtonProps> = ({ fieldName, bucketName, dire
     onSuccess(ossSrc)
   }
   return (
-    <Button size="small" component="label" variant="contained" startIcon={<CloudUploadIcon />}>
+    <Button size="small" component="label" variant="contained" startIcon={<CloudUploadIcon />} color="button">
       Upload {fieldName}
       <VisuallyHiddenInput type="file" onChange={onUploadFile} />
     </Button>

@@ -140,6 +140,7 @@ const AnyphotoEditor: React.FC<AnyphotoEditorProps> = ({ generate, isGenerate })
           helperText={formik.touched.outputName && formik.errors.outputName}
         />
         <StyledLoadingButton
+          color="button"
           ref={buttonRef}
           fullWidth
           className={isGenerate ? 'in-generate-button' : ''}
