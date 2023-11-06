@@ -204,11 +204,11 @@ class AliOssUpload {
       const res = await ossClient.multipartUpload(uploadPath, file, uploadOptions as MultipartUploadOptions)
       return this.domain
         ? {
-            ossSrc: `${this.domain}${res.name}`,
+            ossSourceUrl: `${this.domain}${res.name}`,
             ...res
           }
         : {
-            ossSrc: `https://${bucket}.${region}.aliyuncs.com/${res.name}`,
+            ossSourceUrl: `https://${bucket}.${region}.aliyuncs.com/${res.name}`,
             ...res
           }
     } catch (error: any) {
