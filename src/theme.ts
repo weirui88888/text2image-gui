@@ -17,6 +17,11 @@ declare module '@mui/material/Button' {
     button: true
   }
 }
+declare module '@mui/material/TextField' {
+  interface TextFieldPropsColorOverrides {
+    button: true
+  }
+}
 
 // enum themeModes {
 //   'light' = 'light',

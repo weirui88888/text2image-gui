@@ -95,6 +95,7 @@ export default function BasicSpeedDial() {
             fullWidth
             multiline
             maxRows={4}
+            color="button"
             variant="standard"
             onChange={e => {
               setPenContent(e.target.value)
@@ -103,6 +104,7 @@ export default function BasicSpeedDial() {
         </DialogContent>
         <DialogActions>
           <Button
+            sx={{ color: theme.palette.getContrastText(theme.palette.background.paper) }}
             onClick={() => {
               setPenVisible(false)
             }}
@@ -125,6 +127,7 @@ export default function BasicSpeedDial() {
             loading={isPen}
             loadingPosition="end"
             variant="contained"
+            color="button"
           >
             <span>Pen it</span>
           </LoadingButton>
