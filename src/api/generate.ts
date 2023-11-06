@@ -4,7 +4,6 @@ import type { AnyPhotoResponse } from './api.d'
 interface GenerateParams {
   avatar: string
   content: string
-  outputName: string
   author: string
 }
 

@@ -6,27 +6,26 @@ const { sleep } = require('../utils')
 
 const generatePhoto = async (req, res) => {
   const client = new OSS({
-    region: 'oss-cn-beijing',
+    region: process.env.OssRegion,
     accessKeyId: process.env.AccessKeyId,
     accessKeySecret: process.env.AccessKeySecret,
-    bucket: 'anyphoto'
+    bucket: process.env.OssBucket
   })
-  const { content, author, avatar, outputName } = req.body
+  const { content, author, avatar } = req.body
   const photoSrc = await generate({
     content,
     options: {
       author,
-      avatar,
-      outputName
+      avatar
     }
   })
   try {
     await sleep(1)
     const dirnamePath = path.dirname(photoSrc)
     const imageName = photoSrc.replace(`${dirnamePath}/`, '')
-    const photoRes = await client.put(`myphotos/${imageName}`, photoSrc)
+    const photoRes = await client.put(`${process.env.OssBucketPhotoDirectory}/${imageName}`, photoSrc)
 
-    const userGeneratedPhotoUrl = `https://anyphoto.newarray.vip/${photoRes.name}`
+    const userGeneratedPhotoUrl = `${process.env.OssBucketCustomDomain}/${photoRes.name}`
     const newPhoto = new PhotoModel({
       content,
       author,

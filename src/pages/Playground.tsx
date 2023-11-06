@@ -23,7 +23,7 @@ function Playground() {
   return (
     <React.Fragment>
       <AppAppBar />
-      <Box sx={{ p: 4 }}>
+      <Box sx={{ p: 4 }} component="main">
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
             <AnyphotoEditor generate={generate} isGenerate={isGenerate} />
