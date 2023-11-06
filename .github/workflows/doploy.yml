@@ -138,4 +138,9 @@ jobs:
           # Required sender full name (address can be skipped):
           from: Github Actioner
           # Optional plain body:
-          body: Build completed ${{steps.checkDeployStatus.outputs.DeployStatus}},Commit Id:${{ github.sha }},Commit Message:${{needs.deploy-web.outputs.LatestCommitMessage}}!
+          body: |
+            Deploy Result: ${{steps.checkDeployStatus.outputs.DeployStatus}}
+            Commit Id: ${{ github.sha }}
+            Commit Message: ${{needs.deploy-web.outputs.LatestCommitMessage}}
+          # Optional priority: 'high', 'normal' (default) or 'low'
+          priority: high
