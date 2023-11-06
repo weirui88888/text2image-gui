@@ -35,12 +35,12 @@ const anyPhotoConfig = {
   defaultOutputNameHandle(defaultOutputName) {
     return `${Date.now()}-${defaultOutputName}`
   },
-  defaultAvatar: '/Users/weirui05/Desktop/rainbow.png',
+  defaultAvatar: 'https://static.anyphoto.space/logos/logo1/logo.png',
   defaultAuthor: '送东阳马生序',
   canvasSetting: {
     width: 1250,
     fontFamilys: ['Arial', 'Times New Roman', 'Verdana', 'Tahoma', 'Courier New', 'Helvetica', 'Custom'],
-    customFontPath: 'https://show.newarray.vip/font/LXGWWenKai-Bold.ttf',
+    customFontPath: 'https://static.anyphoto.space/fonts/LXGWWenKai-Bold.ttf',
     downloadCustomFontOutputDir: 'anyphoto-web-font',
     fallbackFontFamilyIndex: 4,
     backgroundColor: '#669966',

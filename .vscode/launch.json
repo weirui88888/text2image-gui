@@ -1,7 +1,4 @@
 {
-  // 使用 IntelliSense 了解相关属性。
-  // 悬停以查看现有属性的描述。
-  // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
     {
@@ -9,7 +6,11 @@
       "request": "launch",
       "name": "启动程序",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/server/bin/www"
+      "program": "${workspaceFolder}/server/bin/www",
+      "cwd": "${workspaceFolder}/server",
+      "env": {
+        "DOTENV_KEY": "dotenv://:key_adb4faafbcc977a2a84ffdefbe51175dda26d63c0ca218c8c234e0abe5be1dd0@dotenv.org/vault/.env.vault?environment=production"
+      }
     }
   ]
 }

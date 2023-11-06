@@ -27,7 +27,7 @@ const UploadButton: React.FC<UploadButtonProps> = ({ fieldName, bucketName, dire
   const { upload } = new AliOssUpload({
     bucket: bucketName,
     region: 'oss-cn-beijing',
-    domain: 'https://anyphoto.newarray.vip/',
+    domain: 'https://static.anyphoto.space/',
     directory: directoryName,
     asyncGetStsToken: async () =>
       await Promise.resolve({

@@ -12,8 +12,8 @@ dependencies:
     specifier: 4.1.3
     version: 4.1.3
   anyphoto:
-    specifier: ^1.0.0
-    version: 1.0.0(debug@4.3.4)
+    specifier: ^1.0.1
+    version: 1.0.1(debug@4.3.4)
   axios:
     specifier: 1.5.1
     version: 1.5.1(debug@4.3.4)
@@ -212,8 +212,8 @@ packages:
       picomatch: 2.3.1
     dev: false
 
-  /anyphoto@1.0.0(debug@4.3.4):
-    resolution: {integrity: sha512-0vwF2AgoIpni+8YrCWBpX8Za5MtI+QdmO+KRNlOCgeJp8jPkAH83lt/LywgNvDFI0J5WYlou4kgv0PCsce2akw==}
+  /anyphoto@1.0.1(debug@4.3.4):
+    resolution: {integrity: sha512-KOYVOzRNHaUwpSvicsQjeDgh2LsomsnkbVi5aolXPTOHMoUSNrlQk/DmnvAIv7BcuUFwotGM/NW26hRyhV2ltg==}
     hasBin: true
     dependencies:
       '@types/node': 20.8.7
@@ -223,7 +223,7 @@ packages:
       canvas: 2.11.2
       cli-progress: 3.12.0
       commander: 11.1.0
-      figlet: 1.6.0
+      figlet: 1.7.0
       is-image-url: 1.1.8
       open: 8.4.0
       ora: 5.4.1
@@ -776,8 +776,8 @@ packages:
       is-extendable: 0.1.1
     dev: false
 
-  /figlet@1.6.0:
-    resolution: {integrity: sha512-31EQGhCEITv6+hi2ORRPyn3bulaV9Fl4xOdR169cBzH/n1UqcxsiSB/noo6SJdD7Kfb1Ljit+IgR1USvF/XbdA==}
+  /figlet@1.7.0:
+    resolution: {integrity: sha512-gO8l3wvqo0V7wEFLXPbkX83b7MVjRrk1oRLfYlZXol8nEpb/ON9pcKLI4qpBv5YtOTfrINtqb7b40iYY2FTWFg==}
     engines: {node: '>= 0.4.0'}
     hasBin: true
     dev: false
@@ -1703,7 +1703,7 @@ packages:
     engines: {node: '>= 6'}
     dependencies:
       inherits: 2.0.4
-      string_decoder: 1.3.0
+      string_decoder: 1.1.1
       util-deprecate: 1.0.2
     dev: false
 
@@ -1912,12 +1912,6 @@ packages:
     resolution: {integrity: sha512-n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg==}
     dependencies:
       safe-buffer: 5.1.2
-    dev: false
-
-  /string_decoder@1.3.0:
-    resolution: {integrity: sha512-hkRX8U1WjJFd8LsDJ2yQ/wWWxaopEsABU1XfkM8A+j0+85JAGppt16cr1Whg6KIbb4okU6Mql6BOj+uup/wKeA==}
-    dependencies:
-      safe-buffer: 5.2.1
     dev: false
 
   /strip-ansi@6.0.1:

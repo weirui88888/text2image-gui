@@ -7,7 +7,7 @@ import ProductHeroLayout from './ProductHeroLayout'
 import { Link as RouterLink } from 'react-router-dom'
 import { useApp } from '../store/app'
 
-const backgroundImage = 'https://anyphoto.newarray.vip/pexels-krishna-lair-1165005.jpg'
+const backgroundImage = 'https://static.anyphoto.space/pexels-krishna-lair-1165005.jpg'
 
 export default function ProductHero() {
   const { state } = useApp()
