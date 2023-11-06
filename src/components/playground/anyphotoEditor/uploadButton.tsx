@@ -38,11 +38,11 @@ const UploadButton: React.FC<UploadButtonProps> = ({ fieldName, bucketName, dire
 
   const onUploadFile = async (e: any) => {
     const file = e.target.files[0]
-    const { ossSrc } = await upload({
+    const { ossFileSrc } = await upload({
       file,
       randomName: true
     })
-    onSuccess(ossSrc)
+    onSuccess(ossFileSrc)
   }
   return (
     <Button size="small" component="label" variant="contained" startIcon={<CloudUploadIcon />} color="button">
