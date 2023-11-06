@@ -140,7 +140,14 @@ jobs:
           # Optional plain body:
           body: |
             Deploy Result: ${{steps.checkDeployStatus.outputs.DeployStatus}}
+
+            Deploy Web Result: ${{ needs.deploy-web.result }}
+
+            Deploy Server Result: ${{ needs.deploy-server.result }}
+
             Commit Id: ${{ github.sha }}
+
             Commit Message: ${{needs.deploy-web.outputs.LatestCommitMessage}}
+
           # Optional priority: 'high', 'normal' (default) or 'low'
           priority: high
