@@ -35,7 +35,7 @@ const anyPhotoConfig = {
   defaultOutputNameHandle(defaultOutputName) {
     return `${Date.now()}-${defaultOutputName}`
   },
-  defaultAvatar: 'https://static.anyphoto.space/logos/logo1/logo.png',
+  defaultAvatar: 'https://static.anyphoto.space/core/themes/default/avatar.jpg',
   defaultAuthor: '送东阳马生序',
   canvasSetting: {
     width: 1250,
