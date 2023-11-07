@@ -22,15 +22,15 @@ i18n
           slogan: 'photo by any inspiration',
           'sign-up': 'sign up',
           'login-in': 'login in',
-          author: 'Author is：<1>code1 and beast</1>'
+          author: 'Author is:<1>code1 and beast</1>'
         }
       },
       zh: {
         translation: {
           slogan: '借由灵感创作图片',
-          'sign-up': 'sign up', // 注册，
+          'sign-up': 'sign up', // 注册1
           'login-in': 'login in', // 登录
-          author: '作者是：<1>代码与野兽</1>'
+          author: '作者是:<1>anyphoto与野兽</1>'
         }
       }
     }

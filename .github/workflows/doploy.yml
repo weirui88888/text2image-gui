@@ -10,20 +10,53 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  check-changed-files:
+    runs-on: ubuntu-latest
+    name: check-changed-files
+    outputs:
+      shouldDeployWeb: ${{steps.changed-files-yaml.outputs.web_any_changed}}
+      shouldDeployServer: ${{steps.changed-files-yaml.outputs.server_any_changed}}
+      shouldDeployAll: ${{steps.changed-files-yaml.outputs.action_any_changed}}
+      webChangedFiles: ${{steps.changed-files-yaml.outputs.web_all_changed_and_modified_files}}
+      serverChangedFiles: ${{steps.changed-files-yaml.outputs.server_all_changed_and_modified_files}}
+      latestCommitMessage: ${{steps.get-latest-commit.outputs.latest_commit_message }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get Latest Commit Message
+        id: get-latest-commit
+        run: |
+          echo "latest_commit_message=$(git log --format=%B -n 1 ${{ github.sha }})" >> $GITHUB_OUTPUT
+
+      - name: Get changed files
+        id: changed-files-yaml
+        uses: tj-actions/changed-files@v40
+        with:
+          files_yaml: |
+            action:
+              - '.github/workflows/**'
+            server:
+              - server/**
+            web:
+              - ./**
+              - '!.github/**'
+              - '!server/**'
+
   deploy-web:
     name: deploy-web
     runs-on: ubuntu-latest
-    outputs:
-      WebPageUpdateTimeWithNumber: ${{ steps.observer.outputs.WebPageUpdateTimeWithNumber }}
-      LatestCommitMessage: ${{steps.getLatestCommitMessage.outputs.LatestCommitMessage }}
+    needs: check-changed-files
+    if: ${{ (needs.check-changed-files.outputs.shouldDeployWeb == 'true') || (needs.check-changed-files.outputs.shouldDeployAll == 'true') }}
     steps:
       - name: Fetch Resources
         uses: actions/checkout@v3
 
-      - name: Get Latest Commit Message
-        id: getLatestCommitMessage
+      - name: View Changed Web Files Name
+        if: ${{ needs.check-changed-files.outputs.shouldDeployWeb == 'true' }}
         run: |
-          echo "LatestCommitMessage=$(git log --format=%B -n 1 ${{ github.sha }})" >> $GITHUB_OUTPUT
+          echo "List all the web files that have changed: ${{ needs.check-changed-files.outputs.webChangedFiles }}"
 
       - uses: pnpm/action-setup@v2
         name: Install pnpm
@@ -45,7 +78,7 @@ jobs:
           echo "REACT_APP_ALI_CAPTCHA_LOGININ_SCENE_ID=${{ secrets.REACT_APP_ALI_CAPTCHA_LOGININ_SCENE_ID }}" >> .env.production
           echo "REACT_APP_ALI_CAPTCHA_SIGNUP_SCENE_ID=${{ secrets.REACT_APP_ALI_CAPTCHA_SIGNUP_SCENE_ID }}" >> .env.production
           echo "REACT_APP_WEBSITE_LATEST_COMMIT_ID=$GITHUB_SHA" >> .env.production
-          echo "REACT_APP_WEBSITE_LATEST_COMMIT_MESSAGE=${{ steps.getLatestCommitMessage.outputs.LatestCommitMessage }}" >> .env.production
+          echo "REACT_APP_WEBSITE_LATEST_COMMIT_MESSAGE=${{ needs.check-changed-files.outputs.latestCommitMessage }}" >> .env.production
 
       - name: Install Dependencies & Build
         run: |
@@ -55,38 +88,36 @@ jobs:
       - name: View Anyphoto Web Static Files
         run: ls build
 
-      - name: Deploy Web Static Files To Centos
+      - name: Deploy Web Static Files To Ubuntu
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          username: ${{ secrets.CENTOS_USER }}
-          server: ${{ secrets.CENTOS_HOST }}
-          password: ${{ secrets.CENTOS_PASSWORD }}
+          username: ${{ secrets.UBUNTU_USER }}
+          server: ${{ secrets.UBUNTU_HOST }}
+          password: ${{ secrets.UBUNTU_PASSWORD }}
           local_path: './build/*'
           remote_path: '/home/www/anyphoto-web'
           delete_remote_files: true
 
-      - name: Observer Web Page Update Time
-        id: observer
-        run: |
-          echo "-------------------- Observer Web Page Update Time Log Start --------------------"
-          echo "WebPageUpdateTimeWithNumber=$(date "+%y%m%d").$GITHUB_RUN_NUMBER"
-          echo "-------------------- Observer Web Page Update Time Log end --------------------"
-          echo "WebPageUpdateTimeWithNumber=$(date "+%y%m%d").$GITHUB_RUN_NUMBER" >> $GITHUB_OUTPUT
-
   deploy-server:
     name: deploy-server
     runs-on: ubuntu-latest
-    needs: deploy-web
+    needs: check-changed-files
+    if: ${{ (needs.check-changed-files.outputs.shouldDeployServer == 'true') || (needs.check-changed-files.outputs.shouldDeployAll == 'true') }}
     steps:
       - name: Fetch Resources
         uses: actions/checkout@v3
 
-      - name: Deploy to Server
+      - name: View Changed Server Files Name
+        if: ${{ needs.check-changed-files.outputs.shouldDeployServer == 'true' }}
+        run: |
+          echo "List all the server files that have changed: ${{ needs.check-changed-files.outputs.serverChangedFiles }}"
+
+      - name: Deploy Express Server Files To Ubuntu
         uses: cross-the-world/ssh-scp-ssh-pipelines@latest
         with:
-          host: ${{ secrets.CENTOS_HOST }}
-          user: ${{ secrets.CENTOS_USER }}
-          pass: ${{ secrets.CENTOS_PASSWORD }}
+          host: ${{ secrets.UBUNTU_HOST }}
+          user: ${{ secrets.UBUNTU_USER }}
+          pass: ${{ secrets.UBUNTU_PASSWORD }}
           connect_timeout: 60s
           first_ssh: |
             cd /home/www
@@ -101,18 +132,17 @@ jobs:
             pnpm i
             pnpm run start:production
 
-      - name: View Env Detail
-        run: echo ${{needs.deploy-web.outputs.WebPageUpdateTimeWithNumber}}
-
   send-email:
     name: send email
     runs-on: ubuntu-latest
-    needs: [deploy-web, deploy-server]
+    # important
+    if: success('check-changed-files')
+    needs: [deploy-web, deploy-server, check-changed-files]
     steps:
       - name: Check Deploy Status
         id: checkDeployStatus
         run: |
-          if [[ "${{ needs.deploy-web.result }}" == 'success' && "${{ needs.deploy-server.result }}" == 'success' ]]; then
+          if [[ "${{ needs.deploy-web.result }}" != 'failure' && "${{ needs.deploy-server.result }}" != 'failure' && "${{ needs.check-changed-files.result }}" != 'failure' ]]; then
             echo "DeployStatus=success" >> $GITHUB_OUTPUT
           else
             echo "DeployStatus=fail" >> $GITHUB_OUTPUT
@@ -141,13 +171,24 @@ jobs:
           body: |
             Deploy Result: ${{steps.checkDeployStatus.outputs.DeployStatus}}
 
-            Deploy Web Result: ${{ needs.deploy-web.result }}
 
-            Deploy Server Result: ${{ needs.deploy-server.result }}
+            Web:
+            -------
+            Deploy Web Job Result: ${{ needs.deploy-web.result }} 
 
+            Web changed files: ${{ needs.check-changed-files.outputs.webChangedFiles }}
+
+            Server:
+            -------
+            Deploy Server Job Result: ${{ needs.deploy-server.result }}
+
+            Web changed files: ${{ needs.check-changed-files.outputs.serverChangedFiles }}
+
+            Commit:
+            -------
             Commit Id: ${{ github.sha }}
 
-            Commit Message: ${{needs.deploy-web.outputs.LatestCommitMessage}}
+            Commit Message: ${{needs.check-changed-files.outputs.latestCommitMessage}}
 
           # Optional priority: 'high', 'normal' (default) or 'low'
           priority: high

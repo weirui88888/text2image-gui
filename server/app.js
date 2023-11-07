@@ -17,7 +17,21 @@ const penRouterApi = require('./routes/pen')
 const app = express()
 
 app.set('port', process.env.PORT ?? 3001)
-app.use(cors())
+// TODO:如果本地开发的话，需要调整这里，将cors中的配置删除，使用app.use(cors())即可
+const allowedOrigins = ['https://anyphoto.space', 'https://www.anyphoto.space']
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      //  || !origin
+      if (allowedOrigins.includes(origin) || process.env.NODE_ENV === 'development') {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    }
+  })
+)
 app.use(morgan('dev'))
 app.use(cookieParser())
 app.use(bodyParser.json())

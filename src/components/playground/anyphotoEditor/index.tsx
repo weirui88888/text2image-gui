@@ -7,7 +7,7 @@ import LoadingButton from '@mui/lab/LoadingButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import UploadButton from './uploadButton'
 
-const StyledLoadingButton = styled(LoadingButton)(({ theme }) => ({
+const StyledLoadingButton = styled(LoadingButton)(() => ({
   position: 'relative',
   '&.in-generate-button:before, &.in-generate-button:after': {
     content: '""',
@@ -130,7 +130,7 @@ const AnyphotoEditor: React.FC<AnyphotoEditorProps> = ({ generate, isGenerate })
           fullWidth
           className={isGenerate ? 'in-generate-button' : ''}
           type="submit"
-          sx={{ mt: 4 }}
+          sx={{ mt: 4, fontSize: { xs: 13 } }}
           loading={isGenerate}
           loadingIndicator="just wait a moment"
           variant="contained"

@@ -33,9 +33,5 @@ anyphoto-web-font/
 # nginx
 nginx.conf
 
-
-
-.env*
-.flaskenv*
-!.env.project
-!.env.vault
+# index.html
+index.html
