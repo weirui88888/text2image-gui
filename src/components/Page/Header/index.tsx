@@ -35,12 +35,17 @@ const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
                 <Logo />
               </Grid>
               <Grid
-                style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'column' }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  justifyContent: 'center',
+                  flexDirection: 'column',
+                  transform: 'translateY(-2px)'
+                }}
               >
                 <Text
                   b
                   span
-                  font={1.25}
                   margin={0}
                   style={{ display: 'block', cursor: 'pointer' }}
                   onClick={() => {
