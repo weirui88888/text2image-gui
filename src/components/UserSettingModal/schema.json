@@ -1,0 +1,276 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["defaultAvatar", "defaultTitle", "canvasSetting"],
+  "properties": {
+    "defaultAvatar": {
+      "type": "string"
+    },
+    "defaultTitle": {
+      "type": "string"
+    },
+    "canvasSetting": {
+      "type": "object",
+      "required": [
+        "width",
+        "customFontPath",
+        "backgroundImage",
+        "backgroundColor",
+        "linearGradientStop",
+        "linearGradientDirection",
+        "backgroundLineSpacing",
+        "backgroundLineColor",
+        "color",
+        "fontSize",
+        "lineGap",
+        "x",
+        "y",
+        "header",
+        "footer",
+        "from",
+        "underline"
+      ],
+      "properties": {
+        "width": {
+          "type": "number"
+        },
+        "customFontPath": {
+          "type": "string"
+        },
+        "backgroundImage": {
+          "type": "string"
+        },
+        "backgroundColor": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "linearGradientStop": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "linearGradientDirection": {
+          "type": "string"
+        },
+        "backgroundLineSpacing": {
+          "type": "number"
+        },
+        "backgroundLineColor": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        },
+        "fontSize": {
+          "type": "number"
+        },
+        "lineGap": {
+          "type": "number"
+        },
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "header": {
+          "type": "object",
+          "required": [
+            "headerAlign",
+            "headerPaddingTop",
+            "headerPaddingBottom",
+            "showHeaderAvatar",
+            "headerAvatarSize",
+            "headerAvatarBorderWidth",
+            "headerAvatarBorderColor",
+            "headerAvatarMarginBottom",
+            "showHeaderTitle",
+            "headerTitleFontSize",
+            "headerTitleFontColor",
+            "headerTitleFontWeight",
+            "headerTitleMarginBottom",
+            "showHeaderDescription",
+            "headerDescriptionFontSize",
+            "headerDescriptionFontColor",
+            "headerDescriptionFontWeight",
+            "showHeaderDescriptionTime",
+            "headerDescriptionTimeFormat",
+            "headerDescriptionPrefix",
+            "headerDescriptionPrefixIcon",
+            "headerDescriptionPrefixIconGap",
+            "headerDescriptionPrefixIconOffsetY"
+          ],
+          "properties": {
+            "headerAlign": {
+              "title": "控制图片头部展示位置",
+              "description": "支持左边、右边、中间",
+              "type": "string",
+              "enum": ["left", "center", "right"]
+            },
+            "headerPaddingTop": {
+              "type": "number"
+            },
+            "headerPaddingBottom": {
+              "type": "number"
+            },
+            "showHeaderAvatar": {
+              "type": "boolean"
+            },
+            "headerAvatarSize": {
+              "type": "number"
+            },
+            "headerAvatarBorderWidth": {
+              "type": "number"
+            },
+            "headerAvatarBorderColor": {
+              "type": "string"
+            },
+            "headerAvatarMarginBottom": {
+              "type": "number"
+            },
+            "showHeaderTitle": {
+              "type": "boolean"
+            },
+            "headerTitleFontSize": {
+              "type": "number"
+            },
+            "headerTitleFontColor": {
+              "type": "string"
+            },
+            "headerTitleFontWeight": {
+              "type": "string"
+            },
+            "headerTitleMarginBottom": {
+              "type": "number"
+            },
+            "showHeaderDescription": {
+              "type": "boolean"
+            },
+            "headerDescriptionFontSize": {
+              "type": "number"
+            },
+            "headerDescriptionFontColor": {
+              "type": "string"
+            },
+            "headerDescriptionFontWeight": {
+              "type": "string"
+            },
+            "showHeaderDescriptionTime": {
+              "type": "boolean"
+            },
+            "headerDescriptionTimeFormat": {
+              "type": "string"
+            },
+            "headerDescriptionPrefix": {
+              "type": "string"
+            },
+            "headerDescriptionPrefixIcon": {
+              "type": "string"
+            },
+            "headerDescriptionPrefixIconGap": {
+              "type": "number"
+            },
+            "headerDescriptionPrefixIconOffsetY": {
+              "type": "number"
+            }
+          }
+        },
+        "footer": {
+          "type": "object",
+          "required": [
+            "paddingY",
+            "slogan",
+            "sloganPosition",
+            "sloganFontSize",
+            "sloganFontColor",
+            "sloganFontWeight",
+            "sloganIcon",
+            "sloganIconOffsetY",
+            "sloganIconPaddingY"
+          ],
+          "properties": {
+            "paddingY": {
+              "type": "number"
+            },
+            "slogan": {
+              "type": "string"
+            },
+            "sloganPosition": {
+              "type": "string"
+            },
+            "sloganFontSize": {
+              "type": "number"
+            },
+            "sloganFontColor": {
+              "type": "string"
+            },
+            "sloganFontWeight": {
+              "type": "string"
+            },
+            "sloganIcon": {
+              "type": "string"
+            },
+            "sloganIconOffsetY": {
+              "type": "number"
+            },
+            "sloganIconPaddingY": {
+              "type": "number"
+            }
+          }
+        },
+        "from": {
+          "type": "object",
+          "required": ["showFrom", "name", "fromFontSize", "fromFontColor", "fromFontWeight", "fromMarginTop"],
+          "properties": {
+            "showFrom": {
+              "type": "boolean"
+            },
+            "name": {
+              "type": "string"
+            },
+            "fromFontSize": {
+              "type": "number"
+            },
+            "fromFontColor": {
+              "type": "string"
+            },
+            "fromFontWeight": {
+              "type": "string"
+            },
+            "fromMarginTop": {
+              "type": "number"
+            }
+          }
+        },
+        "underline": {
+          "type": "object",
+          "required": ["shape", "color", "lineWidth", "amplitude", "wavelength", "offsetY"],
+          "properties": {
+            "shape": {
+              "type": "string"
+            },
+            "color": {
+              "type": "string"
+            },
+            "lineWidth": {
+              "type": "number"
+            },
+            "amplitude": {
+              "type": "number"
+            },
+            "wavelength": {
+              "type": "number"
+            },
+            "offsetY": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

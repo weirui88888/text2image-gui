@@ -50,7 +50,7 @@ const Home = () => {
         rows={16}
         ref={textareaRef}
         className="autosize"
-        style={{ maxHeight: 'calc(100vh - 280px)', transition: 'height 0.4s' }}
+        style={{ maxHeight: 'calc(100vh - 280px)', transition: 'height 0.2s' }}
         value={value}
         onChange={handler}
       ></Textarea>

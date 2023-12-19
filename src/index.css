@@ -1,17 +1,50 @@
+@font-face {
+  font-family: 'Preahvihear';
+  src: url('./Preahvihear.ttf');
+}
 html,
 body {
   height: 100%;
   overflow-y: scroll;
 }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
-    'Droid Sans', 'Helvetica Neue', sans-serif;
   background-image: radial-gradient(#333 1px, transparent 0), radial-gradient(#222 1px, transparent 0);
   background-position: 0 0, 25px 25px;
   background-attachment: fixed;
   background-size: 50px 50px;
 }
 
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+b,
+::placeholder {
+  font-family: Preahvihear, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
+}
+
 main {
   padding: 0 !important;
+}
+
+@media screen and (max-width: 600px) {
+  .smile-tip {
+    margin-bottom: 10px !important;
+  }
+}
+
+.config-tip {
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.svg-cursor-pointer {
+  cursor: pointer;
 }

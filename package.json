@@ -5,6 +5,7 @@
   "dependencies": {
     "@geist-ui/core": "^2.3.8",
     "@geist-ui/icons": "^1.0.2",
+    "@monaco-editor/react": "^4.6.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -14,10 +15,12 @@
     "@types/react-dom": "^18.2.18",
     "autosize": "^6.0.1",
     "date-fns": "^3.0.0",
+    "monaco-editor": "^0.45.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.0",
     "react-scripts": "5.0.1",
+    "react-transition-group": "^4.4.5",
     "react-use": "^17.4.2",
     "recoil": "^0.7.7",
     "styled-components": "^6.1.1",
@@ -52,6 +55,7 @@
   },
   "devDependencies": {
     "@types/autosize": "^4.0.3",
+    "@types/react-transition-group": "^4.4.10",
     "@types/uuid": "^9.0.7",
     "customize-cra": "^1.0.0",
     "react-app-rewired": "^2.2.1"

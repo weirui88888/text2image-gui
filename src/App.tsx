@@ -11,11 +11,12 @@ import Home from './pages/home'
 import Docs from './pages/docs'
 
 function App() {
-  const [theme, setTheme] = useLocalStorage<string>('theme', 'dark')
+  const [theme, setTheme] = useLocalStorage<string>('theme', 'dark', {raw:true})
   const switchTheme = (themeType: string) => {
     setTheme(themeType)
     localStorage.setItem('theme', themeType)
   }
+
   return (
     <RecoilRoot>
       <GeistProvider themeType={theme}>

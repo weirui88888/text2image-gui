@@ -1,10 +1,10 @@
 import { FC, useState, useEffect } from 'react'
 
-import { Grid, Page, Text } from '@geist-ui/core'
+import { Grid, Page, Text, useKeyboard, KeyCode, KeyMod } from '@geist-ui/core'
 import { Book, Moon, Settings, Sun } from '@geist-ui/icons'
 import ButtonRound from '@/components/ButtonRound'
 import Logo from '@/components/Logo'
-import TemplateSettingDrawer from '@/components/TemplateSettingDrawer'
+import UserSettingModal from '@/components/UserSettingModal'
 import { format } from 'date-fns'
 
 interface PageHeaderProps {
@@ -13,8 +13,13 @@ interface PageHeaderProps {
 }
 
 const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
-  const [isDrawerVisible, setIsDrawerVisible] = useState(false)
+  const [isUserSettingModalVisible, setIsUserSettingModalVisible] = useState(false)
   const [time, setTime] = useState(new Date())
+
+  useKeyboard(() => {
+    setIsUserSettingModalVisible(true)
+  }, [KeyCode.KEY_S, KeyMod.CtrlCmd])
+
   useEffect(() => {
     const timer = setInterval(() => {
       setTime(new Date())
@@ -44,7 +49,6 @@ const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
                 }}
               >
                 <Text
-                  b
                   span
                   margin={0}
                   style={{ display: 'block', cursor: 'pointer' }}
@@ -81,10 +85,15 @@ const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
                 />
               </Grid>
               <Grid>
-                <ButtonRound auto aria-label="Settings" icon={<Settings />} onClick={() => setIsDrawerVisible(true)} />
+                <ButtonRound
+                  auto
+                  aria-label="Settings"
+                  icon={<Settings />}
+                  onClick={() => setIsUserSettingModalVisible(true)}
+                />
               </Grid>
             </Grid.Container>
-            <TemplateSettingDrawer isVisible={isDrawerVisible} setIsVisible={setIsDrawerVisible} />
+            <UserSettingModal isVisible={isUserSettingModalVisible} setIsVisible={setIsUserSettingModalVisible} />
           </Grid>
         </Grid.Container>
       </Page.Header>
