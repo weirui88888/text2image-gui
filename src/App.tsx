@@ -2,12 +2,13 @@ import React from 'react'
 import { GeistProvider, CssBaseline } from '@geist-ui/core'
 import { BrowserRouter as Router, Routes as ReactRouters, Route } from 'react-router-dom'
 import { useLocalStorage } from 'react-use'
-import Home from './pages/home'
-import Docs from './pages/docs'
 import PageContainer from '@/components/Page/Container'
 import PageHeader from '@/components/Page/Header'
 import PageContent from '@/components/Page/Content'
 import PageFooter from '@/components/Page/Footer'
+import { RecoilRoot } from 'recoil'
+import Home from './pages/home'
+import Docs from './pages/docs'
 
 function App() {
   const [theme, setTheme] = useLocalStorage<string>('theme', 'dark')
@@ -16,7 +17,7 @@ function App() {
     localStorage.setItem('theme', themeType)
   }
   return (
-    <>
+    <RecoilRoot>
       <GeistProvider themeType={theme}>
         <CssBaseline />
         <Router>
@@ -32,7 +33,7 @@ function App() {
           </PageContainer>
         </Router>
       </GeistProvider>
-    </>
+    </RecoilRoot>
   )
 }
 

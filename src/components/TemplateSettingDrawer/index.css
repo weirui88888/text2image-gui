@@ -1,0 +1,10 @@
+.template-setting-drawer {
+  width: 50% !important;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 1000px) {
+  .template-setting-drawer {
+    width: 100% !important;
+  }
+}

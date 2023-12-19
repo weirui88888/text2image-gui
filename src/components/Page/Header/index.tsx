@@ -4,6 +4,7 @@ import { Grid, Page, Text } from '@geist-ui/core'
 import { Book, Moon, Settings, Sun } from '@geist-ui/icons'
 import ButtonRound from '@/components/ButtonRound'
 import Logo from '@/components/Logo'
+import TemplateSettingDrawer from '@/components/TemplateSettingDrawer'
 import { format } from 'date-fns'
 
 interface PageHeaderProps {
@@ -14,7 +15,6 @@ interface PageHeaderProps {
 const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
   const [isDrawerVisible, setIsDrawerVisible] = useState(false)
   const [time, setTime] = useState(new Date())
-
   useEffect(() => {
     const timer = setInterval(() => {
       setTime(new Date())
@@ -84,6 +84,7 @@ const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
                 <ButtonRound auto aria-label="Settings" icon={<Settings />} onClick={() => setIsDrawerVisible(true)} />
               </Grid>
             </Grid.Container>
+            <TemplateSettingDrawer isVisible={isDrawerVisible} setIsVisible={setIsDrawerVisible} />
           </Grid>
         </Grid.Container>
       </Page.Header>
