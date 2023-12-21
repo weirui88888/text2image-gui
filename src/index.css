@@ -32,12 +32,6 @@ main {
   padding: 0 !important;
 }
 
-@media screen and (max-width: 600px) {
-  .smile-tip {
-    margin-bottom: 10px !important;
-  }
-}
-
 .config-tip {
   position: absolute;
   right: 0px;
@@ -47,4 +41,10 @@ main {
 
 .svg-cursor-pointer {
   cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .smile-tip {
+    margin-bottom: 10px !important;
+  }
 }

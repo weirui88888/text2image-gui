@@ -58,7 +58,7 @@ const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
                 >
                   text2image-gui
                 </Text>
-                <Text span font={0.7}>
+                <Text span font={0.7} style={{ letterSpacing: '1px' }}>
                   {format(time, 'yyyy/MM/dd HH:mm:ss')}
                 </Text>
               </Grid>
