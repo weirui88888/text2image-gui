@@ -4,16 +4,19 @@ import {
   Tooltip,
   useKeyboard,
   KeyCode,
+  KeyMod,
   Text,
   Keyboard,
   useTheme,
   Image,
   Modal,
-  useModal
+  useModal,
+  Button
 } from '@geist-ui/core'
 import autosize from 'autosize'
-import { PenTool, X, Camera } from '@geist-ui/icons'
+import { PenTool, X, Camera, Minimize2, Maximize2, Download } from '@geist-ui/icons'
 import ButtonRound from '@/components/ButtonRound'
+import getImageMeta from '@/utils/getImageMeta'
 import './index.css'
 
 const maxInputLength = 3000
@@ -28,16 +31,19 @@ const images = [image1, image2, image3, image4]
 const Home = () => {
   const textareaRef: RefObject<HTMLTextAreaElement | null> = useRef(null)
   const [generate, setGenerate] = useState(false)
+  const [mini, setMini] = useState(false)
+  const [heightGreaterThanWidth, setHeightGreaterThanWidth] = useState(false)
   const [blurValue, setBlurValue] = useState(100)
   const [generatedImage, setGeneratedImage] = useState('')
   const { setVisible: setImageModalVisible, bindings: imageModalVisible } = useModal(false)
 
   const [usedImageIndex, setUsedImageIndex] = useState(0)
 
-  const mockGenerate: () => Promise<string> = () => {
-    return new Promise((res, rej) => {
+  const mockGenerate = (): Promise<string> => {
+    return new Promise(res => {
       setTimeout(() => {
         res(images[usedImageIndex % 4])
+        // res(images[1])
       }, 1000)
     })
   }
@@ -73,6 +79,8 @@ const Home = () => {
     setUsedImageIndex(usedImageIndex => usedImageIndex + 1)
     setGenerate(true)
     const imageSrc = await mockGenerate()
+    const { width, height } = await getImageMeta(imageSrc)
+    setHeightGreaterThanWidth(height / width > 1)
     setGeneratedImage(imageSrc)
     setImageModalVisible(true)
     transitionBlur()
@@ -85,7 +93,7 @@ const Home = () => {
         generateImage()
       }
     },
-    [KeyCode.Enter],
+    [KeyMod.Alt, KeyCode.Enter],
     { disableGlobalEvent: true }
   )
   return (
@@ -160,7 +168,9 @@ const Home = () => {
           text={
             <Text my={0} style={{ whiteSpace: 'nowrap' }}>
               click this button or press {''}
-              <Keyboard scale={0.5}>Enter</Keyboard>
+              <Keyboard option scale={0.5}>
+                Enter
+              </Keyboard>
             </Text>
           }
           style={{ position: 'absolute', bottom: '10px', right: '10px' }}
@@ -170,20 +180,48 @@ const Home = () => {
         </Tooltip>
       )}
       <Modal
-        width="50%"
+        width="50rem"
         {...imageModalVisible}
         onClose={() => {
           setImageModalVisible(false)
           setTimeout(() => {
+            setMini(false)
             setBlurValue(100)
-          }, 100)
+          }, 500)
         }}
       >
-        <Modal.Title>Image Title</Modal.Title>
-        <Modal.Content>
+        <Modal.Title style={{ marginBottom: '21px', position: 'relative' }}>
+          Image Title
+          {heightGreaterThanWidth ? (
+            <Button
+              placeholder={mini ? 'Maximize' : 'Minimize'}
+              iconRight={mini ? <Maximize2 /> : <Minimize2 />}
+              auto
+              scale={2 / 3}
+              px={0.6}
+              style={{ position: 'absolute', right: '40px' }}
+              onClick={() => setMini(mini ? false : true)}
+            ></Button>
+          ) : null}
+          <Button
+            placeholder="Download"
+            style={{ position: 'absolute', right: 0 }}
+            iconRight={<Download />}
+            auto
+            scale={2 / 3}
+            px={0.6}
+            onClick={() => {}}
+          ></Button>
+        </Modal.Title>
+        <Modal.Content style={{ maxHeight: '68vh', overflow: 'scroll', paddingTop: 0, textAlign: 'center' }}>
           <Image
             src={generatedImage}
-            style={{ filter: `blur(${blurValue}px) contrast(${blurValue + 1})`, transition: 'filter 1s' }}
+            style={{
+              filter: `blur(${blurValue}px) contrast(${blurValue + 1})`,
+              transition: 'filter 1s',
+              borderRadius: '6px',
+              height: mini ? '65vh' : 'auto'
+            }}
           />
         </Modal.Content>
       </Modal>

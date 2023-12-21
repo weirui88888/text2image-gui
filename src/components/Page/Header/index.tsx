@@ -18,7 +18,7 @@ const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
 
   useKeyboard(() => {
     setIsUserSettingModalVisible(true)
-  }, [KeyCode.KEY_S, KeyMod.CtrlCmd])
+  }, [KeyMod.Alt,KeyCode.KEY_S])
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -45,7 +45,8 @@ const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
                   alignItems: 'flex-start',
                   justifyContent: 'center',
                   flexDirection: 'column',
-                  transform: 'translateY(-2px)'
+                  transform: 'translateY(-2px)',
+                  paddingLeft:0
                 }}
               >
                 <Text

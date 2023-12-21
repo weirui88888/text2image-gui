@@ -12,12 +12,12 @@ import SwitchFadeTransition from '../SwitchFadeTransition'
 import Smile from './Smile'
 import Cry from './Cry'
 
-interface SchemaModalProps {
+interface UserSettingModalProps {
   isVisible: boolean
   setIsVisible: Dispatch<SetStateAction<boolean>>
 }
 
-const SchemaModal: FC<SchemaModalProps> = ({ isVisible, setIsVisible }) => {
+const UserSettingModal: FC<UserSettingModalProps> = ({ isVisible, setIsVisible }) => {
   const [userConfig, setUserConfig] = useRecoilState(userConfigState)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [userLocalConfig, setUserLocalConfig] = useLocalStorage<Record<string, any>>('user-config', undefined, {
@@ -93,7 +93,7 @@ const SchemaModal: FC<SchemaModalProps> = ({ isVisible, setIsVisible }) => {
               <Text my={0} style={{ whiteSpace: 'nowrap' }}>
                 <Dot type="warning" />
                 Try press{' '}
-                <Keyboard command scale={0.5}>
+                <Keyboard option scale={0.5}>
                   S
                 </Keyboard>{' '}
                 to open setting modal and <Keyboard scale={0.5}>ESC</Keyboard> to close and save setting
@@ -203,4 +203,4 @@ const SchemaModal: FC<SchemaModalProps> = ({ isVisible, setIsVisible }) => {
   )
 }
 
-export default SchemaModal
+export default UserSettingModal

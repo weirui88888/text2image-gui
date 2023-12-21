@@ -1,4 +1,4 @@
-import { getUniqueName } from '@/utils/getUniqueName'
+import getUniqueName from '@/utils/getUniqueName'
 import { atom } from 'recoil'
 import defaultConfig from '@/components/UserSettingModal/default-config'
 
