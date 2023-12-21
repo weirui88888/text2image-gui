@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState, RefObject } from 'react'
 import { Textarea, Tooltip, useKeyboard, KeyCode, Keyboard } from '@geist-ui/core'
 import autosize from 'autosize'
 import { PenTool, X } from '@geist-ui/icons'
@@ -12,11 +12,12 @@ const mockGenerate = () => {
 }
 
 const Home = () => {
-  const textareaRef = useRef(null)
+  const textareaRef: RefObject<HTMLTextAreaElement | null> = useRef(null)
   const [generate, setGenerate] = useState(false)
   const [value, setValue] = useState<string>('')
   useEffect(() => {
     const textareaDom = textareaRef.current
+    textareaDom!.focus()
     autosize(textareaDom!)
     return () => {
       autosize.destroy(textareaDom!)
@@ -48,7 +49,7 @@ const Home = () => {
         width="100%"
         placeholder="type any thing you like..."
         rows={16}
-        ref={textareaRef}
+        ref={textareaRef as any}
         className="autosize"
         style={{ maxHeight: 'calc(100vh - 280px)', transition: 'height 0.2s' }}
         value={value}
