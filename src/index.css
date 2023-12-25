@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Preahvihear';
-  src: url('./Preahvihear.ttf');
+  src: url('./IBMPlexSans-Regular.ttf');
 }
 html,
 body {
@@ -30,6 +30,19 @@ b,
 
 main {
   padding: 0 !important;
+}
+
+.caption {
+  margin-top: 0 !important;
+  text-align: left !important;
+  width: 100% !important;
+  padding: 18px 0 8px 0 !important;
+  max-width: 100% !important;
+}
+
+ul li::before {
+  position: relative !important;
+  content: '*' !important;
 }
 
 .config-tip {

@@ -1,0 +1,9 @@
+.theme-tag {
+  margin-right: 8px !important;
+  margin-bottom: 8px !important;
+  cursor: default;
+}
+.select-theme {
+  border: 1px solid #00ff00 !important;
+  transition: border-color 0.5s;
+}

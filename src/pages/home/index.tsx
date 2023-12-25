@@ -17,6 +17,8 @@ import autosize from 'autosize'
 import { PenTool, X, Camera, Minimize2, Maximize2, Download } from '@geist-ui/icons'
 import ButtonRound from '@/components/ButtonRound'
 import getImageMeta from '@/utils/getImageMeta'
+import { useRecoilValueLoadable } from 'recoil'
+import { pickedThemeOptions } from '@/recoil/theme'
 import './index.css'
 
 const maxInputLength = 3000
@@ -38,6 +40,7 @@ const Home = () => {
   const { setVisible: setImageModalVisible, bindings: imageModalVisible } = useModal(false)
 
   const [usedImageIndex, setUsedImageIndex] = useState(0)
+  const { state, contents } = useRecoilValueLoadable(pickedThemeOptions)
 
   const mockGenerate = (): Promise<string> => {
     return new Promise(res => {
@@ -97,7 +100,11 @@ const Home = () => {
     { disableGlobalEvent: true }
   )
   return (
-    <div className="home-page">
+    <div className="home-page" style={{ textAlign: 'center' }}>
+      {/* <Text h1 font={2}>
+        Text2image
+      </Text> */}
+      {state === 'hasValue' && contents && contents.map((option: any) => option.key)}
       <Textarea
         {...bindings}
         width="100%"

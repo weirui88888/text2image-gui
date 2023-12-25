@@ -1,12 +1,13 @@
-import { FC, useState, useEffect } from 'react'
+import { FC, useState, useEffect, useCallback } from 'react'
 
-import { Grid, Page, Text, useKeyboard, KeyCode, KeyMod } from '@geist-ui/core'
-import { Book, Moon, Settings, Sun } from '@geist-ui/icons'
+import { Grid, Page, Text, useKeyboard, KeyCode, KeyMod, useMediaQuery } from '@geist-ui/core'
+import { Book, Moon, Settings, Sun, Github, MoreVertical, Aperture } from '@geist-ui/icons'
 import ButtonRound from '@/components/ButtonRound'
 import Logo from '@/components/Logo'
 import UserSettingModal from '@/components/UserSettingModal'
-import { format } from 'date-fns'
+import ThemeModal from '@/components/ThemeModal'
 
+import { format } from 'date-fns'
 interface PageHeaderProps {
   theme?: string
   switchTheme: (theme: string) => any
@@ -14,11 +15,12 @@ interface PageHeaderProps {
 
 const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
   const [isUserSettingModalVisible, setIsUserSettingModalVisible] = useState(false)
+  const [themeModalVisible, setThemeModalVisible] = useState(false)
   const [time, setTime] = useState(new Date())
-
+  const upSM = useMediaQuery('sm', { match: 'up' })
   useKeyboard(() => {
     setIsUserSettingModalVisible(true)
-  }, [KeyMod.Alt,KeyCode.KEY_S])
+  }, [KeyMod.Alt, KeyCode.KEY_S])
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -30,10 +32,14 @@ const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
     }
   }, [])
 
+  const openThemeModal = useCallback(() => {
+    setThemeModalVisible(true)
+  }, [])
+
   return (
     <div style={{ height: '64px', display: 'flex', alignItems: 'center' }}>
-      <Page.Header center>
-        <Grid.Container alignItems="center" gap={1} justify="space-between">
+      <Page.Header>
+        <Grid.Container alignItems="center" justify="space-between">
           <Grid sm>
             <Grid.Container alignItems="center" gap={1}>
               <Grid>
@@ -46,7 +52,7 @@ const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
                   justifyContent: 'center',
                   flexDirection: 'column',
                   transform: 'translateY(-2px)',
-                  paddingLeft:0
+                  paddingLeft: 0
                 }}
               >
                 <Text
@@ -66,37 +72,70 @@ const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
             </Grid.Container>
           </Grid>
           <Grid>
-            <Grid.Container alignItems="center" gap={1}>
-              <Grid>
-                <ButtonRound
-                  auto
-                  aria-label="Glossary"
-                  icon={<Book />}
-                  onClick={() => {
-                    console.log('docs')
-                  }}
-                />
-              </Grid>
-              <Grid>
-                <ButtonRound
-                  auto
-                  aria-label="Theme"
-                  icon={theme === 'dark' ? <Moon /> : <Sun />}
-                  onClick={() => switchTheme(theme === 'dark' ? 'light' : 'dark')}
-                />
-              </Grid>
-              <Grid>
-                <ButtonRound
-                  auto
-                  aria-label="Settings"
-                  icon={<Settings />}
-                  onClick={() => setIsUserSettingModalVisible(true)}
-                />
-              </Grid>
-            </Grid.Container>
-            <UserSettingModal isVisible={isUserSettingModalVisible} setIsVisible={setIsUserSettingModalVisible} />
+            {upSM ? (
+              <Grid.Container alignItems="center" gap={1}>
+                <Grid>
+                  <ButtonRound
+                    auto
+                    aria-label="Aperture"
+                    icon={<Aperture />}
+                    title="Template"
+                    onClick={openThemeModal}
+                  />
+                </Grid>
+                <Grid>
+                  <ButtonRound
+                    auto
+                    aria-label="About"
+                    title="About"
+                    icon={<Book />}
+                    onClick={() => {
+                      console.log('docs')
+                    }}
+                  />
+                </Grid>
+                <Grid>
+                  <ButtonRound
+                    auto
+                    aria-label="Github"
+                    title="Github"
+                    icon={<Github />}
+                    onClick={() => window.open('https://github.com/weirui88888/text2image-gui', '_blank')}
+                  />
+                </Grid>
+                <Grid>
+                  <ButtonRound
+                    auto
+                    aria-label="Theme"
+                    title="Theme"
+                    icon={theme === 'dark' ? <Moon /> : <Sun />}
+                    onClick={() => switchTheme(theme === 'dark' ? 'light' : 'dark')}
+                  />
+                </Grid>
+                <Grid>
+                  <ButtonRound
+                    auto
+                    aria-label="Settings"
+                    title="Settings"
+                    icon={<Settings />}
+                    onClick={() => setIsUserSettingModalVisible(true)}
+                  />
+                </Grid>
+              </Grid.Container>
+            ) : (
+              <Grid.Container alignItems="center" gap={1}>
+                <Grid>
+                  <ButtonRound auto aria-label="Aperture" icon={<Aperture />} onClick={openThemeModal} />
+                </Grid>
+                <Grid>
+                  <ButtonRound auto aria-label="Theme" icon={<MoreVertical />} onClick={() => {}} />
+                </Grid>
+              </Grid.Container>
+            )}
           </Grid>
         </Grid.Container>
+        <UserSettingModal isVisible={isUserSettingModalVisible} setIsVisible={setIsUserSettingModalVisible} />
+        <ThemeModal isVisible={themeModalVisible} setIsVisible={setThemeModalVisible}></ThemeModal>
       </Page.Header>
     </div>
   )
