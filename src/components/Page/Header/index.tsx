@@ -20,7 +20,7 @@ const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
   const upSM = useMediaQuery('sm', { match: 'up' })
   useKeyboard(() => {
     setIsUserSettingModalVisible(true)
-  }, [KeyMod.Alt, KeyCode.KEY_S])
+  }, [KeyMod.CtrlCmd, KeyCode.KEY_S])
 
   useEffect(() => {
     const timer = setInterval(() => {

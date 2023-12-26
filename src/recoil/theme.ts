@@ -22,19 +22,23 @@ const getIntegratedThemes = () => {
           options: [
             {
               key: 'defaultTitle',
-              component: 'Input'
+              component: 'Input',
+              label: 'Title'
             },
             {
               key: 'headerDescriptionPrefix',
-              component: 'Input'
+              component: 'Input',
+              label: 'Description Prefix'
             },
             {
               key: 'slogan',
-              component: 'Input'
+              component: 'Input',
+              label: 'Slogan'
             },
             {
               key: 'name',
-              component: 'Input'
+              component: 'Input',
+              label: 'From'
             }
           ],
           config: {
@@ -44,17 +48,14 @@ const getIntegratedThemes = () => {
           tags: ['title', 'description', 'content', 'from', 'slogan']
         },
         {
-          name: 'theme2',
-          description: 'this is theme1',
+          name: 'Custom Image Width',
+          description: 'You can custom set image width by adjusting the slider',
           preview: 'https://static.anyphoto.space/theme-demo/10003.png',
           options: [
             {
-              key: 'defaultTitle',
-              component: 'Input'
-            },
-            {
-              key: 'defaultAvatar',
-              component: 'upload'
+              key: 'width',
+              component: 'Slider',
+              label: 'Width'
             }
           ],
           config: {

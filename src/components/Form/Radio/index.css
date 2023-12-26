@@ -1,0 +1,10 @@
+.custom-radio {
+  margin-left: 0 !important;
+}
+.custom-radio .name {
+  font-size: 14px !important;
+  font-weight: normal !important;
+}
+.custom-radio .point {
+  margin-right: 2px !important;
+}

@@ -32,6 +32,11 @@ main {
   padding: 0 !important;
 }
 
+.with-label,
+.input-container {
+  width: 100% !important;
+}
+
 .caption {
   margin-top: 0 !important;
   text-align: left !important;
@@ -60,4 +65,17 @@ ul li::before {
   .smile-tip {
     margin-bottom: 10px !important;
   }
+}
+
+input[type='file'] {
+  opacity: 0;
+  cursor: pointer;
+  width: 34px;
+  height: 36px;
+  font-size: 0;
+  position: absolute;
+  left: 0;
+}
+::placeholder {
+  font-size: 12px;
 }

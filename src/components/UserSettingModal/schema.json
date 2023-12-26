@@ -41,10 +41,17 @@
           "type": "string"
         },
         "backgroundColor": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "type": "string"
+            }
+          ]
         },
         "linearGradientStop": {
           "type": "array",
@@ -79,6 +86,7 @@
         "header": {
           "type": "object",
           "required": [
+            "showHeader",
             "headerAlign",
             "headerPaddingTop",
             "headerPaddingBottom",
@@ -104,6 +112,9 @@
             "headerDescriptionPrefixIconOffsetY"
           ],
           "properties": {
+            "showHeader": {
+              "type": "boolean"
+            },
             "headerAlign": {
               "title": "控制图片头部展示位置",
               "description": "支持左边、右边、中间",
@@ -181,6 +192,7 @@
         "footer": {
           "type": "object",
           "required": [
+            "showFooter",
             "paddingY",
             "slogan",
             "sloganPosition",
@@ -192,6 +204,9 @@
             "sloganIconPaddingY"
           ],
           "properties": {
+            "showFooter": {
+              "type": "boolean"
+            },
             "paddingY": {
               "type": "number"
             },

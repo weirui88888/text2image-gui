@@ -3,7 +3,6 @@ import { Page } from '@geist-ui/core'
 import './index.css'
 
 const index: FC<{ children: React.ReactNode }> = ({ children }) => {
-  // return <div className="page-container">{children}</div>
   return (
     <Page
       dotBackdrop

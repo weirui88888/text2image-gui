@@ -11,14 +11,14 @@ import {
   Image,
   Modal,
   useModal,
-  Button
+  Button,
+  useMediaQuery
 } from '@geist-ui/core'
 import autosize from 'autosize'
 import { PenTool, X, Camera, Minimize2, Maximize2, Download } from '@geist-ui/icons'
 import ButtonRound from '@/components/ButtonRound'
+import Form from '@/components/Form'
 import getImageMeta from '@/utils/getImageMeta'
-import { useRecoilValueLoadable } from 'recoil'
-import { pickedThemeOptions } from '@/recoil/theme'
 import './index.css'
 
 const maxInputLength = 3000
@@ -38,9 +38,8 @@ const Home = () => {
   const [blurValue, setBlurValue] = useState(100)
   const [generatedImage, setGeneratedImage] = useState('')
   const { setVisible: setImageModalVisible, bindings: imageModalVisible } = useModal(false)
-
+  const upSM = useMediaQuery('sm', { match: 'up' })
   const [usedImageIndex, setUsedImageIndex] = useState(0)
-  const { state, contents } = useRecoilValueLoadable(pickedThemeOptions)
 
   const mockGenerate = (): Promise<string> => {
     return new Promise(res => {
@@ -100,21 +99,18 @@ const Home = () => {
     { disableGlobalEvent: true }
   )
   return (
-    <div className="home-page" style={{ textAlign: 'center' }}>
-      {/* <Text h1 font={2}>
-        Text2image
-      </Text> */}
-      {state === 'hasValue' && contents && contents.map((option: any) => option.key)}
+    <div className="home-page" style={{ position: 'relative' }}>
+      {upSM ? <Form /> : null}
       <Textarea
         {...bindings}
         width="100%"
         maxLength={maxInputLength}
         placeholder="type any thing you like..."
-        rows={12}
+        rows={8}
         ref={textareaRef as any}
         className="autosize"
         style={{
-          maxHeight: 'calc(100vh - 280px)',
+          maxHeight: '50vh',
           transition: 'height 0.2s',
           fontSize: '14px',
           background,
@@ -156,7 +152,7 @@ const Home = () => {
         {value.length > maxInputLength ? maxInputLength : value.length}/{maxInputLength}
       </Text>
 
-      {value ? (
+      {!value ? (
         <Tooltip
           scale={0.5}
           text={
@@ -170,21 +166,11 @@ const Home = () => {
           <ButtonRound disabled auto icon={<PenTool />} />
         </Tooltip>
       ) : (
-        <Tooltip
-          scale={0.5}
-          text={
-            <Text my={0} style={{ whiteSpace: 'nowrap' }}>
-              click this button or press {''}
-              <Keyboard option scale={0.5}>
-                Enter
-              </Keyboard>
-            </Text>
-          }
-          style={{ position: 'absolute', bottom: '10px', right: '10px' }}
-          placement="left"
-        >
-          <ButtonRound loading={generate} auto icon={<Camera />} onClick={generateImage} />
-        </Tooltip>
+          <div style={{ position: 'absolute', bottom: '10px', right: '10px',alignItems:'center',display:'flex' }}>
+            <Keyboard option mr="10px" scale={0.5} ></Keyboard>
+            <Keyboard mr="10px" scale={0.5}>Enter</Keyboard>
+            <ButtonRound loading={generate} auto icon={<Camera />} onClick={generateImage} />
+          </div>
       )}
       <Modal
         width="50rem"
