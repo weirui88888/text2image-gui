@@ -23,7 +23,7 @@ interface GetConfigOptions {
 
 interface Config {
   bucket: string // bucket库
-  domain: string // 自定义域名
+  domain?: string // 自定义域名
   directory?: string // oss目录
   region: string // 地域节点
   extraUploadOptions?: MultipartUploadOptions // 额外的配置
@@ -64,14 +64,7 @@ class AliOssUpload {
   public defaultUploadOption?: MultipartUploadOptions
   public asyncGetStsToken?: AsyncGetStsToken
   constructor(config: Config) {
-    const {
-      bucket,
-      domain,
-      region,
-      directory = '',
-      extraUploadOptions = {},
-      asyncGetStsToken,
-    } = config
+    const { bucket, domain, region, directory = '', extraUploadOptions = {}, asyncGetStsToken } = config
     this.bucket = bucket
     this.domain = this.handelDomain(domain)
     this.directory = directory
@@ -114,7 +107,9 @@ class AliOssUpload {
 
   checkStsToken(stsToken: any) {
     if (typeof stsToken !== 'object' || !('accessKeyId' in stsToken) || !('accessKeySecret' in stsToken)) {
-      throw new TypeError('The return value of asyncGetStsToken method should be StsToken object type, and at least include accessKeyId and accessKeySecret field.')
+      throw new TypeError(
+        'The return value of asyncGetStsToken method should be StsToken object type, and at least include accessKeyId and accessKeySecret field.'
+      )
     }
   }
 
@@ -134,13 +129,19 @@ class AliOssUpload {
   getConfig = async (options: GetConfigOptions) => {
     const { asyncGetStsToken, bucket, region } = options
     if (!asyncGetStsToken && !this.asyncGetStsToken) {
-      throw new Error('Uploading files requires permission authentication information. You need to provide the global asynchronous method asyncGetStsToken when instantiating AliOssUpload, or actively pass in the asynchronous method asyncGetStsToken when calling the upload method.')
+      throw new Error(
+        'Uploading files requires permission authentication information. You need to provide the global asynchronous method asyncGetStsToken when instantiating AliOssUpload, or actively pass in the asynchronous method asyncGetStsToken when calling the upload method.'
+      )
     }
     if (asyncGetStsToken && typeof asyncGetStsToken !== 'function') {
-      throw new TypeError('The asyncGetStsToken should be an asynchronous function and return stsToken object, and the object includes at least accessKeyId and accessKeySecret fields, and it is better to provide securityToken for temporary access.')
+      throw new TypeError(
+        'The asyncGetStsToken should be an asynchronous function and return stsToken object, and the object includes at least accessKeyId and accessKeySecret fields, and it is better to provide securityToken for temporary access.'
+      )
     }
     if (!asyncGetStsToken && this.asyncGetStsToken && typeof this.asyncGetStsToken !== 'function') {
-      throw new TypeError('The asyncGetStsToken should be an asynchronous function and return stsToken object, and the object includes at least accessKeyId and accessKeySecret fields, and it is better to provide securityToken for temporary access.')
+      throw new TypeError(
+        'The asyncGetStsToken should be an asynchronous function and return stsToken object, and the object includes at least accessKeyId and accessKeySecret fields, and it is better to provide securityToken for temporary access.'
+      )
     }
     try {
       const stsToken = asyncGetStsToken ? await asyncGetStsToken() : await this.asyncGetStsToken!()

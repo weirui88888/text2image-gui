@@ -3,7 +3,7 @@ const anyPhotoConfig = {
   defaultTitle: '',
   canvasSetting: {
     width: 1000,
-    customFontPath: '',
+    customFontPath: 'https://anyphoto.oss-cn-beijing.aliyuncs.com/fonts/zh-font1.ttf',
     backgroundImage: '',
     backgroundColor: '#000000',
     linearGradientStop: [0.8, 1],

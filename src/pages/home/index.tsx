@@ -31,6 +31,7 @@ const image4 = 'https://static.anyphoto.space/WechatIMG595.jpg'
 const images = [image1, image2, image3, image4]
 
 const Home = () => {
+  console.log('home')
   const textareaRef: RefObject<HTMLTextAreaElement | null> = useRef(null)
   const [generate, setGenerate] = useState(false)
   const [mini, setMini] = useState(false)
@@ -88,7 +89,6 @@ const Home = () => {
     transitionBlur()
     setGenerate(false)
   }
-
   const { bindings } = useKeyboard(
     () => {
       if (!generate && value) {
@@ -166,11 +166,13 @@ const Home = () => {
           <ButtonRound disabled auto icon={<PenTool />} />
         </Tooltip>
       ) : (
-          <div style={{ position: 'absolute', bottom: '10px', right: '10px',alignItems:'center',display:'flex' }}>
-            <Keyboard option mr="10px" scale={0.5} ></Keyboard>
-            <Keyboard mr="10px" scale={0.5}>Enter</Keyboard>
-            <ButtonRound loading={generate} auto icon={<Camera />} onClick={generateImage} />
-          </div>
+        <div style={{ position: 'absolute', bottom: '10px', right: '10px', alignItems: 'center', display: 'flex' }}>
+          <Keyboard option mr="10px" scale={0.5}></Keyboard>
+          <Keyboard mr="10px" scale={0.5}>
+            Enter
+          </Keyboard>
+          <ButtonRound loading={generate} auto icon={<Camera />} onClick={generateImage} />
+        </div>
       )}
       <Modal
         width="50rem"

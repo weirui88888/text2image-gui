@@ -1,27 +1,37 @@
-import React, { FC, useState } from 'react'
-import { Input, Grid, useTheme, useToasts, Button } from '@geist-ui/core'
+import { useEffect,useState } from 'react'
+import { Grid, useTheme, useToasts, Button } from '@geist-ui/core'
 import { useBatchSetUserConfig } from '@/hooks/useSetUserConfig'
 import { Plus, Minus } from '@geist-ui/icons'
 import { useLocalStorage } from 'react-use'
 import axios from 'axios'
-import RadioGroup from './Radio'
+import LabelRadioGroup from './LabelRadioGroup'
 import Upload from './Upload'
 import Palette from './Palette'
 import NumberInput from './NumberInput'
 import StringInput from './StringInput'
 import FadeTransition from '../FadeTransition'
+import LabelSelect from './LabelSelect'
+import getCustomFont from '@/api/getCustomFont'
 
-interface FormProps {}
 
-const Form: FC<FormProps> = props => {
+const Form = () => {
   const {
     palette: { background }
   } = useTheme()
+
+  const [integratedFonts,setIntegratedFonts] = useState<Record<string,{key:string,value:string}[]>>()
+
+  useEffect(() => {
+    getCustomFont().then(res => {
+      setIntegratedFonts(res)
+    })
+  },[])
   const [showForm, setShowForm] = useLocalStorage<boolean>('show-form', false)
   const { setToast } = useToasts({
     placement: 'topRight',
     width: 'fit-content'
   })
+
   const { batchSet } = useBatchSetUserConfig()
   return (
     <div
@@ -295,7 +305,7 @@ const Form: FC<FormProps> = props => {
             <Palette label="背景网格颜色" fallbackValue="#cccccc55" keyPath="canvasSetting.backgroundLineColor" />
           </Grid>
           <Grid xs={12} md={6}>
-            <Input label="自定义字体" crossOrigin="anonymous" clearable />
+            <LabelSelect keyPath='canvasSetting.customFontPath' label="自定义字体" options={integratedFonts!}/>
           </Grid>
           <Grid xs={12} md={6}>
             <NumberInput label="字体大小" min={12} max={50} keyPath="canvasSetting.fontSize" />
@@ -307,7 +317,7 @@ const Form: FC<FormProps> = props => {
             <NumberInput label="字体行间距" min={10} max={30} keyPath="canvasSetting.lineGap" />
           </Grid>
           <Grid xs={12} md={6}>
-            <RadioGroup
+            <LabelRadioGroup
               label="顶部布局"
               initialValue="center"
               options={[
@@ -318,7 +328,7 @@ const Form: FC<FormProps> = props => {
             />
           </Grid>
           <Grid xs={12} md={6}>
-            <RadioGroup
+            <LabelRadioGroup
               label="底部布局"
               initialValue="left"
               options={[
@@ -331,7 +341,7 @@ const Form: FC<FormProps> = props => {
             <Palette label="下划线颜色" fallbackValue="#ffffff" keyPath="canvasSetting.underline.color" />
           </Grid>
           <Grid xs={12} md={6}>
-            <RadioGroup
+            <LabelRadioGroup
               label="下划线形状"
               initialValue="line"
               options={[
