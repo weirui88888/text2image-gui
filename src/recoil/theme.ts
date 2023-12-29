@@ -21,7 +21,7 @@ const getIntegratedThemes = () => {
           preview: 'https://static.anyphoto.space/theme-demo/10002.png',
           options: [
             {
-              key: 'defaultTitle',
+              key: 'title',
               component: 'Input',
               label: 'Title'
             },
@@ -43,7 +43,7 @@ const getIntegratedThemes = () => {
           ],
           config: {
             ...defaultConfig,
-            defaultTitle: '标题'
+            title: '标题'
           },
           tags: ['title', 'description', 'content', 'from', 'slogan']
         },
@@ -60,8 +60,8 @@ const getIntegratedThemes = () => {
           ],
           config: {
             ...defaultConfig,
-            defaultTitle: '标题',
-            defaultAvatar: 'https://static.anyphoto.space/theme-demo/10004.png'
+            title: '标题',
+            avatar: 'https://static.anyphoto.space/theme-demo/10004.png'
           },
           tags: ['title', 'description', 'content', 'from', 'slogan']
         },
@@ -71,18 +71,18 @@ const getIntegratedThemes = () => {
           preview: 'https://static.anyphoto.space/theme-demo/10005.png',
           options: [
             {
-              key: 'defaultTitle',
+              key: 'title',
               component: 'Input'
             },
             {
-              key: 'defaultAvatar',
+              key: 'avatar',
               component: 'upload'
             }
           ],
           config: {
             ...defaultConfig,
-            defaultTitle: '标题',
-            defaultAvatar: 'https://static.anyphoto.space/theme-demo/10006.png'
+            title: '标题',
+            avatar: 'https://static.anyphoto.space/theme-demo/10006.png'
           },
           tags: ['title', 'description', 'content', 'from', 'slogan']
         },
@@ -92,18 +92,18 @@ const getIntegratedThemes = () => {
           preview: 'https://static.anyphoto.space/theme-demo/10007.png',
           options: [
             {
-              key: 'defaultTitle',
+              key: 'title',
               component: 'Input'
             },
             {
-              key: 'defaultAvatar',
+              key: 'avatar',
               component: 'upload'
             }
           ],
           config: {
             ...defaultConfig,
-            defaultTitle: '标题',
-            defaultAvatar: 'https://static.anyphoto.space/theme-demo/10008.png'
+            title: '标题',
+            avatar: 'https://static.anyphoto.space/theme-demo/10008.png'
           },
           tags: ['title', 'description', 'content', 'from', 'slogan']
         },
@@ -113,18 +113,18 @@ const getIntegratedThemes = () => {
           preview: 'https://static.anyphoto.space/theme-demo/10009.png',
           options: [
             {
-              key: 'defaultTitle',
+              key: 'title',
               component: 'Input'
             },
             {
-              key: 'defaultAvatar',
+              key: 'avatar',
               component: 'upload'
             }
           ],
           config: {
             ...defaultConfig,
-            defaultTitle: '标题',
-            defaultAvatar: 'https://static.anyphoto.space/core/themes/default/avatar.jpg'
+            title: '标题',
+            avatar: 'https://static.anyphoto.space/core/themes/default/avatar.jpg'
           },
           tags: ['title', 'description', 'content', 'from', 'slogan']
         },
@@ -134,18 +134,18 @@ const getIntegratedThemes = () => {
           preview: 'https://static.anyphoto.space/theme-demo/10009.png',
           options: [
             {
-              key: 'defaultTitle',
+              key: 'title',
               component: 'Input'
             },
             {
-              key: 'defaultAvatar',
+              key: 'avatar',
               component: 'upload'
             }
           ],
           config: {
             ...defaultConfig,
-            defaultTitle: '标题',
-            defaultAvatar: 'https://static.anyphoto.space/core/themes/default/avatar.jpg'
+            title: '标题',
+            avatar: 'https://static.anyphoto.space/core/themes/default/avatar.jpg'
           },
           tags: ['title', 'description', 'content', 'from', 'slogan']
         },
@@ -155,18 +155,18 @@ const getIntegratedThemes = () => {
           preview: 'https://static.anyphoto.space/theme-demo/10010.png',
           options: [
             {
-              key: 'defaultTitle',
+              key: 'title',
               component: 'Input'
             },
             {
-              key: 'defaultAvatar',
+              key: 'avatar',
               component: 'upload'
             }
           ],
           config: {
             ...defaultConfig,
-            defaultTitle: '标题',
-            defaultAvatar: 'https://static.anyphoto.space/core/themes/default/avatar.jpg'
+            title: '标题',
+            avatar: 'https://static.anyphoto.space/core/themes/default/avatar.jpg'
           },
           tags: ['title', 'description', 'content', 'from', 'slogan']
         },
@@ -176,18 +176,18 @@ const getIntegratedThemes = () => {
           preview: 'https://static.anyphoto.space/theme-demo/10011.png',
           options: [
             {
-              key: 'defaultTitle',
+              key: 'title',
               component: 'Input'
             },
             {
-              key: 'defaultAvatar',
+              key: 'avatar',
               component: 'upload'
             }
           ],
           config: {
             ...defaultConfig,
-            defaultTitle: '标题',
-            defaultAvatar: 'https://static.anyphoto.space/core/themes/default/avatar.jpg'
+            title: '标题',
+            avatar: 'https://static.anyphoto.space/core/themes/default/avatar.jpg'
           },
           tags: ['title', 'description', 'content', 'from', 'slogan']
         },
@@ -197,18 +197,18 @@ const getIntegratedThemes = () => {
           preview: 'https://static.anyphoto.space/theme-demo/10012.png',
           options: [
             {
-              key: 'defaultTitle',
+              key: 'title',
               component: 'Input'
             },
             {
-              key: 'defaultAvatar',
+              key: 'avatar',
               component: 'upload'
             }
           ],
           config: {
             ...defaultConfig,
-            defaultTitle: '标题',
-            defaultAvatar: 'https://static.anyphoto.space/core/themes/default/avatar.jpg'
+            title: '标题',
+            avatar: 'https://static.anyphoto.space/core/themes/default/avatar.jpg'
           },
           tags: ['title', 'description', 'content', 'from', 'slogan']
         }

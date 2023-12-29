@@ -20,15 +20,11 @@ import ButtonRound from '@/components/ButtonRound'
 import Form from '@/components/Form'
 import getImageMeta from '@/utils/getImageMeta'
 import './index.css'
+import { useRecoilValue } from 'recoil'
+import userConfigState from '@/recoil/config'
+import { text2Image } from '@/api/generate'
 
 const maxInputLength = 3000
-
-const image1 = 'https://static.anyphoto.space/pexels-krishna-lair-1165005.jpg'
-const image2 = 'https://static.anyphoto.space/pexels-waldir-%C3%A9vora-19317145.jpg'
-const image3 = 'https://static.anyphoto.space/photos/pro/valid-photo-generate-at-2023.12.11.17.35.49.png'
-const image4 = 'https://static.anyphoto.space/WechatIMG595.jpg'
-
-const images = [image1, image2, image3, image4]
 
 const Home = () => {
   const textareaRef: RefObject<HTMLTextAreaElement | null> = useRef(null)
@@ -39,20 +35,24 @@ const Home = () => {
   const [generatedImage, setGeneratedImage] = useState('')
   const { setVisible: setImageModalVisible, bindings: imageModalVisible } = useModal(false)
   const upSM = useMediaQuery('sm', { match: 'up' })
-  const [usedImageIndex, setUsedImageIndex] = useState(0)
+  const userConfig = useRecoilValue(userConfigState)
+  const [value, setValue] =
+    useState<string>(`寒冬降临，大地被冰雪所覆盖，这是一年中最美丽的季节之一。记得那年冬天的第一场雪，仿佛是天地间的一幅画卷，让人陶醉其中。
 
-  const mockGenerate = (): Promise<string> => {
-    return new Promise(res => {
-      setTimeout(() => {
-        res(images[usedImageIndex % 4])
-        // res(images[1])
-      }, 1000)
-    })
-  }
+那天，天空阴沉沉的，寒风凛冽，似乎预示着一场雪的到来。人们心中充满期待，期待着那冰雪的降临，期待着冬天的第一场雪。
+  
+终于，雪花飘飘洒洒地从天空中飘落下来。起初是零星的小雪花，如同飘落的蝶舞动，轻盈而翩跹。随着时间的推移，雪花越来越密集，仿佛是天空中的白色花瓣，铺满了整个大地`)
+  // setTimeout(() => {
+  //   if (textareaRef.current!) {
+  //     console.log(textareaRef.current.scrollHeight)
+  //     textareaRef.current.scrollTop = textareaRef.current.scrollHeight
+  //   }
+  //   autosize.update(textareaRef.current!)
+  // }, 1000)
+
   const {
     palette: { background }
   } = useTheme()
-  const [value, setValue] = useState<string>('')
   useEffect(() => {
     const textareaDom = textareaRef.current
     textareaDom!.focus()
@@ -73,17 +73,27 @@ const Home = () => {
     }, 1000)
   }
 
-  const handler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const textChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value)
   }
 
   const generateImage = async () => {
-    setUsedImageIndex(usedImageIndex => usedImageIndex + 1)
+    const { avatar, title, canvasSetting } = userConfig
     setGenerate(true)
-    const imageSrc = await mockGenerate()
-    const { width, height } = await getImageMeta(imageSrc)
+    const {
+      data: { url }
+    } = await text2Image({
+      content: value,
+      options: {
+        avatar,
+        title
+      },
+      canvasSetting: canvasSetting
+    })
+
+    const { width, height } = await getImageMeta(url)
     setHeightGreaterThanWidth(height / width > 1)
-    setGeneratedImage(imageSrc)
+    setGeneratedImage(url)
     setImageModalVisible(true)
     transitionBlur()
     setGenerate(false)
@@ -112,18 +122,19 @@ const Home = () => {
         width="100%"
         maxLength={maxInputLength}
         placeholder="type any thing you like..."
-        rows={8}
+        rows={10}
         ref={textareaRef as any}
         className="autosize"
         style={{
-          maxHeight: '50vh',
+          maxHeight: upSM ? '40vh' : '50vh',
           transition: 'height 0.2s',
           fontSize: '14px',
           background,
-          borderRadius: '6px'
+          borderRadius: '6px',
+          overflow: 'scroll !important'
         }}
         value={value}
-        onChange={handler}
+        onChange={textChange}
       ></Textarea>
       {value && (
         <Tooltip
@@ -148,8 +159,6 @@ const Home = () => {
       )}
 
       <Text
-        // onAnimationStart={() => setInShake(true)}
-        // onAnimationEnd={() => setInShake(false)}
         my={0}
         style={{ position: 'absolute', bottom: '-30px', left: '4px' }}
         font={0.75}

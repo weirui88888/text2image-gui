@@ -49,7 +49,7 @@ const Form = () => {
           <Grid xs={12} md={6}>
             <StringInput
               label="标题"
-              keyPath="defaultTitle"
+              keyPath="title"
               after={value => {
                 if (value) {
                   batchSet([
@@ -64,6 +64,10 @@ const Form = () => {
                   ])
                 } else {
                   batchSet([
+                    {
+                      keyPath: 'canvasSetting.header.showHeader',
+                      value: false
+                    },
                     {
                       keyPath: 'canvasSetting.header.showHeaderTitle',
                       value: false
@@ -91,6 +95,10 @@ const Form = () => {
                   ])
                 } else {
                   batchSet([
+                    {
+                      keyPath: 'canvasSetting.header.showHeader',
+                      value: false
+                    },
                     {
                       keyPath: 'canvasSetting.header.showHeaderDescription',
                       value: false
@@ -154,7 +162,7 @@ const Form = () => {
               onSuccess={url => {
                 batchSet([
                   {
-                    keyPath: 'defaultAvatar',
+                    keyPath: 'avatar',
                     value: url
                   },
                   {
@@ -168,15 +176,35 @@ const Form = () => {
                 ])
               }}
               onCheck={async url => {
-                if (!url) return
+                if (!url) {
+                  batchSet([
+                    {
+                      keyPath: 'avatar',
+                      value: ''
+                    },
+                    {
+                      keyPath: 'canvasSetting.header.showHeader',
+                      value: false
+                    },
+                    {
+                      keyPath: 'canvasSetting.header.showHeaderAvatar',
+                      value: false
+                    }
+                  ])
+                  return
+                }
                 try {
                   const response = await axios.head(url)
                   const imgExist = response.status === 200 && response.headers['content-type'].startsWith('image/')
                   if (!imgExist) {
                     batchSet([
                       {
-                        keyPath: 'defaultAvatar',
+                        keyPath: 'avatar',
                         value: ''
+                      },
+                      {
+                        keyPath: 'canvasSetting.header.showHeader',
+                        value: false
                       },
                       {
                         keyPath: 'canvasSetting.header.showHeaderAvatar',
@@ -189,7 +217,7 @@ const Form = () => {
                   } else {
                     batchSet([
                       {
-                        keyPath: 'defaultAvatar',
+                        keyPath: 'avatar',
                         value: url
                       },
                       {
@@ -205,8 +233,12 @@ const Form = () => {
                 } catch (error) {
                   batchSet([
                     {
-                      keyPath: 'defaultAvatar',
+                      keyPath: 'avatar',
                       value: ''
+                    },
+                    {
+                      keyPath: 'canvasSetting.header.showHeader',
+                      value: false
                     },
                     {
                       keyPath: 'canvasSetting.header.showHeaderAvatar',
@@ -219,7 +251,7 @@ const Form = () => {
                   })
                 }
               }}
-              keyPath="defaultAvatar"
+              keyPath="avatar"
             />
           </Grid>
           <Grid xs={12} md={6}>
@@ -245,7 +277,21 @@ const Form = () => {
             <NumberInput label="图片宽度" min={750} max={1500} step={10} keyPath="canvasSetting.width" />
           </Grid>
           <Grid xs={12} md={6}>
-            <Palette label="背景颜色" fallbackValue="#cccccc55" keyPath="canvasSetting.backgroundColor" />
+            <NumberInput label="标题字体大小" min={12} max={50} keyPath="canvasSetting.header.headerTitleFontSize" />
+          </Grid>
+          <Grid xs={12} md={6}>
+            <NumberInput
+              label="描述字体大小"
+              min={12}
+              max={50}
+              keyPath="canvasSetting.header.headerDescriptionFontSize"
+            />
+          </Grid>
+          <Grid xs={12} md={6}>
+            <Palette label="标题颜色" fallbackValue="#ffffff" keyPath="canvasSetting.header.headerTitleFontColor" />
+          </Grid>
+          <Grid xs={12} md={6}>
+            <Palette label="背景颜色" fallbackValue="#000000" keyPath="canvasSetting.backgroundColor" />
           </Grid>
           <Grid xs={12} md={6} style={{ position: 'relative' }}>
             <Upload
@@ -304,13 +350,22 @@ const Form = () => {
             <Palette label="背景网格颜色" fallbackValue="#cccccc55" keyPath="canvasSetting.backgroundLineColor" />
           </Grid>
           <Grid xs={12} md={6}>
+            <NumberInput
+              label="背景网格大小"
+              min={0}
+              max={100}
+              step={10}
+              keyPath="canvasSetting.backgroundLineSpacing"
+            />
+          </Grid>
+          <Grid xs={12} md={6}>
             <LabelSelect keyPath="canvasSetting.customFontPath" label="字体" options={integratedFonts!} />
           </Grid>
           <Grid xs={12} md={6}>
-            <NumberInput label="字体大小" min={12} max={50} keyPath="canvasSetting.fontSize" />
+            <NumberInput label="内容字体大小" min={12} max={50} keyPath="canvasSetting.fontSize" />
           </Grid>
           <Grid xs={12} md={6}>
-            <Palette label="字体颜色" fallbackValue="#ffffff" keyPath="canvasSetting.color" />
+            <Palette label="内容字体颜色" fallbackValue="#ffffff" keyPath="canvasSetting.color" />
           </Grid>
           <Grid xs={12} md={6}>
             <NumberInput label="字体行间距" min={10} max={30} keyPath="canvasSetting.lineGap" />
@@ -349,6 +404,18 @@ const Form = () => {
               ]}
             />
           </Grid>
+          <Grid xs={12} md={6}>
+            <NumberInput label="来源字体大小" min={12} max={50} keyPath="canvasSetting.from.fromFontSize" />
+          </Grid>
+          <Grid xs={12} md={6}>
+            <Palette label="来源字体颜色" fallbackValue="#ffffff" keyPath="canvasSetting.from.fromFontColor" />
+          </Grid>
+          <Grid xs={12} md={6}>
+            <NumberInput label="签名字体大小" min={12} max={50} keyPath="canvasSetting.footer.sloganFontSize" />
+          </Grid>
+          <Grid xs={12} md={6}>
+            <Palette label="签名字体颜色" fallbackValue="#ffffff" keyPath="canvasSetting.footer.sloganFontColor" />
+          </Grid>
         </Grid.Container>
       </FadeTransition>
       <div style={{ marginTop: '20px' }}>
@@ -360,7 +427,9 @@ const Form = () => {
             scale={1 / 3}
             px={0.5}
             title="收起配置项"
-            onClick={() => setShowForm(false)}
+            onClick={() => {
+              setShowForm(false)
+            }}
           />
         ) : (
           <Button
@@ -370,7 +439,9 @@ const Form = () => {
             scale={1 / 3}
             px={0.5}
             title="展开配置项"
-            onClick={() => setShowForm(true)}
+            onClick={() => {
+              setShowForm(true)
+            }}
           />
         )}
       </div>

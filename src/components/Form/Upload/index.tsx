@@ -85,7 +85,6 @@ const Upload: FC<UploadProps> = ({
         file: files[0],
         randomName: false
       })
-      console.log(ossSourceUrl)
       onSuccess(ossSourceUrl)
     }
   }

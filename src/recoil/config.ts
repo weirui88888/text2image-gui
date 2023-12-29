@@ -4,8 +4,8 @@ import defaultConfig from '@/default-config'
 
 const getLocalUserConfig = (value: any) => {
   return Object.prototype.toString.call(value).slice(8, -1) === 'Object' &&
-    'defaultAvatar' in value &&
-    'defaultTitle' in value &&
+    'avatar' in value &&
+    'title' in value &&
     'canvasSetting' in value
     ? value
     : defaultConfig

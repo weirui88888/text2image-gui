@@ -1,0 +1,8 @@
+
+.env*
+.flaskenv*
+!.env.project
+!.env.vault
+
+anyphoto
+anyphoto-web-font
