@@ -1,6 +1,6 @@
 import getUniqueName from '@/utils/getUniqueName'
 import { atom } from 'recoil'
-import defaultConfig from '@/components/UserSettingModal/default-config'
+import defaultConfig from '@/default-config'
 
 const getLocalUserConfig = (value: any) => {
   return Object.prototype.toString.call(value).slice(8, -1) === 'Object' &&

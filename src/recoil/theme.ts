@@ -1,7 +1,7 @@
 import getUniqueName from '@/utils/getUniqueName'
 import { atom, selector } from 'recoil'
 // default theme config
-import defaultConfig from '@/components/UserSettingModal/default-config'
+import defaultConfig from '@/default-config'
 
 const getIntegratedThemes = () => {
   return new Promise(res => {

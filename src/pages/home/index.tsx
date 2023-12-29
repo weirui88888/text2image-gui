@@ -98,7 +98,14 @@ const Home = () => {
     { disableGlobalEvent: true }
   )
   return (
-    <div className="home-page" style={{ position: 'relative' }}>
+    <div
+      className="home-page"
+      style={
+        upSM
+          ? { position: 'relative' }
+          : { position: 'absolute', width: '100%', top: '50%', transform: 'translateY(-50%)' }
+      }
+    >
       {upSM ? <Form /> : null}
       <Textarea
         {...bindings}

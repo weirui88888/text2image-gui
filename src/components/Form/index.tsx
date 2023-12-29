@@ -318,7 +318,7 @@ const Form = () => {
           <Grid xs={12} md={6}>
             <LabelRadioGroup
               label="顶部布局"
-              initialValue="center"
+              keyPath="canvasSetting.header.headerAlign"
               options={[
                 { value: 'left', key: '左' },
                 { value: 'center', key: '中' },
@@ -329,7 +329,7 @@ const Form = () => {
           <Grid xs={12} md={6}>
             <LabelRadioGroup
               label="底部布局"
-              initialValue="left"
+              keyPath="canvasSetting.footer.sloganPosition"
               options={[
                 { value: 'left', key: '左' },
                 { value: 'right', key: '右' }
@@ -342,7 +342,7 @@ const Form = () => {
           <Grid xs={12} md={6}>
             <LabelRadioGroup
               label="下划线形状"
-              initialValue="line"
+              keyPath="canvasSetting.underline.shape"
               options={[
                 { value: 'line', key: '直线' },
                 { value: 'wave', key: '波浪' }

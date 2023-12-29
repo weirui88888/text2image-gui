@@ -1,14 +1,15 @@
-import React, { FC, useState } from 'react'
+import { FC } from 'react'
 import { Radio, useTheme } from '@geist-ui/core'
+import { useSetUserConfig } from '@/hooks/useSetUserConfig'
 import './index.css'
 
 interface RadioGroupProps {
   options: { key: string; value: string }[]
-  initialValue: string
   label: string
+  keyPath: string
 }
-const RadioGroup: FC<RadioGroupProps> = ({ label, options, initialValue }) => {
-  const [value, setValue] = useState(initialValue)
+const RadioGroup: FC<RadioGroupProps> = ({ label, options, keyPath }) => {
+  const { value, set } = useSetUserConfig({ keyPath })
   const { palette } = useTheme()
   return (
     <div
@@ -27,7 +28,9 @@ const RadioGroup: FC<RadioGroupProps> = ({ label, options, initialValue }) => {
       <label style={{ padding: '0 8pt', borderRight: `1px solid ${palette.border}` }}>{label}</label>
       <Radio.Group
         value={value}
-        onChange={() => {}}
+        onChange={val => {
+          set(val)
+        }}
         useRow
         style={{
           flex: 1,
