@@ -31,7 +31,6 @@ const image4 = 'https://static.anyphoto.space/WechatIMG595.jpg'
 const images = [image1, image2, image3, image4]
 
 const Home = () => {
-  console.log('home')
   const textareaRef: RefObject<HTMLTextAreaElement | null> = useRef(null)
   const [generate, setGenerate] = useState(false)
   const [mini, setMini] = useState(false)

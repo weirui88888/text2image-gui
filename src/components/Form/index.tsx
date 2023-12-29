@@ -1,4 +1,4 @@
-import { useEffect,useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Grid, useTheme, useToasts, Button } from '@geist-ui/core'
 import { useBatchSetUserConfig } from '@/hooks/useSetUserConfig'
 import { Plus, Minus } from '@geist-ui/icons'
@@ -13,19 +13,18 @@ import FadeTransition from '../FadeTransition'
 import LabelSelect from './LabelSelect'
 import getCustomFont from '@/api/getCustomFont'
 
-
 const Form = () => {
   const {
     palette: { background }
   } = useTheme()
 
-  const [integratedFonts,setIntegratedFonts] = useState<Record<string,{key:string,value:string}[]>>()
+  const [integratedFonts, setIntegratedFonts] = useState<{ key: string; value: string; className: string }[]>()
 
   useEffect(() => {
-    getCustomFont().then(res => {
-      setIntegratedFonts(res)
+    getCustomFont().then(fonts => {
+      setIntegratedFonts(fonts)
     })
-  },[])
+  }, [])
   const [showForm, setShowForm] = useLocalStorage<boolean>('show-form', false)
   const { setToast } = useToasts({
     placement: 'topRight',
@@ -305,7 +304,7 @@ const Form = () => {
             <Palette label="背景网格颜色" fallbackValue="#cccccc55" keyPath="canvasSetting.backgroundLineColor" />
           </Grid>
           <Grid xs={12} md={6}>
-            <LabelSelect keyPath='canvasSetting.customFontPath' label="自定义字体" options={integratedFonts!}/>
+            <LabelSelect keyPath="canvasSetting.customFontPath" label="字体" options={integratedFonts!} />
           </Grid>
           <Grid xs={12} md={6}>
             <NumberInput label="字体大小" min={12} max={50} keyPath="canvasSetting.fontSize" />

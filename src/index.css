@@ -2,6 +2,7 @@
   font-family: 'Preahvihear';
   src: url('./IBMPlexSans-Regular.ttf');
 }
+
 html,
 body {
   height: 100%;
@@ -44,9 +45,10 @@ main {
   padding: 18px 0 8px 0 !important;
   max-width: 100% !important;
 }
-/* .select-dropdown {
-  border-radius: 0 !important;
-} */
+
+.select-dropdown {
+  width: max-content !important;
+}
 
 ul li::before {
   position: relative !important;
