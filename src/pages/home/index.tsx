@@ -88,7 +88,7 @@ const Home = () => {
         avatar,
         title
       },
-      canvasSetting: canvasSetting
+      canvasSetting
     })
 
     const { width, height } = await getImageMeta(url)

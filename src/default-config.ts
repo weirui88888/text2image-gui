@@ -2,11 +2,11 @@ const anyPhotoConfig = {
   avatar: '', // 1
   title: '', // 1
   canvasSetting: {
-    width: 1000, // 1
+    width: 750, // 1
     customFontPath: 'https://anyphoto.oss-cn-beijing.aliyuncs.com/fonts/origin/zh-MaShanZheng.ttf', // 1
     backgroundImage: '', // 1
     backgroundColor: '#000000',
-    linearGradientStop: [0.8, 1],
+    linearGradientStop: [],
     linearGradientDirection: 'to left bottom',
     backgroundLineSpacing: 60, // 1
     backgroundLineColor: '#cccccc55', // 1

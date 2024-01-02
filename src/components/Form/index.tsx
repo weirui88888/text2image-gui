@@ -13,6 +13,41 @@ import FadeTransition from '../FadeTransition'
 import LabelSelect from './LabelSelect'
 import getCustomFont from '@/api/getCustomFont'
 
+const linearGradientDirections = [
+  {
+    key: '向左',
+    value: 'to left'
+  },
+  {
+    key: '向右',
+    value: 'to right'
+  },
+  {
+    key: '向上',
+    value: 'to top'
+  },
+  {
+    key: '向下',
+    value: 'to bottom'
+  },
+  {
+    key: '向左上',
+    value: 'to left top'
+  },
+  {
+    key: '向左下',
+    value: 'to left bottom'
+  },
+  {
+    key: '向右上',
+    value: 'to right top'
+  },
+  {
+    key: '向右下',
+    value: 'to right bottom'
+  }
+]
+
 const Form = () => {
   const {
     palette: { background }
@@ -154,6 +189,88 @@ const Form = () => {
               }}
             />
           </Grid>
+          <Grid xs={12} md={6}>
+            <Palette
+              label="背景颜色"
+              fallbackValue="#000000"
+              keyPath="canvasSetting.backgroundColor"
+              linearGradientDirectionKeyPath="canvasSetting.linearGradientDirection"
+              multiple
+              paletteModalSubtitle="支持添加更多颜色以使用渐变背景"
+            />
+          </Grid>
+          <Grid xs={12} md={6}>
+            <LabelSelect
+              keyPath="canvasSetting.linearGradientDirection"
+              label="背景渐变方向"
+              options={linearGradientDirections}
+            />
+          </Grid>
+          <Grid xs={12} md={6} style={{ position: 'relative' }}>
+            <Upload
+              label="背景图像"
+              cropper={false}
+              bucketName="anyphoto"
+              directoryName="background"
+              onSuccess={url => {
+                batchSet([
+                  {
+                    keyPath: 'canvasSetting.backgroundImage',
+                    value: url
+                  }
+                ])
+              }}
+              onCheck={async url => {
+                if (!url) return
+                try {
+                  const response = await axios.head(url)
+                  const imgExist = response.status === 200 && response.headers['content-type'].startsWith('image/')
+                  if (!imgExist) {
+                    batchSet([
+                      {
+                        keyPath: 'canvasSetting.backgroundImage',
+                        value: ''
+                      }
+                    ])
+                    setToast({
+                      text: '请输入正确的图片地址'
+                    })
+                  } else {
+                    batchSet([
+                      {
+                        keyPath: 'canvasSetting.backgroundImage',
+                        value: url
+                      }
+                    ])
+                  }
+                } catch (error) {
+                  batchSet([
+                    {
+                      keyPath: 'canvasSetting.backgroundImage',
+                      value: ''
+                    }
+                  ])
+                  setToast({
+                    text: '请输入正确的图片地址',
+                    type: 'error'
+                  })
+                }
+              }}
+              keyPath="canvasSetting.backgroundImage"
+            />
+          </Grid>
+          <Grid xs={12} md={6}>
+            <Palette label="背景网格颜色" fallbackValue="#cccccc55" keyPath="canvasSetting.backgroundLineColor" />
+          </Grid>
+          <Grid xs={12} md={6}>
+            <NumberInput
+              label="背景网格大小"
+              min={0}
+              max={100}
+              step={10}
+              keyPath="canvasSetting.backgroundLineSpacing"
+            />
+          </Grid>
           <Grid xs={12} md={6} style={{ position: 'relative' }}>
             <Upload
               label="头像"
@@ -271,9 +388,6 @@ const Form = () => {
             />
           </Grid>
           <Grid xs={12} md={6}>
-            <NumberInput label="头像边框大小" min={0} max={5} keyPath="canvasSetting.header.headerAvatarBorderWidth" />
-          </Grid>
-          <Grid xs={12} md={6}>
             <NumberInput label="图片宽度" min={750} max={1500} step={10} keyPath="canvasSetting.width" />
           </Grid>
           <Grid xs={12} md={6}>
@@ -289,74 +403,6 @@ const Form = () => {
           </Grid>
           <Grid xs={12} md={6}>
             <Palette label="标题颜色" fallbackValue="#ffffff" keyPath="canvasSetting.header.headerTitleFontColor" />
-          </Grid>
-          <Grid xs={12} md={6}>
-            <Palette label="背景颜色" fallbackValue="#000000" keyPath="canvasSetting.backgroundColor" />
-          </Grid>
-          <Grid xs={12} md={6} style={{ position: 'relative' }}>
-            <Upload
-              label="背景图像"
-              cropper={false}
-              bucketName="anyphoto"
-              directoryName="background"
-              onSuccess={url => {
-                batchSet([
-                  {
-                    keyPath: 'canvasSetting.backgroundImage',
-                    value: url
-                  }
-                ])
-              }}
-              onCheck={async url => {
-                if (!url) return
-                try {
-                  const response = await axios.head(url)
-                  const imgExist = response.status === 200 && response.headers['content-type'].startsWith('image/')
-                  if (!imgExist) {
-                    batchSet([
-                      {
-                        keyPath: 'canvasSetting.backgroundImage',
-                        value: ''
-                      }
-                    ])
-                    setToast({
-                      text: '请输入正确的图片地址'
-                    })
-                  } else {
-                    batchSet([
-                      {
-                        keyPath: 'canvasSetting.backgroundImage',
-                        value: url
-                      }
-                    ])
-                  }
-                } catch (error) {
-                  batchSet([
-                    {
-                      keyPath: 'canvasSetting.backgroundImage',
-                      value: ''
-                    }
-                  ])
-                  setToast({
-                    text: '请输入正确的图片地址',
-                    type: 'error'
-                  })
-                }
-              }}
-              keyPath="canvasSetting.backgroundImage"
-            />
-          </Grid>
-          <Grid xs={12} md={6}>
-            <Palette label="背景网格颜色" fallbackValue="#cccccc55" keyPath="canvasSetting.backgroundLineColor" />
-          </Grid>
-          <Grid xs={12} md={6}>
-            <NumberInput
-              label="背景网格大小"
-              min={0}
-              max={100}
-              step={10}
-              keyPath="canvasSetting.backgroundLineSpacing"
-            />
           </Grid>
           <Grid xs={12} md={6}>
             <LabelSelect keyPath="canvasSetting.customFontPath" label="字体" options={integratedFonts!} />

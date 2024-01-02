@@ -46,7 +46,7 @@ main {
   max-width: 100% !important;
 }
 
-.select-dropdown {
+.select-dropdown.max-content-dropdown {
   width: max-content !important;
 }
 

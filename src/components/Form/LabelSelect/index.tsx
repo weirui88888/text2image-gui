@@ -4,7 +4,7 @@ import { useSetUserConfig } from '@/hooks/useSetUserConfig'
 import './index.css'
 
 interface LabelSelectProps {
-  options: { key: string; value: string; className: string }[]
+  options: { key: string; value: string; className?: string }[]
   label: string
   keyPath: string
   placeholder?: string

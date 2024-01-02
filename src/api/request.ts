@@ -74,7 +74,6 @@ export class Request {
   }
 
   public async post<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
-    console.log(url, data)
     return await this.instance.post(url, data, config)
   }
 

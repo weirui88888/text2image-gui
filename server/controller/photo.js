@@ -15,7 +15,28 @@ const generatePhoto = async (req, res) => {
   httpDebugger(req.body)
   const photoSrc = await generate({
     content,
-    options,
+    options: {
+      ...options,
+      clear: true,
+      defaultOutputNameHandle() {
+        function generateDate() {
+          const date = new Date()
+          const year = date.getFullYear()
+          let month = date.getMonth() + 1
+          let day = date.getDate()
+          let hours = date.getHours()
+          let minutes = date.getMinutes()
+          let seconds = date.getSeconds()
+          month = month < 10 ? '0' + month : month
+          day = day < 10 ? '0' + day : day
+          hours = hours < 10 ? '0' + hours : hours
+          minutes = minutes < 10 ? '0' + minutes : minutes
+          seconds = seconds < 10 ? '0' + seconds : seconds
+          return year + '.' + month + '.' + day + '.' + hours + '.' + minutes + '.' + seconds
+        }
+        return `image-generated-by-text2image-at-${generateDate()}`
+      }
+    },
     canvasSetting
   })
   try {
