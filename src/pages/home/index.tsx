@@ -107,6 +107,14 @@ const Home = () => {
     [KeyMod.Alt, KeyCode.Enter],
     { disableGlobalEvent: true }
   )
+
+  const onModalClose = () => {
+    setImageModalVisible(false)
+    setTimeout(() => {
+      setMini(false)
+      setBlurValue(100)
+    }, 500)
+  }
   return (
     <div
       className="home-page"
@@ -189,17 +197,7 @@ const Home = () => {
           <ButtonRound loading={generate} auto icon={<Camera />} onClick={generateImage} />
         </div>
       )}
-      <Modal
-        width="50rem"
-        {...imageModalVisible}
-        onClose={() => {
-          setImageModalVisible(false)
-          setTimeout(() => {
-            setMini(false)
-            setBlurValue(100)
-          }, 500)
-        }}
-      >
+      <Modal width="50rem" {...imageModalVisible} onClose={onModalClose}>
         <Modal.Title style={{ marginBottom: '21px', position: 'relative' }}>
           Image Title
           {heightGreaterThanWidth ? (
@@ -220,7 +218,13 @@ const Home = () => {
             auto
             scale={2 / 3}
             px={0.6}
-            onClick={() => {}}
+            onClick={() => {
+              const link = document.createElement('a')
+              link.href = generatedImage
+              link.download = generatedImage
+              link.click()
+              onModalClose()
+            }}
           ></Button>
         </Modal.Title>
         <Modal.Content style={{ maxHeight: '68vh', overflow: 'scroll', paddingTop: 0, textAlign: 'center' }}>
