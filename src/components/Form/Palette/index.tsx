@@ -113,9 +113,9 @@ const Palette: FC<PaletteProps> = ({
           ) : (
             value.map((color: string, index: number) => {
               return (
-                <div style={{ position: 'relative' }} key={`${color}-${index}`}>
+                <div style={{ position: 'relative', padding: '0 30px' }} key={`${color}-${index}`}>
                   <HexColorPicker
-                    style={{ marginTop: index !== 0 ? '1rem' : 0 }}
+                    style={{ marginTop: index !== 0 ? '1.5rem' : 0 }}
                     color={color}
                     onChange={val => {
                       debouncedColorChanged(val, index)
