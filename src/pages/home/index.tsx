@@ -15,6 +15,7 @@ import {
   useMediaQuery
 } from '@geist-ui/core'
 import autosize from 'autosize'
+import { useLocalStorage } from 'react-use'
 import { PenTool, X, Camera, Minimize2, Maximize2, Download } from '@geist-ui/icons'
 import ButtonRound from '@/components/ButtonRound'
 import Form from '@/components/Form'
@@ -36,14 +37,15 @@ const Home = () => {
   const { setVisible: setImageModalVisible, bindings: imageModalVisible } = useModal(false)
   const upSM = useMediaQuery('sm', { match: 'up' })
   const userConfig: any = useRecoilValue(userConfigState)
-  const [value, setValue] = useState<string>(``)
-  // setTimeout(() => {
-  //   if (textareaRef.current!) {
-  //     console.log(textareaRef.current.scrollHeight)
-  //     textareaRef.current.scrollTop = textareaRef.current.scrollHeight
-  //   }
-  //   autosize.update(textareaRef.current!)
-  // }, 1000)
+  //   const [value, setValue] = useState<string>('')
+  const [value, setValue] = useLocalStorage<string>('content', '', { raw: true })
+  setTimeout(() => {
+    if (textareaRef.current!) {
+      console.log(textareaRef.current.scrollHeight)
+      textareaRef.current.scrollTop = textareaRef.current.scrollHeight
+    }
+    autosize.update(textareaRef.current!)
+  }, 1000)
 
   const {
     palette: { background }
@@ -78,7 +80,7 @@ const Home = () => {
     const {
       data: { url }
     } = await text2Image({
-      content: value,
+      content: value!,
       options: {
         avatar,
         title
@@ -118,7 +120,7 @@ const Home = () => {
           {...bindings}
           width="100%"
           maxLength={maxInputLength}
-          placeholder="type any thing you like..."
+          placeholder="输入任何你想记录的文案..."
           rows={10}
           ref={textareaRef as any}
           className="autosize"
@@ -159,9 +161,9 @@ const Home = () => {
           my={0}
           style={{ position: 'absolute', bottom: '-30px', left: '4px' }}
           font={0.75}
-          className={value.length === maxInputLength ? 'shake' : ''}
+          className={value!.length === maxInputLength ? 'shake' : ''}
         >
-          {value.length > maxInputLength ? maxInputLength : value.length}/{maxInputLength}
+          {value!.length > maxInputLength ? maxInputLength : value!.length}/{maxInputLength}
         </Text>
 
         {!value ? (
@@ -187,7 +189,7 @@ const Home = () => {
                 </Keyboard>
               </>
             ) : null}
-            <ButtonRound loading={generate} auto icon={<Camera />} onClick={generateImage} />
+            <ButtonRound loading={generate} auto icon={<Camera />} onClick={generateImage} type="secondary" />
           </div>
         )}
       </div>

@@ -8,7 +8,7 @@ const anyPhotoConfig = {
     backgroundColor: '#000000',
     linearGradientStop: [],
     linearGradientDirection: 'to left bottom',
-    backgroundLineSpacing: 60, // 1
+    backgroundLineSpacing: 0, // 1
     backgroundLineColor: '#cccccc55', // 1
     color: '#ffffff', // 1
     fontSize: 30, // 1

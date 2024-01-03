@@ -90,7 +90,7 @@ const Form = () => {
       >
         <Grid xs={12} md={6}>
           <StringInput
-            placeholder="图片标题，非必填"
+            placeholder="非必填"
             label="标题"
             keyPath="title"
             after={value => {
@@ -122,8 +122,8 @@ const Form = () => {
         </Grid>
         <Grid xs={12} md={6}>
           <StringInput
-            label="描述"
-            placeholder="图片描述，非必填"
+            label="副标题"
+            placeholder="非必填"
             keyPath="canvasSetting.header.headerDescriptionPrefix"
             after={value => {
               if (value) {
@@ -154,8 +154,8 @@ const Form = () => {
         </Grid>
         <Grid xs={12} md={6}>
           <StringInput
-            label="来源"
-            placeholder="图片来源，非必填"
+            label="摘自"
+            placeholder="非必填"
             keyPath="canvasSetting.from.name"
             after={value => {
               if (value) {
@@ -178,8 +178,8 @@ const Form = () => {
         </Grid>
         <Grid xs={12} md={6}>
           <StringInput
-            label="签名"
-            placeholder="图片签名，非必填"
+            label="署名"
+            placeholder="非必填"
             keyPath="canvasSetting.footer.slogan"
             after={value => {
               if (value) {

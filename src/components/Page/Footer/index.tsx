@@ -11,10 +11,10 @@ const PageFooter = () => {
       text: (
         <div style={{}}>
           <Text p my={0} font={0.75} style={{ wordBreak: 'break-all' }}>
-            提交记录:process.env.REACT_APP_WEBSITE_LATEST_COMMIT_ID
+            提交记录:{process.env.REACT_APP_WEBSITE_LATEST_COMMIT_ID}
           </Text>
           <Text p my={0} font={0.75} style={{ wordBreak: 'break-all' }}>
-            提交信息:process.env.REACT_APP_WEBSITE_LATEST_COMMIT_MESSAGE
+            提交信息:{process.env.REACT_APP_WEBSITE_LATEST_COMMIT_MESSAGE}
           </Text>
         </div>
       )
