@@ -50,8 +50,11 @@ const linearGradientDirections = [
 
 const Form = () => {
   const {
-    palette: { background }
+    palette: { background },
+    layout: { gapHalf, gapQuarter }
   } = useTheme()
+
+  console.log(useTheme())
 
   const [integratedFonts, setIntegratedFonts] = useState<{ key: string; value: string; className: string }[]>()
   const upSM = useMediaQuery('sm', { match: 'up' })
@@ -79,6 +82,125 @@ const Form = () => {
         alignItems: 'center'
       }}
     >
+      <Grid.Container
+        gap={upSM ? 2 : 1}
+        justify="space-between"
+        alignItems="center"
+        style={{ width: '100% !important', marginBottom: `${upSM ? gapHalf : gapQuarter}` }}
+      >
+        <Grid xs={12} md={6}>
+          <StringInput
+            placeholder="图片标题，非必填"
+            label="标题"
+            keyPath="title"
+            after={value => {
+              if (value) {
+                batchSet([
+                  {
+                    keyPath: 'canvasSetting.header.showHeader',
+                    value: true
+                  },
+                  {
+                    keyPath: 'canvasSetting.header.showHeaderTitle',
+                    value: true
+                  }
+                ])
+              } else {
+                batchSet([
+                  {
+                    keyPath: 'canvasSetting.header.showHeader',
+                    value: false
+                  },
+                  {
+                    keyPath: 'canvasSetting.header.showHeaderTitle',
+                    value: false
+                  }
+                ])
+              }
+            }}
+          />
+        </Grid>
+        <Grid xs={12} md={6}>
+          <StringInput
+            label="描述"
+            placeholder="图片描述，非必填"
+            keyPath="canvasSetting.header.headerDescriptionPrefix"
+            after={value => {
+              if (value) {
+                batchSet([
+                  {
+                    keyPath: 'canvasSetting.header.showHeader',
+                    value: true
+                  },
+                  {
+                    keyPath: 'canvasSetting.header.showHeaderDescription',
+                    value: true
+                  }
+                ])
+              } else {
+                batchSet([
+                  {
+                    keyPath: 'canvasSetting.header.showHeader',
+                    value: false
+                  },
+                  {
+                    keyPath: 'canvasSetting.header.showHeaderDescription',
+                    value: false
+                  }
+                ])
+              }
+            }}
+          />
+        </Grid>
+        <Grid xs={12} md={6}>
+          <StringInput
+            label="来源"
+            placeholder="图片来源，非必填"
+            keyPath="canvasSetting.from.name"
+            after={value => {
+              if (value) {
+                batchSet([
+                  {
+                    keyPath: 'canvasSetting.from.showFrom',
+                    value: true
+                  }
+                ])
+              } else {
+                batchSet([
+                  {
+                    keyPath: 'canvasSetting.from.showFrom',
+                    value: false
+                  }
+                ])
+              }
+            }}
+          />
+        </Grid>
+        <Grid xs={12} md={6}>
+          <StringInput
+            label="签名"
+            placeholder="图片签名，非必填"
+            keyPath="canvasSetting.footer.slogan"
+            after={value => {
+              if (value) {
+                batchSet([
+                  {
+                    keyPath: 'canvasSetting.footer.showFooter',
+                    value: true
+                  }
+                ])
+              } else {
+                batchSet([
+                  {
+                    keyPath: 'canvasSetting.footer.showFooter',
+                    value: false
+                  }
+                ])
+              }
+            }}
+          />
+        </Grid>
+      </Grid.Container>
       <FadeTransition visible={showForm!}>
         <Grid.Container
           gap={upSM ? 2 : 1}
@@ -86,7 +208,7 @@ const Form = () => {
           alignItems="center"
           style={{ width: '100% !important' }}
         >
-          <Grid xs={12} md={6}>
+          {/* <Grid xs={12} md={6}>
             <StringInput
               label="标题"
               keyPath="title"
@@ -193,7 +315,7 @@ const Form = () => {
                 }
               }}
             />
-          </Grid>
+          </Grid> */}
           <Grid xs={12} md={6}>
             <Palette
               label="背景颜色"
@@ -469,7 +591,7 @@ const Form = () => {
           </Grid>
         </Grid.Container>
       </FadeTransition>
-      <div style={{ marginTop: '20px' }}>
+      <div style={{ marginTop: `${showForm ? '20px' : 0}` }}>
         {showForm ? (
           <Button
             placeholder="Minus"

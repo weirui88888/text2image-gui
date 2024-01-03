@@ -7,13 +7,15 @@ interface StringInputProps {
   keyPath: string
   maxLength?: number
   after?: (value: string) => void
+  placeholder?: string
 }
 
-const StringInput: FC<StringInputProps> = ({ keyPath, label, maxLength, after }) => {
+const StringInput: FC<StringInputProps> = ({ keyPath, label, maxLength, after, placeholder }) => {
   const { value, set } = useSetUserConfig({ keyPath })
   return (
     <Input
       label={label}
+      placeholder={placeholder}
       crossOrigin="anonymous"
       clearable
       value={value}
@@ -27,7 +29,8 @@ const StringInput: FC<StringInputProps> = ({ keyPath, label, maxLength, after })
 }
 
 StringInput.defaultProps = {
-  maxLength: 10
+  maxLength: 10,
+  placeholder: ''
 }
 
 export default StringInput

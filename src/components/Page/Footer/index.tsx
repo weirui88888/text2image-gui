@@ -3,16 +3,19 @@ import { useLongPress } from 'use-long-press'
 
 const PageFooter = () => {
   const { setToast } = useToasts({
-    placement: 'topRight',
-    width: 'fit-content'
+    placement: 'topRight'
   })
   const bind = useLongPress(() => {
     setToast({
       delay: 5000,
       text: (
-        <div>
-          <p>提交记录:{process.env.REACT_APP_WEBSITE_LATEST_COMMIT_ID}</p>
-          <p>提交信息:{process.env.REACT_APP_WEBSITE_LATEST_COMMIT_MESSAGE}</p>
+        <div style={{}}>
+          <Text p my={0} font={0.75} style={{ wordBreak: 'break-all' }}>
+            提交记录:process.env.REACT_APP_WEBSITE_LATEST_COMMIT_ID
+          </Text>
+          <Text p my={0} font={0.75} style={{ wordBreak: 'break-all' }}>
+            提交信息:process.env.REACT_APP_WEBSITE_LATEST_COMMIT_MESSAGE
+          </Text>
         </div>
       )
     })
@@ -31,7 +34,7 @@ const PageFooter = () => {
             Geist
           </Link>
         </Text>
-        <div style={{ width: '21px', height: '21px', position: 'absolute', right: 0 }} {...bind()}></div>
+        <div style={{ width: '32px', height: '32px', position: 'absolute', right: 0, bottom: 0 }} {...bind()}></div>
       </Grid>
     </Grid.Container>
   )
