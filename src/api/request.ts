@@ -90,4 +90,6 @@ export class Request {
   }
 }
 
-export default new Request()
+const instance = new Request()
+
+export default instance

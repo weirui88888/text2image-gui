@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Grid, useTheme, useToasts, Button } from '@geist-ui/core'
+import { Grid, useTheme, useToasts, Button, useMediaQuery } from '@geist-ui/core'
 import { useBatchSetUserConfig } from '@/hooks/useSetUserConfig'
 import { Plus, Minus } from '@geist-ui/icons'
 import { useLocalStorage } from 'react-use'
@@ -15,35 +15,35 @@ import getCustomFont from '@/api/getCustomFont'
 
 const linearGradientDirections = [
   {
-    key: '向左',
+    key: '左',
     value: 'to left'
   },
   {
-    key: '向右',
+    key: '右',
     value: 'to right'
   },
   {
-    key: '向上',
+    key: '上',
     value: 'to top'
   },
   {
-    key: '向下',
+    key: '下',
     value: 'to bottom'
   },
   {
-    key: '向左上',
+    key: '左上',
     value: 'to left top'
   },
   {
-    key: '向左下',
+    key: '左下',
     value: 'to left bottom'
   },
   {
-    key: '向右上',
+    key: '右上',
     value: 'to right top'
   },
   {
-    key: '向右下',
+    key: '右下',
     value: 'to right bottom'
   }
 ]
@@ -54,7 +54,7 @@ const Form = () => {
   } = useTheme()
 
   const [integratedFonts, setIntegratedFonts] = useState<{ key: string; value: string; className: string }[]>()
-
+  const upSM = useMediaQuery('sm', { match: 'up' })
   useEffect(() => {
     getCustomFont().then(fonts => {
       setIntegratedFonts(fonts)
@@ -80,7 +80,12 @@ const Form = () => {
       }}
     >
       <FadeTransition visible={showForm!}>
-        <Grid.Container gap={2} justify="space-between" alignItems="center" style={{ width: '100% !important' }}>
+        <Grid.Container
+          gap={upSM ? 2 : 1}
+          justify="space-between"
+          alignItems="center"
+          style={{ width: '100% !important' }}
+        >
           <Grid xs={12} md={6}>
             <StringInput
               label="标题"
@@ -416,7 +421,7 @@ const Form = () => {
           <Grid xs={12} md={6}>
             <NumberInput label="字体行间距" min={10} max={30} keyPath="canvasSetting.lineGap" />
           </Grid>
-          <Grid xs={12} md={6}>
+          <Grid xs={24} md={6}>
             <LabelRadioGroup
               label="顶部布局"
               keyPath="canvasSetting.header.headerAlign"
@@ -440,7 +445,7 @@ const Form = () => {
           <Grid xs={12} md={6}>
             <Palette label="下划线颜色" fallbackValue="#ffffff" keyPath="canvasSetting.underline.color" />
           </Grid>
-          <Grid xs={12} md={6}>
+          <Grid xs={24} md={6}>
             <LabelRadioGroup
               label="下划线形状"
               keyPath="canvasSetting.underline.shape"

@@ -26,6 +26,9 @@ const NumberInput: FC<NumberInputProps> = ({ keyPath, label, min, max, step }) =
         if (Number(e.target.value) < min) {
           set(min)
         }
+        if (Number(e.target.value) > max) {
+          set(max)
+        }
       }}
     />
   )

@@ -35,13 +35,8 @@ const Home = () => {
   const [generatedImage, setGeneratedImage] = useState('')
   const { setVisible: setImageModalVisible, bindings: imageModalVisible } = useModal(false)
   const upSM = useMediaQuery('sm', { match: 'up' })
-  const userConfig = useRecoilValue(userConfigState)
-  const [value, setValue] =
-    useState<string>(`寒冬降临，大地被冰雪所覆盖，这是一年中最美丽的季节之一。记得那年冬天的第一场雪，仿佛是天地间的一幅画卷，让人陶醉其中。
-
-那天，天空阴沉沉的，寒风凛冽，似乎预示着一场雪的到来。人们心中充满期待，期待着那冰雪的降临，期待着冬天的第一场雪。
-  
-终于，雪花飘飘洒洒地从天空中飘落下来。起初是零星的小雪花，如同飘落的蝶舞动，轻盈而翩跹。随着时间的推移，雪花越来越密集，仿佛是天空中的白色花瓣，铺满了整个大地`)
+  const userConfig: any = useRecoilValue(userConfigState)
+  const [value, setValue] = useState<string>(``)
   // setTimeout(() => {
   //   if (textareaRef.current!) {
   //     console.log(textareaRef.current.scrollHeight)
@@ -116,87 +111,87 @@ const Home = () => {
     }, 500)
   }
   return (
-    <div
-      className="home-page"
-      style={
-        upSM
-          ? { position: 'relative' }
-          : { position: 'absolute', width: '100%', top: '50%', transform: 'translateY(-50%)' }
-      }
-    >
-      {upSM ? <Form /> : null}
-      <Textarea
-        {...bindings}
-        width="100%"
-        maxLength={maxInputLength}
-        placeholder="type any thing you like..."
-        rows={10}
-        ref={textareaRef as any}
-        className="autosize"
-        style={{
-          maxHeight: upSM ? '40vh' : '50vh',
-          transition: 'height 0.2s',
-          fontSize: '14px',
-          background,
-          borderRadius: '6px',
-          overflow: 'scroll !important'
-        }}
-        value={value}
-        onChange={textChange}
-      ></Textarea>
-      {value && (
-        <Tooltip
-          style={{ position: 'absolute', bottom: '60px', right: '10px' }}
-          text={
-            <Text my={0} style={{ whiteSpace: 'nowrap' }}>
-              clear input...
-            </Text>
-          }
-          placement="left"
-          scale={0.5}
-        >
-          <ButtonRound
-            auto
-            icon={<X />}
-            onClick={() => {
-              ;(textareaRef.current as any).style.removeProperty('height')
-              setValue('')
-            }}
-          />
-        </Tooltip>
-      )}
+    <div className="home-page">
+      <Form />
+      <div style={{ position: 'relative' }}>
+        <Textarea
+          {...bindings}
+          width="100%"
+          maxLength={maxInputLength}
+          placeholder="type any thing you like..."
+          rows={10}
+          ref={textareaRef as any}
+          className="autosize"
+          style={{
+            maxHeight: upSM ? '40vh' : '50vh',
+            transition: 'height 0.2s',
+            fontSize: '14px',
+            background,
+            borderRadius: '6px',
+            overflow: 'scroll !important'
+          }}
+          value={value}
+          onChange={textChange}
+        ></Textarea>
+        {value && (
+          <Tooltip
+            style={{ position: 'absolute', bottom: '60px', right: '10px' }}
+            text={
+              <Text my={0} style={{ whiteSpace: 'nowrap' }}>
+                clear input...
+              </Text>
+            }
+            placement="left"
+            scale={0.5}
+          >
+            <ButtonRound
+              auto
+              icon={<X />}
+              onClick={() => {
+                ;(textareaRef.current as any).style.removeProperty('height')
+                setValue('')
+              }}
+            />
+          </Tooltip>
+        )}
 
-      <Text
-        my={0}
-        style={{ position: 'absolute', bottom: '-30px', left: '4px' }}
-        font={0.75}
-        className={value.length === maxInputLength ? 'shake' : ''}
-      >
-        {value.length > maxInputLength ? maxInputLength : value.length}/{maxInputLength}
-      </Text>
-
-      {!value ? (
-        <Tooltip
-          scale={0.5}
-          text={
-            <Text my={0} style={{ whiteSpace: 'nowrap' }}>
-              😊 type something before you click this button...
-            </Text>
-          }
-          style={{ position: 'absolute', bottom: '10px', right: '10px' }}
-          placement="left"
+        <Text
+          my={0}
+          style={{ position: 'absolute', bottom: '-30px', left: '4px' }}
+          font={0.75}
+          className={value.length === maxInputLength ? 'shake' : ''}
         >
-          <ButtonRound disabled auto icon={<PenTool />} />
-        </Tooltip>
-      ) : (
-        <div style={{ position: 'absolute', bottom: '10px', right: '10px', alignItems: 'center', display: 'flex' }}>
-          <Keyboard option mr="10px" scale={0.5}></Keyboard>
-          <Keyboard mr="10px" scale={0.5}>
-            Enter
-          </Keyboard>
-          <ButtonRound loading={generate} auto icon={<Camera />} onClick={generateImage} />
-        </div>
-      )}
+          {value.length > maxInputLength ? maxInputLength : value.length}/{maxInputLength}
+        </Text>
+
+        {!value ? (
+          <Tooltip
+            scale={0.5}
+            text={
+              <Text my={0} style={{ whiteSpace: 'nowrap' }}>
+                😊 在点击按钮之前先输入一些内容...
+              </Text>
+            }
+            style={{ position: 'absolute', bottom: '10px', right: '10px' }}
+            placement="left"
+          >
+            <ButtonRound disabled auto icon={<PenTool />} />
+          </Tooltip>
+        ) : (
+          <div style={{ position: 'absolute', bottom: '10px', right: '10px', alignItems: 'center', display: 'flex' }}>
+            {upSM ? (
+              <>
+                <Keyboard option mr="10px" scale={0.5}></Keyboard>
+                <Keyboard mr="10px" scale={0.5}>
+                  Enter
+                </Keyboard>
+              </>
+            ) : null}
+            <ButtonRound loading={generate} auto icon={<Camera />} onClick={generateImage} />
+          </div>
+        )}
+      </div>
+
       <Modal width="50rem" {...imageModalVisible} onClose={onModalClose}>
         <Modal.Title style={{ marginBottom: '21px', position: 'relative' }}>
           Image Title

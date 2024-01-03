@@ -1,11 +1,10 @@
-import { FC, useState, useEffect, useCallback } from 'react'
+import { FC, useState, useEffect } from 'react'
 
 import { Grid, Page, Text, useKeyboard, KeyCode, KeyMod, useMediaQuery } from '@geist-ui/core'
 import { Book, Moon, Settings, Sun, Github, MoreVertical, Aperture } from '@geist-ui/icons'
 import ButtonRound from '@/components/ButtonRound'
 import Logo from '@/components/Logo'
 import UserSettingModal from '@/components/UserSettingModal'
-import ThemeModal from '@/components/ThemeModal'
 
 import { format } from 'date-fns'
 interface PageHeaderProps {
@@ -15,7 +14,6 @@ interface PageHeaderProps {
 
 const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
   const [isUserSettingModalVisible, setIsUserSettingModalVisible] = useState(false)
-  const [themeModalVisible, setThemeModalVisible] = useState(false)
   const [time, setTime] = useState(new Date())
   const upSM = useMediaQuery('sm', { match: 'up' })
   useKeyboard(() => {
@@ -30,10 +28,6 @@ const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
     return () => {
       clearInterval(timer)
     }
-  }, [])
-
-  const openThemeModal = useCallback(() => {
-    setThemeModalVisible(true)
   }, [])
 
   return (
@@ -75,13 +69,7 @@ const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
             {upSM ? (
               <Grid.Container alignItems="center" gap={1}>
                 <Grid>
-                  <ButtonRound
-                    auto
-                    aria-label="Aperture"
-                    icon={<Aperture />}
-                    title="Template"
-                    onClick={openThemeModal}
-                  />
+                  <ButtonRound auto aria-label="Aperture" icon={<Aperture />} title="Template" onClick={() => {}} />
                 </Grid>
                 <Grid>
                   <ButtonRound
@@ -125,7 +113,7 @@ const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
             ) : (
               <Grid.Container alignItems="center" gap={1}>
                 <Grid>
-                  <ButtonRound auto aria-label="Aperture" icon={<Aperture />} onClick={openThemeModal} />
+                  <ButtonRound auto aria-label="Aperture" icon={<Aperture />} onClick={() => {}} />
                 </Grid>
                 <Grid>
                   <ButtonRound auto aria-label="Theme" icon={<MoreVertical />} onClick={() => {}} />
@@ -135,7 +123,6 @@ const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
           </Grid>
         </Grid.Container>
         <UserSettingModal isVisible={isUserSettingModalVisible} setIsVisible={setIsUserSettingModalVisible} />
-        <ThemeModal isVisible={themeModalVisible} setIsVisible={setThemeModalVisible}></ThemeModal>
       </Page.Header>
     </div>
   )

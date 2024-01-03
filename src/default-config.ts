@@ -11,7 +11,7 @@ const anyPhotoConfig = {
     backgroundLineSpacing: 60, // 1
     backgroundLineColor: '#cccccc55', // 1
     color: '#ffffff', // 1
-    fontSize: 40, // 1
+    fontSize: 30, // 1
     lineGap: 15, // 1
     x: 40, // 1
     y: 60, // 1
