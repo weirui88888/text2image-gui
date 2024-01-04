@@ -54,8 +54,6 @@ const Form = () => {
     layout: { gapHalf, gapQuarter }
   } = useTheme()
 
-  console.log(useTheme())
-
   const [integratedFonts, setIntegratedFonts] = useState<{ key: string; value: string; className: string }[]>()
   const upSM = useMediaQuery('sm', { match: 'up' })
   useEffect(() => {
@@ -208,114 +206,6 @@ const Form = () => {
           alignItems="center"
           style={{ width: '100% !important' }}
         >
-          {/* <Grid xs={12} md={6}>
-            <StringInput
-              label="标题"
-              keyPath="title"
-              after={value => {
-                if (value) {
-                  batchSet([
-                    {
-                      keyPath: 'canvasSetting.header.showHeader',
-                      value: true
-                    },
-                    {
-                      keyPath: 'canvasSetting.header.showHeaderTitle',
-                      value: true
-                    }
-                  ])
-                } else {
-                  batchSet([
-                    {
-                      keyPath: 'canvasSetting.header.showHeader',
-                      value: false
-                    },
-                    {
-                      keyPath: 'canvasSetting.header.showHeaderTitle',
-                      value: false
-                    }
-                  ])
-                }
-              }}
-            />
-          </Grid>
-          <Grid xs={12} md={6}>
-            <StringInput
-              label="描述"
-              keyPath="canvasSetting.header.headerDescriptionPrefix"
-              after={value => {
-                if (value) {
-                  batchSet([
-                    {
-                      keyPath: 'canvasSetting.header.showHeader',
-                      value: true
-                    },
-                    {
-                      keyPath: 'canvasSetting.header.showHeaderDescription',
-                      value: true
-                    }
-                  ])
-                } else {
-                  batchSet([
-                    {
-                      keyPath: 'canvasSetting.header.showHeader',
-                      value: false
-                    },
-                    {
-                      keyPath: 'canvasSetting.header.showHeaderDescription',
-                      value: false
-                    }
-                  ])
-                }
-              }}
-            />
-          </Grid>
-          <Grid xs={12} md={6}>
-            <StringInput
-              label="来源"
-              keyPath="canvasSetting.from.name"
-              after={value => {
-                if (value) {
-                  batchSet([
-                    {
-                      keyPath: 'canvasSetting.from.showFrom',
-                      value: true
-                    }
-                  ])
-                } else {
-                  batchSet([
-                    {
-                      keyPath: 'canvasSetting.from.showFrom',
-                      value: false
-                    }
-                  ])
-                }
-              }}
-            />
-          </Grid>
-          <Grid xs={12} md={6}>
-            <StringInput
-              label="签名"
-              keyPath="canvasSetting.footer.slogan"
-              after={value => {
-                if (value) {
-                  batchSet([
-                    {
-                      keyPath: 'canvasSetting.footer.showFooter',
-                      value: true
-                    }
-                  ])
-                } else {
-                  batchSet([
-                    {
-                      keyPath: 'canvasSetting.footer.showFooter',
-                      value: false
-                    }
-                  ])
-                }
-              }}
-            />
-          </Grid> */}
           <Grid xs={12} md={6}>
             <Palette
               label="背景颜色"
@@ -578,16 +468,16 @@ const Form = () => {
             />
           </Grid>
           <Grid xs={12} md={6}>
-            <NumberInput label="来源字体大小" min={12} max={50} keyPath="canvasSetting.from.fromFontSize" />
+            <NumberInput label="摘自字体大小" min={12} max={50} keyPath="canvasSetting.from.fromFontSize" />
           </Grid>
           <Grid xs={12} md={6}>
-            <Palette label="来源字体颜色" fallbackValue="#ffffff" keyPath="canvasSetting.from.fromFontColor" />
+            <Palette label="摘自字体颜色" fallbackValue="#ffffff" keyPath="canvasSetting.from.fromFontColor" />
           </Grid>
           <Grid xs={12} md={6}>
-            <NumberInput label="签名字体大小" min={12} max={50} keyPath="canvasSetting.footer.sloganFontSize" />
+            <NumberInput label="署名字体大小" min={12} max={50} keyPath="canvasSetting.footer.sloganFontSize" />
           </Grid>
           <Grid xs={12} md={6}>
-            <Palette label="签名字体颜色" fallbackValue="#ffffff" keyPath="canvasSetting.footer.sloganFontColor" />
+            <Palette label="署名字体颜色" fallbackValue="#ffffff" keyPath="canvasSetting.footer.sloganFontColor" />
           </Grid>
         </Grid.Container>
       </FadeTransition>

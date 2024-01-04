@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, RefObject } from 'react'
+import React, { useRef, useEffect, useState, RefObject, CSSProperties } from 'react'
 import {
   Textarea,
   Tooltip,
@@ -36,20 +36,17 @@ const Home = () => {
   const [generatedImage, setGeneratedImage] = useState('')
   const { setVisible: setImageModalVisible, bindings: imageModalVisible } = useModal(false)
   const upSM = useMediaQuery('sm', { match: 'up' })
-  const userConfig: any = useRecoilValue(userConfigState)
+  const userConfig = useRecoilValue(userConfigState)
+  const [textareaStyle, setTextareaStyle] = useState<CSSProperties>({})
   //   const [value, setValue] = useState<string>('')
   const [value, setValue] = useLocalStorage<string>('content', '', { raw: true })
   setTimeout(() => {
     if (textareaRef.current!) {
-      console.log(textareaRef.current.scrollHeight)
       textareaRef.current.scrollTop = textareaRef.current.scrollHeight
     }
     autosize.update(textareaRef.current!)
   }, 1000)
 
-  const {
-    palette: { background }
-  } = useTheme()
   useEffect(() => {
     const textareaDom = textareaRef.current
     textareaDom!.focus()
@@ -59,6 +56,25 @@ const Home = () => {
     }
   }, [])
 
+  useEffect(() => {
+    const { canvasSetting } = userConfig
+    const { backgroundColor, color, linearGradientDirection } = canvasSetting
+    if (typeof backgroundColor === 'string') {
+      setTextareaStyle({
+        // background: backgroundColor
+        // color
+      })
+    } else {
+      setTextareaStyle({
+        // color,
+        // background: `linear-gradient(${linearGradientDirection}, ${backgroundColor.toString()})`
+      })
+    }
+  }, [userConfig])
+
+  const {
+    palette: { background }
+  } = useTheme()
   const transitionBlur = () => {
     const interval = setInterval(() => {
       setBlurValue(prevBlurValue => prevBlurValue - 10)
@@ -130,7 +146,8 @@ const Home = () => {
             fontSize: '14px',
             background,
             borderRadius: '6px',
-            overflow: 'scroll !important'
+            overflow: 'scroll !important',
+            ...textareaStyle
           }}
           value={value}
           onChange={textChange}

@@ -24,7 +24,7 @@ const userConfig = (() => {
     return defaultConfig
   }
 })()
-export default atom({
+export default atom<{ title: string; avatar: string; canvasSetting: Record<string, any> }>({
   key: getUniqueName('ConfigState'),
   default: userConfig
 })
