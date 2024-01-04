@@ -20,8 +20,8 @@ const StringInput: FC<StringInputProps> = ({ keyPath, label, maxLength, after, p
       clearable
       value={value}
       onChange={e => {
-        set(e.target.value.trim())
-        after && after(e.target.value.trim())
+        set(e.target.value)
+        after && after(e.target.value)
       }}
       maxLength={maxLength}
     />

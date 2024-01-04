@@ -13,7 +13,7 @@ const registerFonts = (fonts: { key: string; value: string; className: string }[
       src: url('${url}');
     }
     .${fontFamily} {
-      font-family: ${fontFamily}, sans-serif;
+      font-family: ${fontFamily}, sans-serif !important;
     }
     `
   })
@@ -87,7 +87,8 @@ const getCustomFont = async (): Promise<{ key: string; value: string; className:
     }
   })
   fonts!.sort((a, b) => a.order - b.order)
-  const compressFonts = fonts?.map(font => ({ ...font, value: font.value.replace('origin', 'compress') }))
+  const compressFonts = fonts?.map(font => ({ ...font }))
+  // const compressFonts = fonts?.map(font => ({ ...font, value: font.value.replace('origin', 'compress') }))
   registerFonts(compressFonts!)
   return fonts
 }

@@ -1,6 +1,8 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useTheme, Select } from '@geist-ui/core'
 import { useSetUserConfig } from '@/hooks/useSetUserConfig'
+import { useSetRecoilState } from 'recoil'
+import SelectFontState from '@/recoil/selectFont'
 import './index.css'
 
 interface LabelSelectProps {
@@ -8,11 +10,20 @@ interface LabelSelectProps {
   label: string
   keyPath: string
   placeholder?: string
+  isFontSelect?: boolean
 }
 
-const LabelSelect: FC<LabelSelectProps> = ({ keyPath, label, options, placeholder }) => {
+const LabelSelect: FC<LabelSelectProps> = ({ keyPath, label, options, placeholder, isFontSelect }) => {
   const { palette } = useTheme()
   const { value, set } = useSetUserConfig({ keyPath })
+  const setSelectFontClassName = useSetRecoilState(SelectFontState)
+
+  useEffect(() => {
+    if (options && isFontSelect) {
+      const { className } = options.find(option => option.value === value) as any
+      setSelectFontClassName(className)
+    }
+  }, [value])
   return (
     <div
       style={{
@@ -61,7 +72,8 @@ const LabelSelect: FC<LabelSelectProps> = ({ keyPath, label, options, placeholde
 }
 
 LabelSelect.defaultProps = {
-  placeholder: ''
+  placeholder: '',
+  isFontSelect: false
 }
 
 export default LabelSelect

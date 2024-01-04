@@ -13,6 +13,11 @@ import FadeTransition from '../FadeTransition'
 import LabelSelect from './LabelSelect'
 import getCustomFont from '@/api/getCustomFont'
 
+import { useSetRecoilState, useRecoilValue } from 'recoil'
+import CheckerState from '@/recoil/checker'
+import SelectFontState from '@/recoil/selectFont'
+import userConfigState from '@/recoil/config'
+
 const linearGradientDirections = [
   {
     key: '左',
@@ -53,11 +58,15 @@ const Form = () => {
     palette: { background },
     layout: { gapHalf, gapQuarter }
   } = useTheme()
-
   const [integratedFonts, setIntegratedFonts] = useState<{ key: string; value: string; className: string }[]>()
+  const setChecker = useSetRecoilState(CheckerState)
+  const setSelectFontClassName = useSetRecoilState(SelectFontState)
+  const userConfig = useRecoilValue(userConfigState)
   const upSM = useMediaQuery('sm', { match: 'up' })
   useEffect(() => {
     getCustomFont().then(fonts => {
+      const { className } = fonts!.find(font => font.value === userConfig.canvasSetting.customFontPath) as any
+      setSelectFontClassName(className)
       setIntegratedFonts(fonts)
     })
   }, [])
@@ -238,11 +247,21 @@ const Form = () => {
                 ])
               }}
               onCheck={async url => {
-                if (!url) return
+                if (!url) {
+                  setChecker(checker => ({
+                    ...checker,
+                    validBackgroundImage: false
+                  }))
+                  return 
+                }
                 try {
                   const response = await axios.head(url)
                   const imgExist = response.status === 200 && response.headers['content-type'].startsWith('image/')
                   if (!imgExist) {
+                    setChecker(checker => ({
+                      ...checker,
+                      validBackgroundImage: false
+                    }))
                     batchSet([
                       {
                         keyPath: 'canvasSetting.backgroundImage',
@@ -253,6 +272,10 @@ const Form = () => {
                       text: '请输入正确的图片地址'
                     })
                   } else {
+                    setChecker(checker => ({
+                      ...checker,
+                      validBackgroundImage: true
+                    }))
                     batchSet([
                       {
                         keyPath: 'canvasSetting.backgroundImage',
@@ -261,6 +284,10 @@ const Form = () => {
                     ])
                   }
                 } catch (error) {
+                  setChecker(checker => ({
+                      ...checker,
+                      validBackgroundImage: false
+                    }))
                   batchSet([
                     {
                       keyPath: 'canvasSetting.backgroundImage',
@@ -274,6 +301,7 @@ const Form = () => {
                 }
               }}
               keyPath="canvasSetting.backgroundImage"
+              checkKey="validBackgroundImage"
             />
           </Grid>
           <Grid xs={12} md={6}>
@@ -311,6 +339,10 @@ const Form = () => {
               }}
               onCheck={async url => {
                 if (!url) {
+                  setChecker(checker => ({
+                    ...checker,
+                    validAvatar: false
+                  }))
                   batchSet([
                     {
                       keyPath: 'avatar',
@@ -331,6 +363,10 @@ const Form = () => {
                   const response = await axios.head(url)
                   const imgExist = response.status === 200 && response.headers['content-type'].startsWith('image/')
                   if (!imgExist) {
+                    setChecker(checker => ({
+                      ...checker,
+                      validAvatar: false
+                    }))
                     batchSet([
                       {
                         keyPath: 'avatar',
@@ -349,6 +385,10 @@ const Form = () => {
                       text: '请输入正确的图片地址'
                     })
                   } else {
+                    setChecker(checker => ({
+                      ...checker,
+                      validAvatar: true
+                    }))
                     batchSet([
                       {
                         keyPath: 'avatar',
@@ -365,6 +405,10 @@ const Form = () => {
                     ])
                   }
                 } catch (error) {
+                  setChecker(checker => ({
+                    ...checker,
+                    validAvatar: false
+                  }))
                   batchSet([
                     {
                       keyPath: 'avatar',
@@ -386,6 +430,7 @@ const Form = () => {
                 }
               }}
               keyPath="avatar"
+              checkKey="validAvatar"
             />
           </Grid>
           <Grid xs={12} md={6}>
@@ -422,7 +467,7 @@ const Form = () => {
             <Palette label="标题颜色" fallbackValue="#ffffff" keyPath="canvasSetting.header.headerTitleFontColor" />
           </Grid>
           <Grid xs={12} md={6}>
-            <LabelSelect keyPath="canvasSetting.customFontPath" label="字体" options={integratedFonts!} />
+            <LabelSelect keyPath="canvasSetting.customFontPath" isFontSelect label="字体" options={integratedFonts!} />
           </Grid>
           <Grid xs={12} md={6}>
             <NumberInput label="内容字体大小" min={12} max={50} keyPath="canvasSetting.fontSize" />

@@ -4,8 +4,10 @@ import { UploadCloud } from '@geist-ui/icons'
 import Cropper, { type ReactCropperElement } from 'react-cropper'
 import 'cropperjs/dist/cropper.css'
 import AliOssUpload from '@/utils/aliOssUpload'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import userConfigState from '@/recoil/config'
+import checkerState from '@/recoil/checker'
+
 import objectPath from 'object-path'
 
 interface UploadProps {
@@ -19,6 +21,7 @@ interface UploadProps {
   onCheck?: (url: string) => void
   keyPath: string
   cropper?: boolean
+  checkKey: string
 }
 
 interface UploadButtonProps {
@@ -44,7 +47,8 @@ const Upload: FC<UploadProps> = ({
   keyPath,
   onSuccess,
   onCheck,
-  cropper
+  cropper,
+  checkKey
 }) => {
   const { setVisible, bindings } = useModal()
   const [originSource, setOriginSource] = useState('')
@@ -52,7 +56,7 @@ const Upload: FC<UploadProps> = ({
   const [showPreview, setShowPreview] = useState(false)
   const cropperRef = useRef<ReactCropperElement>(null)
   const [uploadFileMeta, setUploadFileMeta] = useState({ type: '', name: '' })
-
+  const setChecker = useSetRecoilState(checkerState)
   const userConfig = useRecoilValue(userConfigState)
   const url = objectPath.get(userConfig, keyPath)
 
@@ -86,6 +90,10 @@ const Upload: FC<UploadProps> = ({
         randomName: false
       })
       onSuccess(ossSourceUrl)
+      setChecker(checker => ({
+        ...checker,
+        [checkKey]: true
+      }))
     }
   }
 
@@ -100,6 +108,10 @@ const Upload: FC<UploadProps> = ({
         randomName: false
       })
       onSuccess(ossSourceUrl)
+      setChecker(checker => ({
+        ...checker,
+        [checkKey]: true
+      }))
       setVisible(false)
       setUploading(false)
     }, uploadFileMeta.type)

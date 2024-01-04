@@ -5,12 +5,10 @@ import './index.css'
 const index: FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <Page
-      dotBackdrop
-      dotSize={5}
       style={{
         width: '100%',
         height: '100%',
-        maxWidth: '1000px'
+        maxWidth: '1400px'
       }}
     >
       {children}

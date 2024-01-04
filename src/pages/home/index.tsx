@@ -24,6 +24,7 @@ import './index.css'
 import { useRecoilValue } from 'recoil'
 import userConfigState from '@/recoil/config'
 import { text2Image } from '@/api/generate'
+import Preview from '@/components/Preview'
 
 const maxInputLength = 3000
 
@@ -37,7 +38,6 @@ const Home = () => {
   const { setVisible: setImageModalVisible, bindings: imageModalVisible } = useModal(false)
   const upSM = useMediaQuery('sm', { match: 'up' })
   const userConfig = useRecoilValue(userConfigState)
-  const [textareaStyle, setTextareaStyle] = useState<CSSProperties>({})
   //   const [value, setValue] = useState<string>('')
   const [value, setValue] = useLocalStorage<string>('content', '', { raw: true })
   setTimeout(() => {
@@ -55,22 +55,6 @@ const Home = () => {
       autosize.destroy(textareaDom!)
     }
   }, [])
-
-  useEffect(() => {
-    const { canvasSetting } = userConfig
-    const { backgroundColor, color, linearGradientDirection } = canvasSetting
-    if (typeof backgroundColor === 'string') {
-      setTextareaStyle({
-        // background: backgroundColor
-        // color
-      })
-    } else {
-      setTextareaStyle({
-        // color,
-        // background: `linear-gradient(${linearGradientDirection}, ${backgroundColor.toString()})`
-      })
-    }
-  }, [userConfig])
 
   const {
     palette: { background }
@@ -130,129 +114,132 @@ const Home = () => {
   }
   return (
     <div className="home-page">
-      <Form />
-      <div style={{ position: 'relative' }}>
-        <Textarea
-          {...bindings}
-          width="100%"
-          maxLength={maxInputLength}
-          placeholder="输入任何你想记录的文案..."
-          rows={10}
-          ref={textareaRef as any}
-          className="autosize"
-          style={{
-            maxHeight: upSM ? '40vh' : '50vh',
-            transition: 'height 0.2s',
-            fontSize: '14px',
-            background,
-            borderRadius: '6px',
-            overflow: 'scroll !important',
-            ...textareaStyle
-          }}
-          value={value}
-          onChange={textChange}
-        ></Textarea>
-        {value && (
-          <Tooltip
-            style={{ position: 'absolute', bottom: '60px', right: '10px' }}
-            text={
-              <Text my={0} style={{ whiteSpace: 'nowrap' }}>
-                clear input...
-              </Text>
-            }
-            placement="left"
-            scale={0.5}
-          >
-            <ButtonRound
-              auto
-              icon={<X />}
-              onClick={() => {
-                ;(textareaRef.current as any).style.removeProperty('height')
-                setValue('')
-              }}
-            />
-          </Tooltip>
-        )}
+      <div className="action-area">
+        <Form />
+        <div style={{ position: 'relative' }}>
+          <Textarea
+            {...bindings}
+            width="100%"
+            maxLength={maxInputLength}
+            placeholder="输入任何你想记录的文案..."
+            rows={10}
+            ref={textareaRef as any}
+            className="autosize"
+            style={{
+              maxHeight: upSM ? '40vh' : '50vh',
+              transition: 'height 0.2s',
+              fontSize: '14px',
+              background,
+              borderRadius: '6px',
+              overflow: 'scroll !important'
+            }}
+            value={value}
+            onChange={textChange}
+          ></Textarea>
+          {value && (
+            <Tooltip
+              style={{ position: 'absolute', bottom: '60px', right: '10px' }}
+              text={
+                <Text my={0} style={{ whiteSpace: 'nowrap' }}>
+                  clear input...
+                </Text>
+              }
+              placement="left"
+              scale={0.5}
+            >
+              <ButtonRound
+                auto
+                icon={<X />}
+                onClick={() => {
+                  ;(textareaRef.current as any).style.removeProperty('height')
+                  setValue('')
+                }}
+              />
+            </Tooltip>
+          )}
 
-        <Text
-          my={0}
-          style={{ position: 'absolute', bottom: '-30px', left: '4px' }}
-          font={0.75}
-          className={value!.length === maxInputLength ? 'shake' : ''}
-        >
-          {value!.length > maxInputLength ? maxInputLength : value!.length}/{maxInputLength}
-        </Text>
-
-        {!value ? (
-          <Tooltip
-            scale={0.5}
-            text={
-              <Text my={0} style={{ whiteSpace: 'nowrap' }}>
-                😊 在点击按钮之前先输入一些内容...
-              </Text>
-            }
-            style={{ position: 'absolute', bottom: '10px', right: '10px' }}
-            placement="left"
+          <Text
+            my={0}
+            style={{ position: 'absolute', bottom: '-30px', left: '4px' }}
+            font={0.75}
+            className={value!.length === maxInputLength ? 'shake' : ''}
           >
-            <ButtonRound disabled auto icon={<PenTool />} />
-          </Tooltip>
-        ) : (
-          <div style={{ position: 'absolute', bottom: '10px', right: '10px', alignItems: 'center', display: 'flex' }}>
-            {upSM ? (
-              <>
-                <Keyboard option mr="10px" scale={0.5}></Keyboard>
-                <Keyboard mr="10px" scale={0.5}>
-                  Enter
-                </Keyboard>
-              </>
+            {value!.length > maxInputLength ? maxInputLength : value!.length}/{maxInputLength}
+          </Text>
+
+          {!value ? (
+            <Tooltip
+              scale={0.5}
+              text={
+                <Text my={0} style={{ whiteSpace: 'nowrap' }}>
+                  😊 在点击按钮之前先输入一些内容...
+                </Text>
+              }
+              style={{ position: 'absolute', bottom: '10px', right: '10px' }}
+              placement="left"
+            >
+              <ButtonRound disabled auto icon={<PenTool />} />
+            </Tooltip>
+          ) : (
+            <div style={{ position: 'absolute', bottom: '10px', right: '10px', alignItems: 'center', display: 'flex' }}>
+              {upSM ? (
+                <>
+                  <Keyboard option mr="10px" scale={0.5}></Keyboard>
+                  <Keyboard mr="10px" scale={0.5}>
+                    Enter
+                  </Keyboard>
+                </>
+              ) : null}
+              <ButtonRound loading={generate} auto icon={<Camera />} onClick={generateImage} type="secondary" />
+            </div>
+          )}
+        </div>
+        <Modal width="50rem" {...imageModalVisible} onClose={onModalClose}>
+          <Modal.Title style={{ marginBottom: '21px', position: 'relative' }}>
+            Image Title
+            {heightGreaterThanWidth ? (
+              <Button
+                placeholder={mini ? 'Maximize' : 'Minimize'}
+                iconRight={mini ? <Maximize2 /> : <Minimize2 />}
+                auto
+                scale={2 / 3}
+                px={0.6}
+                style={{ position: 'absolute', right: '40px' }}
+                onClick={() => setMini(mini ? false : true)}
+              ></Button>
             ) : null}
-            <ButtonRound loading={generate} auto icon={<Camera />} onClick={generateImage} type="secondary" />
-          </div>
-        )}
-      </div>
-
-      <Modal width="50rem" {...imageModalVisible} onClose={onModalClose}>
-        <Modal.Title style={{ marginBottom: '21px', position: 'relative' }}>
-          Image Title
-          {heightGreaterThanWidth ? (
             <Button
-              placeholder={mini ? 'Maximize' : 'Minimize'}
-              iconRight={mini ? <Maximize2 /> : <Minimize2 />}
+              placeholder="Download"
+              style={{ position: 'absolute', right: 0 }}
+              iconRight={<Download />}
               auto
               scale={2 / 3}
               px={0.6}
-              style={{ position: 'absolute', right: '40px' }}
-              onClick={() => setMini(mini ? false : true)}
+              onClick={() => {
+                const link = document.createElement('a')
+                link.href = generatedImage
+                link.download = generatedImage
+                link.click()
+                onModalClose()
+              }}
             ></Button>
-          ) : null}
-          <Button
-            placeholder="Download"
-            style={{ position: 'absolute', right: 0 }}
-            iconRight={<Download />}
-            auto
-            scale={2 / 3}
-            px={0.6}
-            onClick={() => {
-              const link = document.createElement('a')
-              link.href = generatedImage
-              link.download = generatedImage
-              link.click()
-              onModalClose()
-            }}
-          ></Button>
-        </Modal.Title>
-        <Modal.Content style={{ maxHeight: '68vh', overflow: 'scroll', paddingTop: 0, textAlign: 'center' }}>
-          <Image
-            src={generatedImage}
-            style={{
-              filter: `blur(${blurValue}px) contrast(${blurValue + 1})`,
-              transition: 'filter 1s',
-              borderRadius: '6px',
-              height: mini ? '65vh' : 'auto'
-            }}
-          />
-        </Modal.Content>
-      </Modal>
+          </Modal.Title>
+          <Modal.Content style={{ maxHeight: '68vh', overflow: 'scroll', paddingTop: 0, textAlign: 'center' }}>
+            <Image
+              src={generatedImage}
+              style={{
+                filter: `blur(${blurValue}px) contrast(${blurValue + 1})`,
+                transition: 'filter 1s',
+                borderRadius: '6px',
+                height: mini ? '65vh' : 'auto'
+              }}
+            />
+          </Modal.Content>
+        </Modal>
+      </div>
+      <div className="preview-area">
+        <Preview content={value!} />
+      </div>
     </div>
   )
 }

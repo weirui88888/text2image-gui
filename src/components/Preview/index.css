@@ -1,0 +1,9 @@
+.preview-container {
+  padding: 24px 0 24px 24px;
+  white-space: pre-wrap;
+}
+
+.demo-container {
+  padding: 24px;
+  position: relative;
+}
