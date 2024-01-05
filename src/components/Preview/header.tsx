@@ -17,9 +17,8 @@ const PreviewHeader = () => {
         headerAlign,
         showHeaderDescription,
         headerDescriptionPrefix,
-        headerAvatarBorderWidth,
+        headerAvatarSize,
         headerAvatarBorderColor,
-        headerAvatarMarginBottom,
         headerTitleFontColor,
         headerDescriptionFontColor
       }
@@ -38,31 +37,28 @@ const PreviewHeader = () => {
         return 'center'
     }
   }
+  console.log(headerAvatarSize, scale)
   return (
-    <div
-      className="zh-MaShanZheng"
-      style={{ display: 'flex', flexDirection: 'column', alignItems: getHeaderAlignItems(headerAlign) }}
-    >
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: getHeaderAlignItems(headerAlign) }}>
       {showHeaderAvatar && avatar ? (
         <img
           src={avatar}
           alt="avatar"
           style={{
-            width: `56px`,
-            height: `56px`,
+            width: '56px',
+            height: '56px',
             borderRadius: '50%',
-            marginBottom: `${headerAvatarMarginBottom * scale}px`,
-            border: `${headerAvatarBorderWidth}px solid ${headerAvatarBorderColor}`
+            border: `3px solid ${headerAvatarBorderColor}`
           }}
         />
       ) : null}
       {showHeaderTitle && title ? (
-        <Text p mb={0} font={1.3} className={selectFontClassName} style={{color:headerTitleFontColor}}>
+        <Text p mb={0} font={1.3} className={selectFontClassName} style={{ color: headerTitleFontColor }}>
           {title}
         </Text>
       ) : null}
       {showHeaderDescription && headerDescriptionPrefix ? (
-        <Text p my={0} className={selectFontClassName} style={{color:headerDescriptionFontColor}}>
+        <Text p my={0} className={selectFontClassName} style={{ color: headerDescriptionFontColor }}>
           {headerDescriptionPrefix}
         </Text>
       ) : null}

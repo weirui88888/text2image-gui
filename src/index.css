@@ -84,3 +84,7 @@ input[type='file'] {
 ::placeholder {
   font-size: 12px;
 }
+
+.toast {
+  width: auto !important;
+}

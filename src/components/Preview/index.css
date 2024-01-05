@@ -1,6 +1,8 @@
 .preview-container {
   padding: 24px 0 24px 24px;
   white-space: pre-wrap;
+  width: 500px;
+  flex-shrink: 0;
 }
 
 .demo-container {

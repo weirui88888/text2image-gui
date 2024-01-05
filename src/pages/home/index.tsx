@@ -1,12 +1,11 @@
-import React, { useRef, useEffect, useState, RefObject, CSSProperties } from 'react'
+import React, { useRef, useEffect, useState, RefObject } from 'react'
 import {
   Textarea,
-  Tooltip,
   useKeyboard,
   KeyCode,
   KeyMod,
   Text,
-  Keyboard,
+  Spacer,
   useTheme,
   Image,
   Modal,
@@ -16,8 +15,7 @@ import {
 } from '@geist-ui/core'
 import autosize from 'autosize'
 import { useLocalStorage } from 'react-use'
-import { PenTool, X, Camera, Minimize2, Maximize2, Download } from '@geist-ui/icons'
-import ButtonRound from '@/components/ButtonRound'
+import { Camera, Minimize2, Maximize2, Download } from '@geist-ui/icons'
 import Form from '@/components/Form'
 import getImageMeta from '@/utils/getImageMeta'
 import './index.css'
@@ -25,8 +23,10 @@ import { useRecoilValue } from 'recoil'
 import userConfigState from '@/recoil/config'
 import { text2Image } from '@/api/generate'
 import Preview from '@/components/Preview'
+import Eraser from '@/components/Eraser'
+import FadeTransition from '@/components/FadeTransition'
 
-const maxInputLength = 3000
+const maxInputLength = 2000
 
 const Home = () => {
   const textareaRef: RefObject<HTMLTextAreaElement | null> = useRef(null)
@@ -121,7 +121,7 @@ const Home = () => {
             {...bindings}
             width="100%"
             maxLength={maxInputLength}
-            placeholder="输入任何你想记录的文案..."
+            placeholder="输入任何你想记录的文案，右侧会实时展示效果图..."
             rows={10}
             ref={textareaRef as any}
             className="autosize"
@@ -136,27 +136,6 @@ const Home = () => {
             value={value}
             onChange={textChange}
           ></Textarea>
-          {value && (
-            <Tooltip
-              style={{ position: 'absolute', bottom: '60px', right: '10px' }}
-              text={
-                <Text my={0} style={{ whiteSpace: 'nowrap' }}>
-                  clear input...
-                </Text>
-              }
-              placement="left"
-              scale={0.5}
-            >
-              <ButtonRound
-                auto
-                icon={<X />}
-                onClick={() => {
-                  ;(textareaRef.current as any).style.removeProperty('height')
-                  setValue('')
-                }}
-              />
-            </Tooltip>
-          )}
 
           <Text
             my={0}
@@ -166,33 +145,33 @@ const Home = () => {
           >
             {value!.length > maxInputLength ? maxInputLength : value!.length}/{maxInputLength}
           </Text>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginTop: '30px' }}>
+          <FadeTransition visible={!!value}>
+            <Eraser
+              onClick={() => {
+                ;(textareaRef.current as any).style.removeProperty('height')
+                setValue('')
+              }}
+            />
+          </FadeTransition>
 
-          {!value ? (
-            <Tooltip
-              scale={0.5}
-              text={
-                <Text my={0} style={{ whiteSpace: 'nowrap' }}>
-                  😊 在点击按钮之前先输入一些内容...
-                </Text>
-              }
-              style={{ position: 'absolute', bottom: '10px', right: '10px' }}
-              placement="left"
-            >
-              <ButtonRound disabled auto icon={<PenTool />} />
-            </Tooltip>
-          ) : (
-            <div style={{ position: 'absolute', bottom: '10px', right: '10px', alignItems: 'center', display: 'flex' }}>
-              {upSM ? (
-                <>
-                  <Keyboard option mr="10px" scale={0.5}></Keyboard>
-                  <Keyboard mr="10px" scale={0.5}>
-                    Enter
-                  </Keyboard>
-                </>
-              ) : null}
-              <ButtonRound loading={generate} auto icon={<Camera />} onClick={generateImage} type="secondary" />
-            </div>
-          )}
+          <Spacer w={1} />
+          <Button
+            shadow
+            type="secondary"
+            placeholder="generate"
+            auto
+            icon={<Camera />}
+            onClick={generateImage}
+            disabled={!value}
+          >
+            生成图片
+          </Button>
+          {/* <Keyboard option mr="10px" scale={0.5}></Keyboard>
+          <Keyboard mr="10px" scale={0.5}>
+            Enter
+          </Keyboard> */}
         </div>
         <Modal width="50rem" {...imageModalVisible} onClose={onModalClose}>
           <Modal.Title style={{ marginBottom: '21px', position: 'relative' }}>
@@ -237,9 +216,9 @@ const Home = () => {
           </Modal.Content>
         </Modal>
       </div>
-      <div className="preview-area">
+      <FadeTransition visible={!!value}>
         <Preview content={value!} />
-      </div>
+      </FadeTransition>
     </div>
   )
 }

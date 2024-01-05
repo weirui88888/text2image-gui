@@ -4,10 +4,6 @@
 .action-area {
   flex-grow: 1;
 }
-.preview-area {
-  width: 500px;
-  flex-shrink: 0;
-}
 
 @keyframes shake {
   10%,

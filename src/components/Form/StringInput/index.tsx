@@ -29,7 +29,7 @@ const StringInput: FC<StringInputProps> = ({ keyPath, label, maxLength, after, p
 }
 
 StringInput.defaultProps = {
-  maxLength: 10,
+  maxLength: 20,
   placeholder: ''
 }
 

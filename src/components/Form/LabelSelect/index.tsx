@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import { FC } from 'react'
 import { useTheme, Select } from '@geist-ui/core'
 import { useSetUserConfig } from '@/hooks/useSetUserConfig'
 import { useSetRecoilState } from 'recoil'
@@ -18,12 +18,6 @@ const LabelSelect: FC<LabelSelectProps> = ({ keyPath, label, options, placeholde
   const { value, set } = useSetUserConfig({ keyPath })
   const setSelectFontClassName = useSetRecoilState(SelectFontState)
 
-  useEffect(() => {
-    if (options && isFontSelect) {
-      const { className } = options.find(option => option.value === value) as any
-      setSelectFontClassName(className)
-    }
-  }, [value])
   return (
     <div
       style={{
@@ -55,12 +49,23 @@ const LabelSelect: FC<LabelSelectProps> = ({ keyPath, label, options, placeholde
           borderBottomRightRadius: '6px',
           minWidth: 'inherit'
         }}
-        onChange={val => set(val)}
+        onChange={val => {
+          if (isFontSelect) {
+            const { className } = options.find(option => option.value === val) as any
+            setSelectFontClassName(className)
+          }
+          set(val)
+        }}
       >
         {options
           ? options.map((option, index) => {
               return (
-                <Select.Option value={option.value} key={`${option.key}-${index}`} className={option.className ?? ''}>
+                <Select.Option
+                  value={option.value}
+                  key={`${option.key}-${index}`}
+                  className={option.className ?? ''}
+                  title={option.className ?? ''}
+                >
                   {option.key}
                 </Select.Option>
               )

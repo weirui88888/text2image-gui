@@ -14,7 +14,6 @@ import LabelSelect from './LabelSelect'
 import getCustomFont from '@/api/getCustomFont'
 
 import { useSetRecoilState, useRecoilValue } from 'recoil'
-import CheckerState from '@/recoil/checker'
 import SelectFontState from '@/recoil/selectFont'
 import userConfigState from '@/recoil/config'
 
@@ -59,7 +58,6 @@ const Form = () => {
     layout: { gapHalf, gapQuarter }
   } = useTheme()
   const [integratedFonts, setIntegratedFonts] = useState<{ key: string; value: string; className: string }[]>()
-  const setChecker = useSetRecoilState(CheckerState)
   const setSelectFontClassName = useSetRecoilState(SelectFontState)
   const userConfig = useRecoilValue(userConfigState)
   const upSM = useMediaQuery('sm', { match: 'up' })
@@ -69,11 +67,10 @@ const Form = () => {
       setSelectFontClassName(className)
       setIntegratedFonts(fonts)
     })
-  }, [])
+  }, [userConfig.canvasSetting.customFontPath, setSelectFontClassName]) // why this?
   const [showForm, setShowForm] = useLocalStorage<boolean>('show-form', false)
   const { setToast } = useToasts({
-    placement: 'topRight',
-    width: 'fit-content'
+    placement: 'topRight'
   })
 
   const { batchSet } = useBatchSetUserConfig()
@@ -247,21 +244,11 @@ const Form = () => {
                 ])
               }}
               onCheck={async url => {
-                if (!url) {
-                  setChecker(checker => ({
-                    ...checker,
-                    validBackgroundImage: false
-                  }))
-                  return 
-                }
+                if (!url) return
                 try {
                   const response = await axios.head(url)
                   const imgExist = response.status === 200 && response.headers['content-type'].startsWith('image/')
                   if (!imgExist) {
-                    setChecker(checker => ({
-                      ...checker,
-                      validBackgroundImage: false
-                    }))
                     batchSet([
                       {
                         keyPath: 'canvasSetting.backgroundImage',
@@ -272,10 +259,6 @@ const Form = () => {
                       text: '请输入正确的图片地址'
                     })
                   } else {
-                    setChecker(checker => ({
-                      ...checker,
-                      validBackgroundImage: true
-                    }))
                     batchSet([
                       {
                         keyPath: 'canvasSetting.backgroundImage',
@@ -284,10 +267,6 @@ const Form = () => {
                     ])
                   }
                 } catch (error) {
-                  setChecker(checker => ({
-                      ...checker,
-                      validBackgroundImage: false
-                    }))
                   batchSet([
                     {
                       keyPath: 'canvasSetting.backgroundImage',
@@ -296,12 +275,11 @@ const Form = () => {
                   ])
                   setToast({
                     text: '请输入正确的图片地址',
-                    type: 'error'
+                    type: 'secondary'
                   })
                 }
               }}
               keyPath="canvasSetting.backgroundImage"
-              checkKey="validBackgroundImage"
             />
           </Grid>
           <Grid xs={12} md={6}>
@@ -321,6 +299,7 @@ const Form = () => {
               label="头像"
               bucketName="anyphoto"
               directoryName="avatars"
+              previewRadius
               onSuccess={url => {
                 batchSet([
                   {
@@ -339,10 +318,6 @@ const Form = () => {
               }}
               onCheck={async url => {
                 if (!url) {
-                  setChecker(checker => ({
-                    ...checker,
-                    validAvatar: false
-                  }))
                   batchSet([
                     {
                       keyPath: 'avatar',
@@ -360,13 +335,10 @@ const Form = () => {
                   return
                 }
                 try {
+                  console.log(url)
                   const response = await axios.head(url)
                   const imgExist = response.status === 200 && response.headers['content-type'].startsWith('image/')
                   if (!imgExist) {
-                    setChecker(checker => ({
-                      ...checker,
-                      validAvatar: false
-                    }))
                     batchSet([
                       {
                         keyPath: 'avatar',
@@ -385,10 +357,6 @@ const Form = () => {
                       text: '请输入正确的图片地址'
                     })
                   } else {
-                    setChecker(checker => ({
-                      ...checker,
-                      validAvatar: true
-                    }))
                     batchSet([
                       {
                         keyPath: 'avatar',
@@ -405,10 +373,6 @@ const Form = () => {
                     ])
                   }
                 } catch (error) {
-                  setChecker(checker => ({
-                    ...checker,
-                    validAvatar: false
-                  }))
                   batchSet([
                     {
                       keyPath: 'avatar',
@@ -424,13 +388,11 @@ const Form = () => {
                     }
                   ])
                   setToast({
-                    text: '请输入正确的图片地址',
-                    type: 'error'
+                    text: '请输入正确的图片地址'
                   })
                 }
               }}
               keyPath="avatar"
-              checkKey="validAvatar"
             />
           </Grid>
           <Grid xs={12} md={6}>
