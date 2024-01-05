@@ -10,21 +10,18 @@ const PreviewHeader = () => {
     avatar,
     title,
     canvasSetting: {
-      width,
       header: {
         showHeaderAvatar,
         showHeaderTitle,
         headerAlign,
         showHeaderDescription,
         headerDescriptionPrefix,
-        headerAvatarSize,
         headerAvatarBorderColor,
         headerTitleFontColor,
         headerDescriptionFontColor
       }
     }
   } = userConfig
-  const scale = 500 / width
   const getHeaderAlignItems = (headerAlign: 'left' | 'center' | 'right') => {
     switch (headerAlign) {
       case 'left':
@@ -37,7 +34,6 @@ const PreviewHeader = () => {
         return 'center'
     }
   }
-  console.log(headerAvatarSize, scale)
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: getHeaderAlignItems(headerAlign) }}>
       {showHeaderAvatar && avatar ? (

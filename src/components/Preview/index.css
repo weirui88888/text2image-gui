@@ -6,6 +6,7 @@
 }
 
 .demo-container {
+  border-radius: 6px;
   padding: 24px;
   position: relative;
 }

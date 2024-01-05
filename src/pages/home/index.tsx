@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, RefObject } from 'react'
+import React, { useRef, useEffect, useState, RefObject, CSSProperties } from 'react'
 import {
   Textarea,
   useKeyboard,
@@ -37,6 +37,8 @@ const Home = () => {
   const [generatedImage, setGeneratedImage] = useState('')
   const { setVisible: setImageModalVisible, bindings: imageModalVisible } = useModal(false)
   const upSM = useMediaQuery('sm', { match: 'up' })
+  const upLg = useMediaQuery('lg', { match: 'up' })
+  const [homePageStyle, setHomePageStyle] = useState<CSSProperties>({})
   const userConfig = useRecoilValue(userConfigState)
   //   const [value, setValue] = useState<string>('')
   const [value, setValue] = useLocalStorage<string>('content', '', { raw: true })
@@ -48,7 +50,19 @@ const Home = () => {
   }, 1000)
 
   useEffect(() => {
+    if (upLg) {
+      setHomePageStyle({})
+    } else {
+      setHomePageStyle({
+        flexDirection: 'column',
+        alignItems: 'stretch'
+      })
+    }
+  }, [upLg])
+
+  useEffect(() => {
     const textareaDom = textareaRef.current
+    textareaDom!.style.width = '100% !important'
     textareaDom!.focus()
     autosize(textareaDom!)
     return () => {
@@ -113,7 +127,7 @@ const Home = () => {
     }, 500)
   }
   return (
-    <div className="home-page">
+    <div className="home-page" style={homePageStyle}>
       <div className="action-area">
         <Form />
         <div style={{ position: 'relative' }}>
@@ -217,7 +231,7 @@ const Home = () => {
         </Modal>
       </div>
       <FadeTransition visible={!!value}>
-        <Preview content={value!} />
+        <Preview content={value!} upLg={upLg} />
       </FadeTransition>
     </div>
   )

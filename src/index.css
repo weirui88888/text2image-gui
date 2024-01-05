@@ -88,3 +88,7 @@ input[type='file'] {
 .toast {
   width: auto !important;
 }
+
+.autosize {
+  max-width: 100% !important;
+}

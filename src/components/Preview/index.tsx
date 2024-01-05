@@ -9,9 +9,10 @@ import PreviewBackground from './background'
 
 interface PreviewProps {
   content: string
+  upLg: boolean
 }
 
-const Preview: FC<PreviewProps> = ({ content }) => {
+const Preview: FC<PreviewProps> = ({ content, upLg }) => {
   const userConfig = useRecoilValue(userConfigState)
   const {
     canvasSetting: {
@@ -20,29 +21,41 @@ const Preview: FC<PreviewProps> = ({ content }) => {
     }
   } = userConfig
   const selectFontClassName = useRecoilValue(SelectFontState)
-  const [textareaStyle, setTextareaStyle] = useState<CSSProperties>({})
+  const [demoContainerStyle, setDemoContainerStyle] = useState<CSSProperties>({})
+  const [previewStyle, setPreviewStyle] = useState<CSSProperties>({})
+
+  useEffect(() => {
+    if (upLg) {
+      setPreviewStyle({})
+    } else {
+      setPreviewStyle({
+        width: '100%',
+        paddingLeft: 0
+      })
+    }
+  }, [upLg])
 
   useEffect(() => {
     const { canvasSetting } = userConfig
     const { backgroundColor, color, linearGradientDirection } = canvasSetting
     if (typeof backgroundColor === 'string') {
-      setTextareaStyle({
+      setDemoContainerStyle({
         background: backgroundColor,
         color
       })
     } else {
-      setTextareaStyle({
+      setDemoContainerStyle({
         color,
         background: `linear-gradient(${linearGradientDirection}, ${backgroundColor.toString()})`
       })
     }
   }, [userConfig])
   return (
-    <div className="preview-container">
+    <div className="preview-container" style={previewStyle}>
       <Note label="提示" mb={1}>
         该部分为预览效果图，仅供参考
       </Note>
-      <div className="demo-container" style={textareaStyle}>
+      <div className="demo-container" style={demoContainerStyle}>
         <div style={{ position: 'relative', zIndex: 1 }}>
           <PreviewHeader />
           <Text p className={selectFontClassName}>
