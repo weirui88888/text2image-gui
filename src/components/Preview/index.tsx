@@ -58,7 +58,7 @@ const Preview: FC<PreviewProps> = ({ content, upLg }) => {
       <div className="demo-container" style={demoContainerStyle}>
         <div style={{ position: 'relative', zIndex: 1 }}>
           <PreviewHeader />
-          <Text p className={selectFontClassName}>
+          <Text p className={selectFontClassName} my={2}>
             {content}
           </Text>
           {showFrom && name ? (

@@ -1,11 +1,11 @@
 const anyPhotoConfig = {
   avatar: '', // 1
-  title: '', // 1
+  title: '出师表', // 1
   canvasSetting: {
     width: 750, // 1
     customFontPath: 'https://anyphoto.oss-cn-beijing.aliyuncs.com/fonts/origin/zh-LXGWWenKai.ttf', // 1
     backgroundImage: '', // 1
-    backgroundColor: ['#c78080', '#5ebd2b'],
+    backgroundColor: ['#D7003A', '#19087E'],
     linearGradientStop: [],
     linearGradientDirection: 'to left bottom',
     backgroundLineSpacing: 0, // 1
@@ -16,7 +16,7 @@ const anyPhotoConfig = {
     x: 40, // 1
     y: 60, // 1
     header: {
-      showHeader: false, // 1
+      showHeader: true, // 1
       headerAlign: 'center', // 1
       headerPaddingTop: 30, // 1
       headerPaddingBottom: 30, // 1
@@ -25,18 +25,18 @@ const anyPhotoConfig = {
       headerAvatarBorderWidth: 4,
       headerAvatarBorderColor: '#ffcc00',
       headerAvatarMarginBottom: 20,
-      showHeaderTitle: false,
+      showHeaderTitle: true,
       headerTitleFontSize: 40,
       headerTitleFontColor: '#ffffff',
       headerTitleFontWeight: 'bold',
       headerTitleMarginBottom: 30,
-      showHeaderDescription: false,
+      showHeaderDescription: true,
       headerDescriptionFontSize: 30,
       headerDescriptionFontColor: '#ffffff',
       headerDescriptionFontWeight: 'medium',
       showHeaderDescriptionTime: false,
       headerDescriptionTimeFormat: 'YYYY/MM/DD HH:mm:ss',
-      headerDescriptionPrefix: '',
+      headerDescriptionPrefix: '诸葛亮',
       headerDescriptionPrefixIcon: '',
       headerDescriptionPrefixIconGap: 10,
       headerDescriptionPrefixIconOffsetY: 4
