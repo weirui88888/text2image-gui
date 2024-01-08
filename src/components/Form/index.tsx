@@ -256,7 +256,7 @@ const Form = () => {
                       }
                     ])
                     setToast({
-                      text: '请输入正确的图片地址'
+                      text: '请提供正确的背景图片地址'
                     })
                   } else {
                     batchSet([
@@ -274,7 +274,7 @@ const Form = () => {
                     }
                   ])
                   setToast({
-                    text: '请输入正确的图片地址',
+                    text: '请提供正确的背景图片地址',
                     type: 'secondary'
                   })
                 }
@@ -335,7 +335,6 @@ const Form = () => {
                   return
                 }
                 try {
-                  console.log(url)
                   const response = await axios.head(url)
                   const imgExist = response.status === 200 && response.headers['content-type'].startsWith('image/')
                   if (!imgExist) {
@@ -354,7 +353,8 @@ const Form = () => {
                       }
                     ])
                     setToast({
-                      text: '请输入正确的图片地址'
+                      text: '请提供正确的头像图片地址',
+                      type: 'secondary'
                     })
                   } else {
                     batchSet([
@@ -388,7 +388,8 @@ const Form = () => {
                     }
                   ])
                   setToast({
-                    text: '请输入正确的图片地址'
+                    text: '请提供正确的头像图片地址',
+                    type: 'secondary'
                   })
                 }
               }}

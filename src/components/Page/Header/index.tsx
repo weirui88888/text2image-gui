@@ -18,7 +18,7 @@ const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
   const upSM = useMediaQuery('sm', { match: 'up' })
   useKeyboard(() => {
     setIsUserSettingModalVisible(true)
-  }, [KeyMod.CtrlCmd, KeyCode.KEY_S])
+  }, [KeyMod.Alt, KeyCode.KEY_S])
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -49,14 +49,15 @@ const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
                 }}
               >
                 <Text
-                  span
+                  h1
+                  font={0.9}
                   margin={0}
                   style={{ display: 'block', cursor: 'pointer' }}
                   onClick={() => {
                     console.log('home')
                   }}
                 >
-                  text2image-gui
+                  在线免费文字转图片
                 </Text>
                 <Text span font={0.7} style={{ letterSpacing: '1px' }}>
                   {format(time, 'yyyy/MM/dd HH:mm:ss')}

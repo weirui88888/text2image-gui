@@ -88,20 +88,16 @@ const UserSettingModal: FC<UserSettingModalProps> = ({ isVisible, setIsVisible }
             <>
               <Text my={0} style={{ whiteSpace: 'nowrap' }}>
                 <Dot type="warning" />
-                You can configure it however you like, but make sure to keep smiling
+                除了界面，你也可以在这里按照你的喜好进行配置，但是请确保保持“微笑”
               </Text>
               <Text my={0} style={{ whiteSpace: 'nowrap' }}>
                 <Dot type="warning" />
-                Try press{' '}
-                <Keyboard option scale={0.5}>
-                  S
-                </Keyboard>{' '}
-                to open setting modal and <Keyboard scale={0.5}>ESC</Keyboard> to close and save setting
+                支持快捷键 <Keyboard scale={0.2}>Alt</Keyboard> <Keyboard scale={0.2}>S</Keyboard> 打开配置弹窗，{' '}
+                <Keyboard scale={0.2}>ESC</Keyboard> 可关闭当前弹窗并保存配置
               </Text>
               <Text my={0} style={{ whiteSpace: 'nowrap' }}>
                 <Dot type="warning" />
-                Your configuration will be saved for next time use. If you want to start over, you can click reset
-                button
+                你对于配置的每一个调整都会被缓存记录下来，避免刷新页面后丢失
               </Text>
             </>
           }
@@ -112,7 +108,7 @@ const UserSettingModal: FC<UserSettingModalProps> = ({ isVisible, setIsVisible }
         </Tooltip>
       </Modal.Title>
       <Modal.Subtitle style={{ textTransform: 'lowercase' }} className="smile-tip">
-        You can configure it however you like, but make sure to keep{' '}
+        你可以随意进行配置，但请保持{' '}
         <SwitchFadeTransition
           valid={valid}
           children1={
@@ -175,7 +171,7 @@ const UserSettingModal: FC<UserSettingModalProps> = ({ isVisible, setIsVisible }
           setValid(true)
         }}
       >
-        cancel
+        取消
       </Modal.Action>
       <Modal.Action
         style={{ fontWeight: 'bold' }}
@@ -188,7 +184,7 @@ const UserSettingModal: FC<UserSettingModalProps> = ({ isVisible, setIsVisible }
           localStorage.removeItem('user-config')
         }}
       >
-        reset
+        重置
       </Modal.Action>
       <Modal.Action
         style={{ fontWeight: 'bold', color: valid ? '#00ff00' : '#ff0000' }}
@@ -197,7 +193,7 @@ const UserSettingModal: FC<UserSettingModalProps> = ({ isVisible, setIsVisible }
         disabled={!valid}
         onClick={save}
       >
-        save
+        保存
       </Modal.Action>
     </Modal>
   )

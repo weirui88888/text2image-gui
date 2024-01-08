@@ -36,7 +36,9 @@ const PreviewHeader = () => {
   }
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: getHeaderAlignItems(headerAlign) }}>
-      {showHeaderAvatar && avatar ? (
+      {showHeaderAvatar &&
+      avatar &&
+      (avatar.endsWith('.png') || avatar.endsWith('.jpg') || avatar.endsWith('.jpeg')) ? (
         <img
           src={avatar}
           alt="avatar"
