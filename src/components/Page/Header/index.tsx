@@ -30,7 +30,7 @@ const PageHeader: FC<PageHeaderProps> = ({ theme = 'dark', switchTheme }) => {
   }, [])
 
   return (
-    <div style={{ height: '64px', display: 'flex', alignItems: 'center' }}>
+    <div style={{ height: '64px', display: 'flex', alignItems: 'center',position:'sticky',left:0,top:0,zIndex:1000 }}>
       <Page.Header>
         <Grid.Container alignItems="center" justify="space-between">
           <Grid sm>

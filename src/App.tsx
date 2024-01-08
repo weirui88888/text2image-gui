@@ -4,7 +4,6 @@ import { useLocalStorage } from 'react-use'
 import PageContainer from '@/components/Page/Container'
 import PageHeader from '@/components/Page/Header'
 import PageContent from '@/components/Page/Content'
-import PageFooter from '@/components/Page/Footer'
 import { RecoilRoot } from 'recoil'
 import Home from './pages/home'
 import Docs from './pages/docs'
@@ -28,7 +27,6 @@ function App() {
                 <Route path="/doc" element={<Docs />} />
               </ReactRouters>
             </PageContent>
-            <PageFooter />
           </PageContainer>
         </Router>
       </GeistProvider>

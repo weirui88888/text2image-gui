@@ -215,15 +215,13 @@ const Home = () => {
                 placeholder={mini ? 'Maximize' : 'Minimize'}
                 iconRight={mini ? <Maximize2 /> : <Minimize2 />}
                 auto
-                scale={2 / 3}
                 px={0.6}
-                style={{ position: 'absolute', right: '40px' }}
+                style={{ position: 'absolute', right: '80px' }}
                 onClick={() => setMini(mini ? false : true)}
               ></Button>
             ) : null}
             <Button
               placeholder="Download"
-              type="secondary"
               style={{ position: 'absolute', right: 0 }}
               iconRight={<Download />}
               auto
