@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState, RefObject, CSSProperties } from 'react'
 import {
-  Textarea,
   useKeyboard,
   KeyCode,
   KeyMod,
@@ -26,7 +25,7 @@ import Preview from '@/components/Preview'
 import Eraser from '@/components/Eraser'
 import FadeTransition from '@/components/FadeTransition'
 
-const maxInputLength = 2000
+const maxInputLength = 1000
 
 const Home = () => {
   const textareaRef: RefObject<HTMLTextAreaElement | null> = useRef(null)
@@ -62,12 +61,6 @@ const Home = () => {
 今当远离，临表涕零，不知所言。`,
     { raw: true }
   )
-  setTimeout(() => {
-    if (textareaRef.current!) {
-      textareaRef.current.scrollTop = textareaRef.current.scrollHeight
-    }
-    autosize.update(textareaRef.current!)
-  }, 1000)
 
   useEffect(() => {
     if (upLg) {
@@ -82,8 +75,10 @@ const Home = () => {
 
   useEffect(() => {
     const textareaDom = textareaRef.current
-    textareaDom!.style.width = '100% !important'
-    textareaDom!.focus()
+    setTimeout(() => {
+      textareaDom!.scrollTop = textareaDom!.scrollHeight
+      textareaDom!.focus()
+    }, 0)
     autosize(textareaDom!)
     return () => {
       autosize.destroy(textareaDom!)
@@ -151,25 +146,26 @@ const Home = () => {
       <div className="action-area">
         <Form />
         <div style={{ position: 'relative' }}>
-          <Textarea
+          <textarea
             {...bindings}
-            width="100%"
             maxLength={maxInputLength}
             placeholder="输入任何你想记录的文案，右侧会实时展示效果图..."
             rows={10}
             ref={textareaRef as any}
             className="autosize"
             style={{
+              width: '100%',
               maxHeight: upSM ? '40vh' : '50vh',
-              transition: 'height 0.2s',
+              transition: 'height 0.3s ease',
               fontSize: '14px',
               background,
               borderRadius: '6px',
-              overflow: 'scroll !important'
+              padding: '6px',
+              resize: 'none'
             }}
             value={value}
             onChange={textChange}
-          ></Textarea>
+          ></textarea>
 
           <Text
             my={0}
@@ -184,8 +180,11 @@ const Home = () => {
           <FadeTransition visible={!!value}>
             <Eraser
               onClick={() => {
-                ;(textareaRef.current as any).style.removeProperty('height')
+                textareaRef.current!.style.removeProperty('height')
                 setValue('')
+                setTimeout(() => {
+                  textareaRef.current!.focus()
+                }, 0)
               }}
             />
           </FadeTransition>
@@ -195,6 +194,7 @@ const Home = () => {
             shadow
             type="secondary"
             placeholder="generate"
+            loading={generate}
             auto
             icon={<Camera />}
             onClick={generateImage}
@@ -223,10 +223,10 @@ const Home = () => {
             ) : null}
             <Button
               placeholder="Download"
+              type="secondary"
               style={{ position: 'absolute', right: 0 }}
               iconRight={<Download />}
               auto
-              scale={2 / 3}
               px={0.6}
               onClick={() => {
                 const link = document.createElement('a')
@@ -235,7 +235,9 @@ const Home = () => {
                 link.click()
                 onModalClose()
               }}
-            ></Button>
+            >
+              下载
+            </Button>
           </Modal.Title>
           <Modal.Content style={{ maxHeight: '68vh', overflow: 'scroll', paddingTop: 0, textAlign: 'center' }}>
             <Image
