@@ -21,7 +21,7 @@ const PageFooter = () => {
     })
   })
   return (
-    <Grid.Container justify="center" alignItems="center">
+    <Grid.Container justify="center" alignItems="center" style={{ height: '64px', padding: '12px 0' }}>
       <Grid xs={24}>
         <Text my={0} b style={{ textAlign: 'center', textTransform: 'uppercase' }} width="100%" font={1.1}>
           Version 1.0.0
