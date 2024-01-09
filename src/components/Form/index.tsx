@@ -213,6 +213,22 @@ const Form = () => {
           style={{ width: '100% !important' }}
         >
           <Grid xs={12} md={6}>
+            <Palette label="标题颜色" fallbackValue="#ffffff" keyPath="canvasSetting.header.headerTitleFontColor" />
+          </Grid>
+          <Grid xs={12} md={6}>
+            <Palette
+              label="副标题颜色"
+              fallbackValue="#ffffff"
+              keyPath="canvasSetting.header.headerDescriptionFontColor"
+            />
+          </Grid>
+          <Grid xs={12} md={6}>
+            <Palette label="摘自颜色" fallbackValue="#ffffff" keyPath="canvasSetting.from.fromFontColor" />
+          </Grid>
+          <Grid xs={12} md={6}>
+            <Palette label="署名颜色" fallbackValue="#ffffff" keyPath="canvasSetting.footer.sloganFontColor" />
+          </Grid>
+          <Grid xs={12} md={6}>
             <Palette
               label="背景颜色"
               fallbackValue="#000000"
@@ -293,6 +309,9 @@ const Form = () => {
               step={10}
               keyPath="canvasSetting.backgroundLineSpacing"
             />
+          </Grid>
+          <Grid xs={12} md={6}>
+            <NumberInput label="图片宽度" min={750} max={1500} step={10} keyPath="canvasSetting.width" />
           </Grid>
           <Grid xs={12} md={6} style={{ position: 'relative' }}>
             <Upload
@@ -397,15 +416,6 @@ const Form = () => {
             />
           </Grid>
           <Grid xs={12} md={6}>
-            <NumberInput
-              label="头像大小"
-              min={60}
-              max={100}
-              step={10}
-              keyPath="canvasSetting.header.headerAvatarSize"
-            />
-          </Grid>
-          <Grid xs={12} md={6}>
             <Palette
               label="头像边框颜色"
               fallbackValue="#ffcc00"
@@ -413,33 +423,10 @@ const Form = () => {
             />
           </Grid>
           <Grid xs={12} md={6}>
-            <NumberInput label="图片宽度" min={750} max={1500} step={10} keyPath="canvasSetting.width" />
-          </Grid>
-          <Grid xs={12} md={6}>
-            <NumberInput label="标题字体大小" min={12} max={50} keyPath="canvasSetting.header.headerTitleFontSize" />
-          </Grid>
-          <Grid xs={12} md={6}>
-            <NumberInput
-              label="描述字体大小"
-              min={12}
-              max={50}
-              keyPath="canvasSetting.header.headerDescriptionFontSize"
-            />
-          </Grid>
-          <Grid xs={12} md={6}>
-            <Palette label="标题颜色" fallbackValue="#ffffff" keyPath="canvasSetting.header.headerTitleFontColor" />
-          </Grid>
-          <Grid xs={12} md={6}>
             <LabelSelect keyPath="canvasSetting.customFontPath" isFontSelect label="字体" options={integratedFonts!} />
           </Grid>
           <Grid xs={12} md={6}>
-            <NumberInput label="内容字体大小" min={12} max={50} keyPath="canvasSetting.fontSize" />
-          </Grid>
-          <Grid xs={12} md={6}>
             <Palette label="内容字体颜色" fallbackValue="#ffffff" keyPath="canvasSetting.color" />
-          </Grid>
-          <Grid xs={12} md={6}>
-            <NumberInput label="字体行间距" min={10} max={30} keyPath="canvasSetting.lineGap" />
           </Grid>
           <Grid xs={24} md={6}>
             <LabelRadioGroup
@@ -463,6 +450,12 @@ const Form = () => {
             />
           </Grid>
           <Grid xs={12} md={6}>
+            <NumberInput label="横向边距" min={10} max={100} step={1} keyPath="canvasSetting.x" />
+          </Grid>
+          <Grid xs={12} md={6}>
+            <NumberInput label="纵向边距" min={10} max={100} step={1} keyPath="canvasSetting.y" />
+          </Grid>
+          <Grid xs={12} md={6}>
             <Palette label="下划线颜色" fallbackValue="#ffffff" keyPath="canvasSetting.underline.color" />
           </Grid>
           <Grid xs={24} md={6}>
@@ -474,18 +467,6 @@ const Form = () => {
                 { value: 'wave', key: '波浪' }
               ]}
             />
-          </Grid>
-          <Grid xs={12} md={6}>
-            <NumberInput label="摘自字体大小" min={12} max={50} keyPath="canvasSetting.from.fromFontSize" />
-          </Grid>
-          <Grid xs={12} md={6}>
-            <Palette label="摘自字体颜色" fallbackValue="#ffffff" keyPath="canvasSetting.from.fromFontColor" />
-          </Grid>
-          <Grid xs={12} md={6}>
-            <NumberInput label="署名字体大小" min={12} max={50} keyPath="canvasSetting.footer.sloganFontSize" />
-          </Grid>
-          <Grid xs={12} md={6}>
-            <Palette label="署名字体颜色" fallbackValue="#ffffff" keyPath="canvasSetting.footer.sloganFontColor" />
           </Grid>
         </Grid.Container>
       </FadeTransition>

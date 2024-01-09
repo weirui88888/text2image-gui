@@ -1,11 +1,11 @@
 const anyPhotoConfig = {
   avatar: '', // 1
-  title: '出师表', // 1
+  title: '文字转图片', // 1
   canvasSetting: {
     width: 750, // 1
     customFontPath: 'https://anyphoto.oss-cn-beijing.aliyuncs.com/fonts/origin/zh-LXGWWenKai.ttf', // 1
     backgroundImage: '', // 1
-    backgroundColor: ['#D7003A', '#19087E'],
+    backgroundColor: ['#61C695', '#133114'],
     linearGradientStop: [],
     linearGradientDirection: 'to left bottom',
     backgroundLineSpacing: 0, // 1
@@ -18,7 +18,7 @@ const anyPhotoConfig = {
     header: {
       showHeader: true, // 1
       headerAlign: 'center', // 1
-      headerPaddingTop: 30, // 1
+      headerPaddingTop: 60, // 1
       headerPaddingBottom: 30, // 1
       showHeaderAvatar: false,
       headerAvatarSize: 80,
@@ -36,7 +36,7 @@ const anyPhotoConfig = {
       headerDescriptionFontWeight: 'medium',
       showHeaderDescriptionTime: false,
       headerDescriptionTimeFormat: 'YYYY/MM/DD HH:mm:ss',
-      headerDescriptionPrefix: '诸葛亮',
+      headerDescriptionPrefix: '灵感来源于微信读书',
       headerDescriptionPrefixIcon: '',
       headerDescriptionPrefixIconGap: 10,
       headerDescriptionPrefixIconOffsetY: 4
@@ -71,8 +71,8 @@ const anyPhotoConfig = {
     },
     underline: {
       shape: 'line',
-      color: '#ffffff',
-      lineWidth: 4,
+      color: '#ffcc00',
+      lineWidth: 2,
       amplitude: 2,
       wavelength: 180,
       offsetY: 10

@@ -22,6 +22,7 @@ const Preview: FC<PreviewProps> = ({ content, upLg }) => {
   } = userConfig
   const selectFontClassName = useRecoilValue(SelectFontState)
   const [demoContainerStyle, setDemoContainerStyle] = useState<CSSProperties>({})
+  const [contentStyle, setContentStyle] = useState<CSSProperties>({})
   const [previewStyle, setPreviewStyle] = useState<CSSProperties>({})
 
   useEffect(() => {
@@ -37,18 +38,26 @@ const Preview: FC<PreviewProps> = ({ content, upLg }) => {
 
   useEffect(() => {
     const { canvasSetting } = userConfig
-    const { backgroundColor, color, linearGradientDirection } = canvasSetting
+    const { backgroundColor, color, linearGradientDirection, x, y } = canvasSetting
     if (typeof backgroundColor === 'string') {
       setDemoContainerStyle({
         background: backgroundColor,
-        color
+        color,
+        paddingLeft: `${x}px`,
+        paddingRight: `${x}px`
       })
     } else {
       setDemoContainerStyle({
         color,
-        background: `linear-gradient(${linearGradientDirection}, ${backgroundColor.toString()})`
+        background: `linear-gradient(${linearGradientDirection}, ${backgroundColor.toString()})`,
+        paddingLeft: `${x}px`,
+        paddingRight: `${x}px`
       })
     }
+    setContentStyle({
+      paddingTop: `${y}px`,
+      paddingBottom: `${y}px`
+    })
   }, [userConfig])
   return (
     <div className="preview-container" style={previewStyle}>
@@ -58,8 +67,8 @@ const Preview: FC<PreviewProps> = ({ content, upLg }) => {
       <div className="demo-container" style={demoContainerStyle}>
         <div style={{ position: 'relative', zIndex: 1 }}>
           <PreviewHeader />
-          <Text p className={selectFontClassName} my={2}>
-            {content}
+          <Text p className={selectFontClassName} my={0} style={contentStyle}>
+            {content.replace(/[{}]/g, '')}
           </Text>
           {showFrom && name ? (
             <Text p className={selectFontClassName}>

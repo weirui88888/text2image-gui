@@ -7,6 +7,7 @@
 
 .demo-container {
   border-radius: 6px;
-  padding: 24px;
+  padding-top: 24px;
+  padding-bottom: 24px;
   position: relative;
 }

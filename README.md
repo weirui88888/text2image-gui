@@ -1,4 +1,4 @@
-## 关于
+## 文字转图片
 
 这是一个文字转图片的应用，原理是采用canvas绘制图片。
 
@@ -9,6 +9,16 @@
 ## 体验地址
 
 [text2image](https://www.anyphoto.space)
+
+## 效果图
+
+下方图片由该应用生成
+
+<div style="display:flex">
+<img src="./examples/gradient-color.png" width="400" style="object-fit:contain"/>
+
+<img src="./examples/background-image.png" width="400"/>
+</div>
 
 ## 支持的功能
 
