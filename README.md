@@ -1,46 +1,37 @@
-# Getting Started with Create React App
+## 关于
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+这是一个文字转图片的应用，原理是采用canvas绘制图片。
 
-## Available Scripts
+**推荐桌面端网页体验**，移动端正在思考如何布局更方便使用，目前计划是提供一些预设模板。方便用户直接体验，有兴趣的小伙伴可以提出自己的见解。
 
-In the project directory, you can run:
+功能不断迭代中～
 
-### `npm start`
+## 体验地址
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[text2image](https://www.anyphoto.space)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 支持的功能
 
-### `npm test`
+调研了下，类似的工具已经有不少了，但是功能都比较单一。
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+下面列出它的一些核心优势
 
-### `npm run build`
+- 全量支持定制化，图片中的**任何元素都支持自定义**，比如颜色、字体、大小、间距、布局等
+- 支持全局安装后通过终端调用，意味着你可以在自己的程序中接入（最新版尚未发布npm）
+- 支持自定义字体、背景图案、多方向渐变色背景、桌布网格背景、支持自定义布局、支持下划线标记
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 接下来计划
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- 提供预设模版，使用者只需要关心输入即可，无需自行调整配置
+- 提供途径，供开发者上传满意的配置方案，他人可直接使用该模板
+- 考虑如何降低使用者心智负担，应用虽然很强大，但也导致了配置项过多
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 更多
 
-### `npm run eject`
+该应用的灵感来源于微信读书，如果你觉得它有价值，或者有更好的想法，欢迎参与进来
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+使用过程中的任何问题都可在[Issue](https://github.com/weirui88888/text2image-gui/issues)或[Discussion](https://github.com/weirui88888/text2image-gui/discussions/1)进行留言反馈
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+为爱发电不易，期待你点亮⭐️
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+微信联系方式：XdzD8b
