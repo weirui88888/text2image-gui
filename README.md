@@ -8,7 +8,7 @@
 
 ## 体验地址
 
-[text2image](https://www.anyphoto.space)
+[text2image](http://text2image.fun)
 
 ## 效果图
 
