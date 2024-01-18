@@ -4,7 +4,7 @@ import type { AnyPhotoResponse } from './api.d'
 
 const baseURL =
   process.env.NODE_ENV === 'production'
-    ? 'https://anyphoto.space/api'
+    ? 'https://text2image.fun/api'
     : `http://localhost:${process.env.REACT_APP_TEXT_TO_IMAGE_SERVER_PORT}/api`
 
 export interface InterceptorsConfig {
