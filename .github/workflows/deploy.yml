@@ -123,6 +123,7 @@ jobs:
           scp: |-
             ./server/* => /home/www/anyphoto-server/
             ./server/.env.vault => /home/www/anyphoto-server/
+            ./server/.npmrc => /home/www/anyphoto-server/
           last_ssh: |
             source /etc/profile
             cd /home/www/anyphoto-server
