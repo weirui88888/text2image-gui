@@ -13,13 +13,12 @@ const cors = require('cors')
 const userRouterApi = require('./routes/user')
 const generateRouterApi = require('./routes/generate')
 const interactiveRouterApi = require('./routes/interactive')
-const configRouterApi = require('./routes/config')
 
 const app = express()
 
 app.set('port', process.env.PORT ?? 3001)
 // TODO:如果本地开发的话，需要调整这里，将cors中的配置删除，使用app.use(cors())即可，这里需要根据环境变量进行判断，本地不跨域，线上跨域
-// const allowedOrigins = ['https://anyphoto.space', 'https://www.anyphoto.space']
+// const allowedOrigins = []
 
 // app.use(
 //   cors({
@@ -42,7 +41,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/api/user', userRouterApi)
 app.use('/api/generate', generateRouterApi)
 app.use('/api/interactive', interactiveRouterApi)
-app.use('/api/config', configRouterApi)
 
 // Development only
 if (app.get('env') === 'development') {

@@ -61,7 +61,7 @@ const Upload: FC<UploadProps> = ({
   const { upload } = new AliOssUpload({
     bucket: bucketName,
     region: 'oss-cn-beijing',
-    domain: 'https://static.anyphoto.space/',
+    domain: 'https://text2image.xdzi8b.cn/',
     directory: directoryName,
     asyncGetStsToken: async () =>
       await Promise.resolve({

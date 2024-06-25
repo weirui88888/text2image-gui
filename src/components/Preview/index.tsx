@@ -62,7 +62,7 @@ const Preview: FC<PreviewProps> = ({ content, upLg }) => {
   return (
     <div className="preview-container" style={previewStyle}>
       <Note label="提示" mb={1}>
-        该部分为预览效果图，仅供参考
+        该部分为预览效果图，仅供参考。
       </Note>
       <div className="demo-container" style={demoContainerStyle}>
         <div style={{ position: 'relative', zIndex: 1 }}>

@@ -36,7 +36,7 @@ const UserSettingModal: FC<UserSettingModalProps> = ({ isVisible, setIsVisible }
       enableSchemaRequest: true,
       schemas: [
         {
-          uri: 'https://static.anyphoto.space/anyphoto.config.json',
+          uri: 'https://text2image.xdzi8b.cn/anyphoto.config.json',
           fileMatch: ['*'],
           schema
         }
