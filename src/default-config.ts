@@ -3,7 +3,7 @@ const anyPhotoConfig = {
   title: '文字转图片', // 1
   canvasSetting: {
     width: 750, // 1
-    customFontPath: 'https://anyphoto.oss-cn-beijing.aliyuncs.com/fonts/origin/zh-LXGWWenKai.ttf', // 1
+    customFontPath: 'https://anyphoto.oss-cn-beijing.aliyuncs.com/fonts/origin/zh-MaShanZheng.ttf', // 1
     backgroundImage: '', // 1
     backgroundColor: ['#61C695', '#133114'],
     linearGradientStop: [],

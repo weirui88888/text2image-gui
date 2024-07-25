@@ -38,7 +38,7 @@ const Preview: FC<PreviewProps> = ({ content, upLg }) => {
 
   useEffect(() => {
     const { canvasSetting } = userConfig
-    const { backgroundColor, color, linearGradientDirection, x, y } = canvasSetting
+    const { backgroundColor, color, linearGradientDirection, x, y,lineGap,width } = canvasSetting
     if (typeof backgroundColor === 'string') {
       setDemoContainerStyle({
         background: backgroundColor,
@@ -54,9 +54,16 @@ const Preview: FC<PreviewProps> = ({ content, upLg }) => {
         paddingRight: `${x}px`
       })
     }
+    setPreviewStyle(previewStyle=>{
+      return {
+        ...previewStyle,
+        width:`${500+width/15}px`
+      }
+    })
     setContentStyle({
       paddingTop: `${y}px`,
-      paddingBottom: `${y}px`
+      paddingBottom: `${y}px`,
+      lineHeight:`${lineGap*1.3}px`
     })
   }, [userConfig])
   return (

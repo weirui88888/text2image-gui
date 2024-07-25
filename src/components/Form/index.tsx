@@ -311,6 +311,15 @@ const Form = () => {
             />
           </Grid>
           <Grid xs={12} md={6}>
+            <NumberInput
+              label="行间距"
+              min={15}
+              max={30}
+              step={5}
+              keyPath="canvasSetting.lineGap"
+            />
+          </Grid>
+          <Grid xs={12} md={6}>
             <NumberInput label="图片宽度" min={750} max={1500} step={10} keyPath="canvasSetting.width" />
           </Grid>
           <Grid xs={12} md={6} style={{ position: 'relative' }}>
