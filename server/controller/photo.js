@@ -12,6 +12,7 @@ const generatePhoto = async (req, res) => {
     bucket: process.env.OssBucket
   })
   const { content, options, canvasSetting } = req.body
+  console.log('req.body',req.body)
   httpDebugger(req.body)
   const photoSrc = await generate({
     content,
