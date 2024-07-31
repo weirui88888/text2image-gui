@@ -1,9 +1,12 @@
 const express = require('express')
 const router = express.Router()
 const { generatePhoto, deletePhoto } = require('../controller/photo')
+const { logDebugger } = require('../debug')
+const { getTime } = require('../utils')
 
 router.use((req, res, next) => {
-  console.log('------photo api------')
+  logDebugger(`------start generate photo at ${getTime()}-----`)
+  logDebugger('req.body===============>',req.body)
   next()
 })
 

@@ -2,7 +2,6 @@ const OSS = require('ali-oss')
 const path = require('path')
 const generate = require('anyphoto')
 const PhotoModel = require('../database/model/photo')
-const { httpDebugger } = require('../debug')
 
 const generatePhoto = async (req, res) => {
   const client = new OSS({
@@ -12,8 +11,6 @@ const generatePhoto = async (req, res) => {
     bucket: process.env.OssBucket
   })
   const { content, options, canvasSetting } = req.body
-  console.log('req.body',req.body)
-  httpDebugger(req.body)
   const photoSrc = await generate({
     content,
     options: {

@@ -3,6 +3,7 @@ const { getAliCaptchaUrl } = require('./getAliCaptchaUrl')
 const { createToken, verifyToken, TOKEN_ENCODE_STR } = require('./token')
 const { isEmail } = require('./isEmail')
 const { sleep } = require('./sleep')
+const { getTime } = require('./time')
 module.exports = {
   TOKEN_ENCODE_STR,
   getAliCaptchaUrl,
@@ -11,5 +12,6 @@ module.exports = {
   createToken,
   verifyToken,
   isEmail,
-  sleep
+  sleep,
+  getTime
 }
