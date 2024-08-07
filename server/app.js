@@ -13,6 +13,7 @@ const cors = require('cors')
 const userRouterApi = require('./routes/user')
 const generateRouterApi = require('./routes/generate')
 const interactiveRouterApi = require('./routes/interactive')
+const miniAppRouterApi = require('./routes/mini-app')
 
 const app = express()
 
@@ -41,6 +42,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/api/user', userRouterApi)
 app.use('/api/generate', generateRouterApi)
 app.use('/api/interactive', interactiveRouterApi)
+app.use('/api/mini-app', miniAppRouterApi)
 
 // Development only
 if (app.get('env') === 'development') {

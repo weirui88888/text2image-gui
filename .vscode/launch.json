@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug start:dev",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "env": {
+        "DOTENV_KEY": "dotenv://:key_05eff5a554c88a7b852ba9c22bf49c5d502a65618ae01ec1fc0fc9b3d835c5f8@dotenv.org/vault/.env.vault?environment=development"
+      },
+      "runtimeExecutable": "nodemon",
+      "cwd": "${workspaceFolder}/server",
+      "program": "${workspaceFolder}/server/bin/www"
+    }
+  ]
+}

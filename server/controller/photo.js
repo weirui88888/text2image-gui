@@ -65,6 +65,9 @@ const generatePhoto = async (req, res) => {
       }
     })
   } catch (error) {
+    console.log("--------------")
+    console.log(error)
+    console.log("--------------")
     res.send({
       code: 500,
       message: 'anyphoto server has some error'
