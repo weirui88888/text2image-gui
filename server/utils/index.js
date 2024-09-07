@@ -4,6 +4,7 @@ const { createToken, verifyToken, TOKEN_ENCODE_STR } = require('./token')
 const { isEmail } = require('./isEmail')
 const { sleep } = require('./sleep')
 const { getTime } = require('./time')
+const { getRandomInt } = require('./random')
 module.exports = {
   TOKEN_ENCODE_STR,
   getAliCaptchaUrl,
@@ -13,5 +14,6 @@ module.exports = {
   verifyToken,
   isEmail,
   sleep,
-  getTime
+  getTime,
+  getRandomInt
 }

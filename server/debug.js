@@ -14,5 +14,5 @@ module.exports = {
   dbDebugger,
   motorDebugger,
   authDebugger,
-  logDebugger
+  logDebugger,
 }

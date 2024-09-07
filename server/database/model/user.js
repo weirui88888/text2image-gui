@@ -2,15 +2,30 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const UserSchema = new Schema({
-  user_name: String,
-  user_id: String,
-  user_email: String,
-  user_pwd: String,
-  user_avatar: String,
-  token: String,
+  id: String,
+  nickName: String,
+  avatar: String,
+  posts: [
+    {
+      postId: String,
+      content: {
+        type: Object
+      },
+      canvasSetting: {
+        type: Object
+      },
+      options:{
+        type: Object
+      },
+      url:String,
+      favorite:Boolean,
+      isTemplate:Boolean,
+      createdAt: { type: Date, default: Date.now }
+    }
+  ],
   create_date: { type: Date, default: Date.now }
 })
 
-const UserModel = mongoose.model('AnyPhotoUser', UserSchema, process.env.UserCollectionName)
+const UserModel = mongoose.model('User', UserSchema, process.env.UserCollectionName)
 
 module.exports = UserModel
