@@ -70,7 +70,7 @@ const create = async (req, res) => {
   } catch (error) {
     res.send({
       code: 500,
-      message: `anyphoto server has some error----[${error.message}]`
+      message: '服务出错了，请联系我'
     })
   }
 }

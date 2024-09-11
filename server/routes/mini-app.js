@@ -1,5 +1,7 @@
 const express = require('express')
 const router = express.Router()
+const rateLimit = require('express-rate-limit')
+
 const { uploadImages, uploadImage, code2session } = require('../controller/mini-app')
 const { register, userInfo, resetNickName, resetAvatar } = require('../controller/miniApp/user')
 const { create,switchFavorite } = require('../controller/miniApp/post')
@@ -12,6 +14,28 @@ const multer = require('multer')
 
 const upload = multer()
 
+const create_limiter = rateLimit({
+  windowMs: 5 * 60 * 1000,
+  max: 10, 
+  handler: (req, res) => {
+    res.status(429).send({
+        code: 429,
+        message: '请求太多啦，让我喘口气～'
+    });
+  }
+})
+
+const register_limiter = rateLimit({
+  windowMs: 5 * 60 * 1000,
+  max: 1, 
+  handler: (req, res) => {
+    res.status(429).send({
+        code: 429,
+        message: '求求小主了，让我喘口气～'
+    });
+  }
+})
+
 router.use((req, res, next) => {
   logDebugger(`------start mini-app request at ${getTime()}-----`)
   logDebugger('req.body===============>', req.body)
@@ -22,11 +46,11 @@ router.get('/code2session', code2session)
 
 router.post('/uploadAvatar', upload.any(), uploadImages)
 router.post('/uploadImage', upload.any(), uploadImage)
-router.post('/register', register)
+router.post('/register',register_limiter, register)
 router.post('/user-info', userInfo)
 router.post('/resetNickName', resetNickName)
 router.post('/resetAvatar', resetAvatar)
-router.post('/create', create)
+router.post('/create',create_limiter, create)
 router.post('/switch-favorite', switchFavorite)
 router.post('/switch-template', switchTemplate)
 router.post('/use-template', useTemplate)

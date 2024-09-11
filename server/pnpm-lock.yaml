@@ -47,6 +47,9 @@ dependencies:
   express-async-errors:
     specifier: ^3.1.1
     version: 3.1.1(express@4.18.2)
+  express-rate-limit:
+    specifier: ^5.5.1
+    version: 5.5.1
   jsonwebtoken:
     specifier: 9.0.2
     version: 9.0.2
@@ -757,6 +760,10 @@ packages:
       express: ^4.16.2
     dependencies:
       express: 4.18.2
+    dev: false
+
+  /express-rate-limit@5.5.1:
+    resolution: {integrity: sha512-MTjE2eIbHv5DyfuFz4zLYWxpqVhEhkTiwFGuB74Q9CSou2WHO52nlE5y3Zlg6SIsiYUIPj6ifFxnkPz6O3sIUg==}
     dev: false
 
   /express@4.18.2:
