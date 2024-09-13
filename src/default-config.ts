@@ -1,18 +1,18 @@
 const anyPhotoConfig = {
   avatar: '', // 1
-  title: '文字转图片', // 1
+  title: '文字图片创作鸭', // 1
   canvasSetting: {
     width: 750, // 1
-    customFontPath: 'https://anyphoto.oss-cn-beijing.aliyuncs.com/fonts/origin/zh-MaShanZheng.ttf', // 1
+    customFontPath: 'https://anyphoto.oss-cn-beijing.aliyuncs.com/fonts/origin/zh-NotoSerifSC.ttf', // 1
     backgroundImage: '', // 1
-    backgroundColor: ['#61C695', '#133114'],
+    backgroundColor: '#feffef',
     linearGradientStop: [],
-    linearGradientDirection: 'to left bottom',
+    linearGradientDirection: '',
     backgroundLineSpacing: 0, // 1
     backgroundLineColor: '#cccccc55', // 1
-    color: '#ffffff', // 1
+    color: '#007b43', // 1
     fontSize: 30, // 1
-    lineGap: 15, // 1
+    lineGap: 20, // 1
     x: 40, // 1
     y: 60, // 1
     header: {
@@ -27,16 +27,16 @@ const anyPhotoConfig = {
       headerAvatarMarginBottom: 20,
       showHeaderTitle: true,
       headerTitleFontSize: 40,
-      headerTitleFontColor: '#ffffff',
+      headerTitleFontColor: '#007b43',
       headerTitleFontWeight: 'bold',
       headerTitleMarginBottom: 30,
       showHeaderDescription: true,
       headerDescriptionFontSize: 30,
-      headerDescriptionFontColor: '#ffffff',
+      headerDescriptionFontColor: '#007b43',
       headerDescriptionFontWeight: 'medium',
       showHeaderDescriptionTime: false,
       headerDescriptionTimeFormat: 'YYYY/MM/DD HH:mm:ss',
-      headerDescriptionPrefix: '灵感来源于微信读书',
+      headerDescriptionPrefix: '文案排版工具',
       headerDescriptionPrefixIcon: '',
       headerDescriptionPrefixIconGap: 10,
       headerDescriptionPrefixIconOffsetY: 4
@@ -46,16 +46,16 @@ const anyPhotoConfig = {
       // }
     },
     footer: {
-      showFooter: false,
-      paddingY: 60,
-      slogan: '',
-      sloganPosition: 'right',
+      showFooter: true,
+      paddingY: 160,
+      slogan: '文字图片创作鸭小程序',
+      sloganPosition: 'left',
       sloganFontSize: 30,
-      sloganFontColor: '#ffffff',
+      sloganFontColor: '#007b43',
       sloganFontWeight: 'bold',
-      sloganIcon: '',
+      sloganIcon: 'https://text2image.xdzi8b.cn/mini-app/share/channel-web.png',
       sloganIconOffsetY: 0,
-      sloganIconPaddingY: 10
+      sloganIconPaddingY: 100
       // divider: {
       //   size: 'contentWidth',
       //   color: '#ffffff'
@@ -65,13 +65,13 @@ const anyPhotoConfig = {
       showFrom: false,
       name: '',
       fromFontSize: 30,
-      fromFontColor: '#ffffff',
+      fromFontColor: '#007b43',
       fromFontWeight: 'bold',
-      fromMarginTop: 60
+      fromMarginTop: 100
     },
     underline: {
       shape: 'line',
-      color: '#ffcc00',
+      color: '#007b43',
       lineWidth: 2,
       amplitude: 2,
       wavelength: 180,

@@ -51,12 +51,12 @@ const PreviewHeader = () => {
         />
       ) : null}
       {showHeaderTitle && title ? (
-        <Text p mb={0} font={1.3} className={selectFontClassName} style={{ color: headerTitleFontColor }}>
+        <Text p mb={0} font={1.8} className={selectFontClassName} style={{ color: headerTitleFontColor }}>
           {title}
         </Text>
       ) : null}
       {showHeaderDescription && headerDescriptionPrefix ? (
-        <Text p my={0} className={selectFontClassName} style={{ color: headerDescriptionFontColor }}>
+        <Text p my={0} font={1.2} className={selectFontClassName} style={{ color: headerDescriptionFontColor }}>
           {headerDescriptionPrefix}
         </Text>
       ) : null}

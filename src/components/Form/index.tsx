@@ -157,32 +157,62 @@ const Form = () => {
           />
         </Grid>
         <Grid xs={12} md={6}>
-          <StringInput
-            label="摘自"
-            placeholder="非必填"
-            keyPath="canvasSetting.from.name"
-            after={value => {
-              if (value) {
+        <Upload
+              label="Logo"
+              cropper={false}
+              bucketName="anyphoto"
+              directoryName="avatars"
+              onSuccess={url => {
                 batchSet([
                   {
-                    keyPath: 'canvasSetting.from.showFrom',
-                    value: true
+                    keyPath: 'canvasSetting.footer.sloganIcon',
+                    value: url
                   }
                 ])
-              } else {
-                batchSet([
-                  {
-                    keyPath: 'canvasSetting.from.showFrom',
-                    value: false
+              }}
+              onCheck={async url => {
+                console.log('url',url)
+                if (!url) return
+                try {
+                  const response = await axios.head(url)
+                  const imgExist = response.status === 200 && response.headers['content-type'].startsWith('image/')
+                  if (!imgExist) {
+                    batchSet([
+                      {
+                        keyPath: 'canvasSetting.footer.sloganIcon',
+                        value: ''
+                      }
+                    ])
+                    setToast({
+                      text: '请提供正确的Logo地址'
+                    })
+                  } else {
+                    batchSet([
+                      {
+                        keyPath: 'canvasSetting.footer.sloganIcon',
+                        value: url
+                      }
+                    ])
                   }
-                ])
-              }
-            }}
-          />
+                } catch (error) {
+                  batchSet([
+                    {
+                      keyPath: 'canvasSetting.footer.sloganIcon',
+                      value: ''
+                    }
+                  ])
+                  setToast({
+                    text: '请提供正确的Logo地址',
+                    type: 'secondary'
+                  })
+                }
+              }}
+              keyPath="canvasSetting.footer.sloganIcon"
+            />
         </Grid>
         <Grid xs={12} md={6}>
           <StringInput
-            label="署名"
+            label="来源"
             placeholder="非必填"
             keyPath="canvasSetting.footer.slogan"
             after={value => {
