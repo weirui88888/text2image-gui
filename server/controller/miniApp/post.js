@@ -5,6 +5,15 @@ const PostModel = require('../../database/model/post')
 const UserModel = require('../../database/model/user')
 const { v4: uuidv4 } = require('uuid')
 
+function getFormattedDate() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+
+  return `${year}${month}${day}`;
+}
+
 const create = async (req, res) => {
   const client = new OSS({
     region: process.env.OssRegion,
@@ -43,7 +52,7 @@ const create = async (req, res) => {
     const dirnamePath = path.dirname(photoSrc)
     const imageName = photoSrc.replace(`${dirnamePath}/`, '')
     // TODO 更换为动态地址
-    const photoRes = await client.put(`mini-app/post/${id}/${imageName}`, photoSrc)
+    const photoRes = await client.put(`mini-app/post/${getFormattedDate()}/${id}-${imageName}`, photoSrc)
     const postId= uuidv4()
     const userGeneratedPhotoUrl = `${process.env.OssBucketCustomDomain}/${photoRes.name}`
     const newPost = new PostModel({
