@@ -25,3 +25,8 @@ yarn-error.log*
 anyphoto
 anyphoto-web-font
 
+
+.env*
+.flaskenv*
+!.env.project
+!.env.vault

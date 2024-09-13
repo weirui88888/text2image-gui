@@ -52,7 +52,7 @@ const create = async (req, res) => {
     const dirnamePath = path.dirname(photoSrc)
     const imageName = photoSrc.replace(`${dirnamePath}/`, '')
     // TODO 更换为动态地址
-    const photoRes = await client.put(`mini-app/post/${getFormattedDate()}/${id}-${imageName}`, photoSrc)
+    const photoRes = await client.put(`${process.env.MiniAppPostDirectory}/${getFormattedDate()}/${id}-${imageName}`, photoSrc)
     const postId= uuidv4()
     const userGeneratedPhotoUrl = `${process.env.OssBucketCustomDomain}/${photoRes.name}`
     const newPost = new PostModel({
