@@ -16,7 +16,6 @@ const Preview: FC<PreviewProps> = ({ content, upLg }) => {
   const userConfig = useRecoilValue(userConfigState)
   const {
     canvasSetting: {
-      from: { showFrom, name },
       footer: { showFooter, slogan, sloganPosition, sloganFontColor,sloganIcon }
     }
   } = userConfig
