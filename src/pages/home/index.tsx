@@ -201,9 +201,24 @@ const Home = () => {
             Enter
           </Keyboard> */}
         </div>
+        <h2 style={{marginTop:'40px'}}>🎉：小程序已上线，截图如下👇，可微信扫码体验秒出图！</h2>
+        <div style={{margin:'20px 0 20px'}}>
+          <img src="https://text2image.xdzi8b.cn/mini-app/share/web-share-0.jpg" alt="" style={{width:'200px'}}/>
+          <img src="https://text2image.xdzi8b.cn/mini-app/share/home.jpg" alt="" style={{width:'200px'}}/>
+          <img src="https://text2image.xdzi8b.cn/mini-app/share/editor.jpg" alt="" style={{width:'200px'}}/>
+          <img src="https://text2image.xdzi8b.cn/mini-app/share/editor1.jpg" alt="" style={{width:'200px'}}/>
+          <img src="https://text2image.xdzi8b.cn/mini-app/share/editor2.jpg" alt="" style={{width:'200px'}}/>
+          <img src="https://text2image.xdzi8b.cn/mini-app/share/template.jpg" alt="" style={{width:'200px'}}/>
+          <img src="https://text2image.xdzi8b.cn/mini-app/share/web-share-1.jpg" alt="" style={{width:'200px'}}/>
+          <img src="https://text2image.xdzi8b.cn/mini-app/share/web-share-2.jpg" alt="" style={{width:'200px'}}/>
+          <img src="https://text2image.xdzi8b.cn/mini-app/share/web-share-6.jpg" alt="" style={{width:'200px'}}/>
+          <img src="https://text2image.xdzi8b.cn/mini-app/share/web-share-3.jpg" alt="" style={{width:'200px'}}/>
+          <img src="https://text2image.xdzi8b.cn/mini-app/share/web-share-7.jpg" alt="" style={{width:'200px'}}/>
+          <img src="https://text2image.xdzi8b.cn/mini-app/share/channel-web.png" alt="" style={{width:'200px'}}/>
+        </div>
         <Modal width="50rem" {...imageModalVisible} onClose={onModalClose}>
-          <Modal.Title style={{ marginBottom: '21px', position: 'relative' }}>
-            Image Title
+          <Modal.Title style={{ marginBottom: '21px', position: 'relative',textAlign:'left' }}>
+            扫码体验小程序，百种模板、主题，一秒出图
             {heightGreaterThanWidth ? (
               <Button
                 placeholder={mini ? 'Maximize' : 'Minimize'}
