@@ -27,7 +27,7 @@ const create_limiter = rateLimit({
 
 const register_limiter = rateLimit({
   windowMs: 5 * 60 * 1000,
-  max: 1, 
+  max: 10, 
   handler: (req, res) => {
     res.status(429).send({
         code: 429,
