@@ -37,8 +37,10 @@ const register_limiter = rateLimit({
 })
 
 router.use((req, res, next) => {
-  logDebugger(`------start mini-app request at ${getTime()}-----`)
-  logDebugger('req.body===============>', req.body)
+  logDebugger(`============================== req.url  =============================`)
+  console.log(req.originalUrl)
+  logDebugger('============================== req.body =============================')
+  console.log(req.body)
   next()
 })
 

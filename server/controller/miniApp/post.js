@@ -4,6 +4,7 @@ const generate = require('anyphoto')
 const PostModel = require('../../database/model/post')
 const UserModel = require('../../database/model/user')
 const { v4: uuidv4 } = require('uuid')
+const { logDebugger } = require('../../debug')
 
 function getFormattedDate() {
   const today = new Date();
@@ -77,6 +78,9 @@ const create = async (req, res) => {
       }
     })
   } catch (error) {
+    logDebugger(`============================== create requst error message  =============================`)
+    logDebugger(error.message)
+    logDebugger(`============================== create request error message =============================`)
     res.send({
       code: 500,
       message: '服务出错了，请联系我'
