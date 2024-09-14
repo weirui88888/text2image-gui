@@ -7,12 +7,12 @@ const { v4: uuidv4 } = require('uuid')
 const { logDebugger } = require('../../debug')
 
 function getFormattedDate() {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, '0');
-  const day = String(today.getDate()).padStart(2, '0');
+  const today = new Date()
+  const year = today.getFullYear()
+  const month = String(today.getMonth() + 1).padStart(2, '0')
+  const day = String(today.getDate()).padStart(2, '0')
 
-  return `${year}${month}${day}`;
+  return `${year}${month}${day}`
 }
 
 const create = async (req, res) => {
@@ -53,8 +53,11 @@ const create = async (req, res) => {
     const dirnamePath = path.dirname(photoSrc)
     const imageName = photoSrc.replace(`${dirnamePath}/`, '')
     // TODO 更换为动态地址
-    const photoRes = await client.put(`${process.env.MiniAppPostDirectory}/${getFormattedDate()}/${id}-${imageName}`, photoSrc)
-    const postId= uuidv4()
+    const photoRes = await client.put(
+      `${process.env.MiniAppPostDirectory}/${getFormattedDate()}/${id}-${imageName}`,
+      photoSrc
+    )
+    const postId = uuidv4()
     const userGeneratedPhotoUrl = `${process.env.OssBucketCustomDomain}/${photoRes.name}`
     const newPost = new PostModel({
       content,
@@ -63,12 +66,15 @@ const create = async (req, res) => {
       // 作品ID
       postId,
       // 用户id
-      posterId:id,
+      posterId: id,
       url: userGeneratedPhotoUrl
     })
     await newPost.save()
     const user = await UserModel.findOne({ id })
-    user.posts = [{ postId,content,options,canvasSetting,url:userGeneratedPhotoUrl,favorite:false,isTemplate:false },...user.posts]
+    user.posts = [
+      { postId, content, options, canvasSetting, url: userGeneratedPhotoUrl, favorite: false, isTemplate: false },
+      ...user.posts
+    ]
     await user.save()
     res.send({
       code: 200,
@@ -89,10 +95,10 @@ const create = async (req, res) => {
 }
 
 const switchFavorite = async (req, res) => {
-  const { id,postId,favorite } = req.body
+  const { id, postId, favorite } = req.body
   const user = await UserModel.findOne({ id })
   let posts = [...user.posts]
-  const postIndex = posts.findIndex(post=>post.postId === postId)
+  const postIndex = posts.findIndex(post => post.postId === postId)
   posts[postIndex].favorite = favorite
   user.posts = posts
   await user.save()
@@ -100,14 +106,27 @@ const switchFavorite = async (req, res) => {
     code: 200,
     message: 'success',
     data: {
-      message: favorite?'标记成功':'取消标记成功'
+      message: favorite ? '标记成功' : '取消标记成功'
     }
   })
 }
 
-
+const getInfoMessage = async (req, res) => {
+  const posts = await PostModel.find()
+  const users = await UserModel.find()
+  res.send({
+    code: 200,
+    message: 'success',
+    data: {
+      postCount: posts.length,
+      userCount: users.length,
+      notAdminPostCount: posts.filter(post => post.posterId !== 'oi7Pb4sVtm-c1xu7xVJoTQCJo5Sc').length
+    }
+  })
+}
 
 module.exports = {
   create,
   switchFavorite,
+  getInfoMessage
 }
